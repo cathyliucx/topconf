@@ -16,7 +16,6 @@ The project is implemented in phases. See:
 
 * `AGENTS.md`
 * `docs/TOPCONF_SOP.md`
-* `docs/CODEX_FIRST_ENTRY_SOP.md`
 
 The current implementation phase should be determined from the repository contents and test status rather than assumed from this README.
 
@@ -597,12 +596,11 @@ Before editing:
 
 1. Read `AGENTS.md`.
 2. Read `docs/TOPCONF_SOP.md`.
-3. Read `docs/CODEX_FIRST_ENTRY_SOP.md`.
-4. Inspect the repository.
-5. Check Git status.
-6. Discover actual Xcode targets and schemes.
-7. Establish build and test baselines.
-8. Determine the current implementation phase.
+3. Inspect the repository.
+4. Check Git status.
+5. Discover actual Xcode targets and schemes.
+6. Establish build and test baselines.
+7. Determine the current implementation phase.
 
 For every task:
 
@@ -769,7 +767,6 @@ Project instructions:
 
 * `AGENTS.md`
 * `docs/TOPCONF_SOP.md`
-* `docs/CODEX_FIRST_ENTRY_SOP.md`
 
 These documents define the intended architecture, workflow, phase boundaries, testing requirements, and acceptance criteria.
 

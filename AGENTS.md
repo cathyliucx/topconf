@@ -18,7 +18,6 @@ The default discovery filter is CCF-A, but rank and category filters must not be
 Before making architectural or feature-level changes, read:
 
 * `docs/TOPCONF_SOP.md`
-* `docs/CODEX_FIRST_ENTRY_SOP.md`
 
 If the repository implementation conflicts with these documents, report the conflict before making broad changes.
 
@@ -365,11 +364,10 @@ Read:
 
 1. `AGENTS.md`
 2. `docs/TOPCONF_SOP.md`
-3. `docs/CODEX_FIRST_ENTRY_SOP.md`
-4. `README.md`
-5. Xcode project and scheme configuration
-6. Relevant source files
-7. Relevant test files
+3. `README.md`
+4. Xcode project and scheme configuration
+5. Relevant source files
+6. Relevant test files
 
 Inspect Git state:
 

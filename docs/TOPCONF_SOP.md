@@ -11,7 +11,6 @@ Before making architectural changes, implementing features, or modifying multipl
 * `AGENTS.md`
 * `README.md`
 * `docs/TOPCONF_SOP.md`
-* `docs/CODEX_FIRST_ENTRY_SOP.md`
 
 The project must be implemented incrementally. The agent must not attempt to build the entire product in one unbounded task.
 
@@ -2420,7 +2419,6 @@ Read these files completely before modifying anything:
 - AGENTS.md
 - README.md
 - docs/TOPCONF_SOP.md
-- docs/CODEX_FIRST_ENTRY_SOP.md
 
 First inspect the repository and establish the build and test baseline.
 

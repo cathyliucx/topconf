@@ -11,6 +11,32 @@
 		100000000000000000000102 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000002 /* ContentView.swift */; };
 		100000000000000000000103 /* TopConfTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000003 /* TopConfTests.swift */; };
 		100000000000000000000104 /* TopConfUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000004 /* TopConfUITests.swift */; };
+		D00000000000000000000101 /* DomainModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00000000000000000000001 /* DomainModels.swift */; };
+		D00000000000000000000102 /* DomainPolicies.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00000000000000000000002 /* DomainPolicies.swift */; };
+		D00000000000000000000103 /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00000000000000000000003 /* Clock.swift */; };
+		D00000000000000000000104 /* RepositoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00000000000000000000004 /* RepositoryProtocols.swift */; };
+		D00000000000000000000105 /* DomainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00000000000000000000005 /* DomainError.swift */; };
+		D00000000000000000000106 /* DomainServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00000000000000000000006 /* DomainServices.swift */; };
+		D00000000000000000000107 /* DomainTestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00000000000000000000007 /* DomainTestSupport.swift */; };
+		D00000000000000000000108 /* ConferenceTrackingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00000000000000000000008 /* ConferenceTrackingServiceTests.swift */; };
+		D00000000000000000000109 /* ConferenceDiscoveryServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00000000000000000000009 /* ConferenceDiscoveryServiceTests.swift */; };
+		D0000000000000000000010A /* DeadlineSelectionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0000000000000000000000A /* DeadlineSelectionServiceTests.swift */; };
+		D0000000000000000000010B /* TrackedConferenceResolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0000000000000000000000B /* TrackedConferenceResolverTests.swift */; };
+		D0000000000000000000010C /* ConferenceSortingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0000000000000000000000C /* ConferenceSortingServiceTests.swift */; };
+		D0000000000000000000010D /* DeadlineCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0000000000000000000000D /* DeadlineCalculatorTests.swift */; };
+		D0000000000000000000010E /* SearchServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0000000000000000000000E /* SearchServiceTests.swift */; };
+		E00000000000000000000101 /* InMemoryConferenceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00000000000000000000001 /* InMemoryConferenceRepository.swift */; };
+		E00000000000000000000102 /* InMemoryTrackedConferenceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00000000000000000000002 /* InMemoryTrackedConferenceRepository.swift */; };
+		E00000000000000000000103 /* InMemoryReminderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00000000000000000000003 /* InMemoryReminderRepository.swift */; };
+		E00000000000000000000104 /* ConferenceFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00000000000000000000004 /* ConferenceFixtures.swift */; };
+		E00000000000000000000105 /* DeadlineFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00000000000000000000005 /* DeadlineFixtures.swift */; };
+		E00000000000000000000106 /* TrackedConferenceFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00000000000000000000006 /* TrackedConferenceFixtures.swift */; };
+		E00000000000000000000107 /* ReminderFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00000000000000000000007 /* ReminderFixtures.swift */; };
+		E00000000000000000000108 /* InMemoryConferenceRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00000000000000000000008 /* InMemoryConferenceRepositoryTests.swift */; };
+		E00000000000000000000109 /* InMemoryTrackedConferenceRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00000000000000000000009 /* InMemoryTrackedConferenceRepositoryTests.swift */; };
+		E0000000000000000000010A /* InMemoryReminderRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0000000000000000000000A /* InMemoryReminderRepositoryTests.swift */; };
+		E0000000000000000000010B /* FixtureValidationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0000000000000000000000B /* FixtureValidationTests.swift */; };
+		E0000000000000000000010C /* FixtureDrivenDomainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0000000000000000000000C /* FixtureDrivenDomainTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +64,32 @@
 		100000000000000000000501 /* TopConf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TopConf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		100000000000000000000502 /* TopConfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TopConfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		100000000000000000000503 /* TopConfUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TopConfUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D00000000000000000000001 /* DomainModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainModels.swift; sourceTree = "<group>"; };
+		D00000000000000000000002 /* DomainPolicies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainPolicies.swift; sourceTree = "<group>"; };
+		D00000000000000000000003 /* Clock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
+		D00000000000000000000004 /* RepositoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryProtocols.swift; sourceTree = "<group>"; };
+		D00000000000000000000005 /* DomainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainError.swift; sourceTree = "<group>"; };
+		D00000000000000000000006 /* DomainServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainServices.swift; sourceTree = "<group>"; };
+		D00000000000000000000007 /* DomainTestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainTestSupport.swift; sourceTree = "<group>"; };
+		D00000000000000000000008 /* ConferenceTrackingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceTrackingServiceTests.swift; sourceTree = "<group>"; };
+		D00000000000000000000009 /* ConferenceDiscoveryServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceDiscoveryServiceTests.swift; sourceTree = "<group>"; };
+		D0000000000000000000000A /* DeadlineSelectionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineSelectionServiceTests.swift; sourceTree = "<group>"; };
+		D0000000000000000000000B /* TrackedConferenceResolverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedConferenceResolverTests.swift; sourceTree = "<group>"; };
+		D0000000000000000000000C /* ConferenceSortingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceSortingServiceTests.swift; sourceTree = "<group>"; };
+		D0000000000000000000000D /* DeadlineCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineCalculatorTests.swift; sourceTree = "<group>"; };
+		D0000000000000000000000E /* SearchServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchServiceTests.swift; sourceTree = "<group>"; };
+		E00000000000000000000001 /* InMemoryConferenceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryConferenceRepository.swift; sourceTree = "<group>"; };
+		E00000000000000000000002 /* InMemoryTrackedConferenceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryTrackedConferenceRepository.swift; sourceTree = "<group>"; };
+		E00000000000000000000003 /* InMemoryReminderRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryReminderRepository.swift; sourceTree = "<group>"; };
+		E00000000000000000000004 /* ConferenceFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceFixtures.swift; sourceTree = "<group>"; };
+		E00000000000000000000005 /* DeadlineFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineFixtures.swift; sourceTree = "<group>"; };
+		E00000000000000000000006 /* TrackedConferenceFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedConferenceFixtures.swift; sourceTree = "<group>"; };
+		E00000000000000000000007 /* ReminderFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderFixtures.swift; sourceTree = "<group>"; };
+		E00000000000000000000008 /* InMemoryConferenceRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryConferenceRepositoryTests.swift; sourceTree = "<group>"; };
+		E00000000000000000000009 /* InMemoryTrackedConferenceRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryTrackedConferenceRepositoryTests.swift; sourceTree = "<group>"; };
+		E0000000000000000000000A /* InMemoryReminderRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryReminderRepositoryTests.swift; sourceTree = "<group>"; };
+		E0000000000000000000000B /* FixtureValidationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixtureValidationTests.swift; sourceTree = "<group>"; };
+		E0000000000000000000000C /* FixtureDrivenDomainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixtureDrivenDomainTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +132,8 @@
 			children = (
 				100000000000000000000001 /* TopConfApp.swift */,
 				100000000000000000000002 /* ContentView.swift */,
+				D00000000000000000000701 /* Domain */,
+				E00000000000000000000701 /* Data */,
 			);
 			path = TopConf;
 			sourceTree = "<group>";
@@ -88,6 +142,11 @@
 			isa = PBXGroup;
 			children = (
 				100000000000000000000003 /* TopConfTests.swift */,
+				D00000000000000000000708 /* Domain */,
+				D00000000000000000000709 /* TestSupport */,
+				E00000000000000000000703 /* Fixtures */,
+				E00000000000000000000704 /* Data */,
+				E00000000000000000000706 /* Integration */,
 			);
 			path = TopConfTests;
 			sourceTree = "<group>";
@@ -108,6 +167,145 @@
 				100000000000000000000503 /* TopConfUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		D00000000000000000000701 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				D00000000000000000000702 /* Models */,
+				D00000000000000000000703 /* Policies */,
+				D00000000000000000000704 /* Services */,
+				D00000000000000000000705 /* Repositories */,
+				D00000000000000000000706 /* Time */,
+				D00000000000000000000707 /* Errors */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		D00000000000000000000702 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D00000000000000000000001 /* DomainModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D00000000000000000000703 /* Policies */ = {
+			isa = PBXGroup;
+			children = (
+				D00000000000000000000002 /* DomainPolicies.swift */,
+			);
+			path = Policies;
+			sourceTree = "<group>";
+		};
+		D00000000000000000000704 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				D00000000000000000000006 /* DomainServices.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		D00000000000000000000705 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				D00000000000000000000004 /* RepositoryProtocols.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		D00000000000000000000706 /* Time */ = {
+			isa = PBXGroup;
+			children = (
+				D00000000000000000000003 /* Clock.swift */,
+			);
+			path = Time;
+			sourceTree = "<group>";
+		};
+		D00000000000000000000707 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				D00000000000000000000005 /* DomainError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		D00000000000000000000708 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				D00000000000000000000008 /* ConferenceTrackingServiceTests.swift */,
+				D00000000000000000000009 /* ConferenceDiscoveryServiceTests.swift */,
+				D0000000000000000000000A /* DeadlineSelectionServiceTests.swift */,
+				D0000000000000000000000B /* TrackedConferenceResolverTests.swift */,
+				D0000000000000000000000C /* ConferenceSortingServiceTests.swift */,
+				D0000000000000000000000D /* DeadlineCalculatorTests.swift */,
+				D0000000000000000000000E /* SearchServiceTests.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		D00000000000000000000709 /* TestSupport */ = {
+			isa = PBXGroup;
+			children = (
+				D00000000000000000000007 /* DomainTestSupport.swift */,
+			);
+			path = TestSupport;
+			sourceTree = "<group>";
+		};
+		E00000000000000000000701 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E00000000000000000000702 /* InMemory */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		E00000000000000000000702 /* InMemory */ = {
+			isa = PBXGroup;
+			children = (
+				E00000000000000000000001 /* InMemoryConferenceRepository.swift */,
+				E00000000000000000000002 /* InMemoryTrackedConferenceRepository.swift */,
+				E00000000000000000000003 /* InMemoryReminderRepository.swift */,
+			);
+			path = InMemory;
+			sourceTree = "<group>";
+		};
+		E00000000000000000000703 /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				E00000000000000000000004 /* ConferenceFixtures.swift */,
+				E00000000000000000000005 /* DeadlineFixtures.swift */,
+				E00000000000000000000006 /* TrackedConferenceFixtures.swift */,
+				E00000000000000000000007 /* ReminderFixtures.swift */,
+				E0000000000000000000000B /* FixtureValidationTests.swift */,
+			);
+			path = Fixtures;
+			sourceTree = "<group>";
+		};
+		E00000000000000000000704 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E00000000000000000000705 /* InMemory */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		E00000000000000000000705 /* InMemory */ = {
+			isa = PBXGroup;
+			children = (
+				E00000000000000000000008 /* InMemoryConferenceRepositoryTests.swift */,
+				E00000000000000000000009 /* InMemoryTrackedConferenceRepositoryTests.swift */,
+				E0000000000000000000000A /* InMemoryReminderRepositoryTests.swift */,
+			);
+			path = InMemory;
+			sourceTree = "<group>";
+		};
+		E00000000000000000000706 /* Integration */ = {
+			isa = PBXGroup;
+			children = (
+				E0000000000000000000000C /* FixtureDrivenDomainTests.swift */,
+			);
+			path = Integration;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,6 +438,15 @@
 			files = (
 				100000000000000000000101 /* TopConfApp.swift in Sources */,
 				100000000000000000000102 /* ContentView.swift in Sources */,
+				D00000000000000000000101 /* DomainModels.swift in Sources */,
+				D00000000000000000000102 /* DomainPolicies.swift in Sources */,
+				D00000000000000000000103 /* Clock.swift in Sources */,
+				D00000000000000000000104 /* RepositoryProtocols.swift in Sources */,
+				D00000000000000000000105 /* DomainError.swift in Sources */,
+				D00000000000000000000106 /* DomainServices.swift in Sources */,
+				E00000000000000000000101 /* InMemoryConferenceRepository.swift in Sources */,
+				E00000000000000000000102 /* InMemoryTrackedConferenceRepository.swift in Sources */,
+				E00000000000000000000103 /* InMemoryReminderRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +455,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				100000000000000000000103 /* TopConfTests.swift in Sources */,
+				D00000000000000000000107 /* DomainTestSupport.swift in Sources */,
+				D00000000000000000000108 /* ConferenceTrackingServiceTests.swift in Sources */,
+				D00000000000000000000109 /* ConferenceDiscoveryServiceTests.swift in Sources */,
+				D0000000000000000000010A /* DeadlineSelectionServiceTests.swift in Sources */,
+				D0000000000000000000010B /* TrackedConferenceResolverTests.swift in Sources */,
+				D0000000000000000000010C /* ConferenceSortingServiceTests.swift in Sources */,
+				D0000000000000000000010D /* DeadlineCalculatorTests.swift in Sources */,
+				D0000000000000000000010E /* SearchServiceTests.swift in Sources */,
+				E00000000000000000000104 /* ConferenceFixtures.swift in Sources */,
+				E00000000000000000000105 /* DeadlineFixtures.swift in Sources */,
+				E00000000000000000000106 /* TrackedConferenceFixtures.swift in Sources */,
+				E00000000000000000000107 /* ReminderFixtures.swift in Sources */,
+				E00000000000000000000108 /* InMemoryConferenceRepositoryTests.swift in Sources */,
+				E00000000000000000000109 /* InMemoryTrackedConferenceRepositoryTests.swift in Sources */,
+				E0000000000000000000010A /* InMemoryReminderRepositoryTests.swift in Sources */,
+				E0000000000000000000010B /* FixtureValidationTests.swift in Sources */,
+				E0000000000000000000010C /* FixtureDrivenDomainTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -571,4 +795,3 @@
 	};
 	rootObject = 100000000000000000000301 /* Project object */;
 }
-

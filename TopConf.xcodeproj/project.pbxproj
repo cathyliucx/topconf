@@ -37,6 +37,25 @@
 		E0000000000000000000010A /* InMemoryReminderRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0000000000000000000000A /* InMemoryReminderRepositoryTests.swift */; };
 		E0000000000000000000010B /* FixtureValidationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0000000000000000000000B /* FixtureValidationTests.swift */; };
 		E0000000000000000000010C /* FixtureDrivenDomainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0000000000000000000000C /* FixtureDrivenDomainTests.swift */; };
+		F00000000000000000000101 /* ConferenceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000001 /* ConferenceEntity.swift */; };
+		F00000000000000000000102 /* ConferenceEditionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000002 /* ConferenceEditionEntity.swift */; };
+		F00000000000000000000103 /* DeadlineEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000003 /* DeadlineEntity.swift */; };
+		F00000000000000000000104 /* TrackedConferenceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000004 /* TrackedConferenceEntity.swift */; };
+		F00000000000000000000105 /* ReminderEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000005 /* ReminderEntity.swift */; };
+		F00000000000000000000106 /* ConferenceCatalogMetadataEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000006 /* ConferenceCatalogMetadataEntity.swift */; };
+		F00000000000000000000107 /* ConferenceEntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000007 /* ConferenceEntityMapper.swift */; };
+		F00000000000000000000108 /* ReminderEntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000008 /* ReminderEntityMapper.swift */; };
+		F00000000000000000000109 /* TrackedConferenceEntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000009 /* TrackedConferenceEntityMapper.swift */; };
+		F0000000000000000000010A /* SwiftDataContainerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0000000000000000000000A /* SwiftDataContainerFactory.swift */; };
+		F0000000000000000000010B /* SwiftDataConferenceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0000000000000000000000B /* SwiftDataConferenceRepository.swift */; };
+		F0000000000000000000010C /* SwiftDataReminderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0000000000000000000000C /* SwiftDataReminderRepository.swift */; };
+		F0000000000000000000010D /* SwiftDataTrackedConferenceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0000000000000000000000D /* SwiftDataTrackedConferenceRepository.swift */; };
+		G00000000000000000000101 /* SwiftDataTestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = G00000000000000000000001 /* SwiftDataTestSupport.swift */; };
+		G00000000000000000000102 /* SwiftDataMappingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = G00000000000000000000002 /* SwiftDataMappingTests.swift */; };
+		G00000000000000000000103 /* SwiftDataConferenceRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = G00000000000000000000003 /* SwiftDataConferenceRepositoryTests.swift */; };
+		G00000000000000000000104 /* SwiftDataTrackedConferenceRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = G00000000000000000000004 /* SwiftDataTrackedConferenceRepositoryTests.swift */; };
+		G00000000000000000000105 /* SwiftDataReminderRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = G00000000000000000000005 /* SwiftDataReminderRepositoryTests.swift */; };
+		G00000000000000000000106 /* SwiftDataPersistenceRecreationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = G00000000000000000000006 /* SwiftDataPersistenceRecreationTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +109,25 @@
 		E0000000000000000000000A /* InMemoryReminderRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryReminderRepositoryTests.swift; sourceTree = "<group>"; };
 		E0000000000000000000000B /* FixtureValidationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixtureValidationTests.swift; sourceTree = "<group>"; };
 		E0000000000000000000000C /* FixtureDrivenDomainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixtureDrivenDomainTests.swift; sourceTree = "<group>"; };
+		F00000000000000000000001 /* ConferenceEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceEntity.swift; sourceTree = "<group>"; };
+		F00000000000000000000002 /* ConferenceEditionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceEditionEntity.swift; sourceTree = "<group>"; };
+		F00000000000000000000003 /* DeadlineEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineEntity.swift; sourceTree = "<group>"; };
+		F00000000000000000000004 /* TrackedConferenceEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedConferenceEntity.swift; sourceTree = "<group>"; };
+		F00000000000000000000005 /* ReminderEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderEntity.swift; sourceTree = "<group>"; };
+		F00000000000000000000006 /* ConferenceCatalogMetadataEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceCatalogMetadataEntity.swift; sourceTree = "<group>"; };
+		F00000000000000000000007 /* ConferenceEntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceEntityMapper.swift; sourceTree = "<group>"; };
+		F00000000000000000000008 /* ReminderEntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderEntityMapper.swift; sourceTree = "<group>"; };
+		F00000000000000000000009 /* TrackedConferenceEntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedConferenceEntityMapper.swift; sourceTree = "<group>"; };
+		F0000000000000000000000A /* SwiftDataContainerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataContainerFactory.swift; sourceTree = "<group>"; };
+		F0000000000000000000000B /* SwiftDataConferenceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataConferenceRepository.swift; sourceTree = "<group>"; };
+		F0000000000000000000000C /* SwiftDataReminderRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataReminderRepository.swift; sourceTree = "<group>"; };
+		F0000000000000000000000D /* SwiftDataTrackedConferenceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataTrackedConferenceRepository.swift; sourceTree = "<group>"; };
+		G00000000000000000000001 /* SwiftDataTestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataTestSupport.swift; sourceTree = "<group>"; };
+		G00000000000000000000002 /* SwiftDataMappingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataMappingTests.swift; sourceTree = "<group>"; };
+		G00000000000000000000003 /* SwiftDataConferenceRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataConferenceRepositoryTests.swift; sourceTree = "<group>"; };
+		G00000000000000000000004 /* SwiftDataTrackedConferenceRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataTrackedConferenceRepositoryTests.swift; sourceTree = "<group>"; };
+		G00000000000000000000005 /* SwiftDataReminderRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataReminderRepositoryTests.swift; sourceTree = "<group>"; };
+		G00000000000000000000006 /* SwiftDataPersistenceRecreationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataPersistenceRecreationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -256,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				E00000000000000000000702 /* InMemory */,
+				F00000000000000000000701 /* Local */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -268,6 +307,58 @@
 				E00000000000000000000003 /* InMemoryReminderRepository.swift */,
 			);
 			path = InMemory;
+			sourceTree = "<group>";
+		};
+		F00000000000000000000701 /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				F00000000000000000000702 /* Entities */,
+				F00000000000000000000703 /* Mapping */,
+				F00000000000000000000704 /* Persistence */,
+				F00000000000000000000705 /* Repositories */,
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
+		F00000000000000000000702 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				F00000000000000000000001 /* ConferenceEntity.swift */,
+				F00000000000000000000002 /* ConferenceEditionEntity.swift */,
+				F00000000000000000000003 /* DeadlineEntity.swift */,
+				F00000000000000000000004 /* TrackedConferenceEntity.swift */,
+				F00000000000000000000005 /* ReminderEntity.swift */,
+				F00000000000000000000006 /* ConferenceCatalogMetadataEntity.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		F00000000000000000000703 /* Mapping */ = {
+			isa = PBXGroup;
+			children = (
+				F00000000000000000000007 /* ConferenceEntityMapper.swift */,
+				F00000000000000000000008 /* ReminderEntityMapper.swift */,
+				F00000000000000000000009 /* TrackedConferenceEntityMapper.swift */,
+			);
+			path = Mapping;
+			sourceTree = "<group>";
+		};
+		F00000000000000000000704 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				F0000000000000000000000A /* SwiftDataContainerFactory.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		F00000000000000000000705 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				F0000000000000000000000B /* SwiftDataConferenceRepository.swift */,
+				F0000000000000000000000C /* SwiftDataReminderRepository.swift */,
+				F0000000000000000000000D /* SwiftDataTrackedConferenceRepository.swift */,
+			);
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 		E00000000000000000000703 /* Fixtures */ = {
@@ -286,6 +377,7 @@
 			isa = PBXGroup;
 			children = (
 				E00000000000000000000705 /* InMemory */,
+				G00000000000000000000701 /* SwiftData */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -298,6 +390,19 @@
 				E0000000000000000000000A /* InMemoryReminderRepositoryTests.swift */,
 			);
 			path = InMemory;
+			sourceTree = "<group>";
+		};
+		G00000000000000000000701 /* SwiftData */ = {
+			isa = PBXGroup;
+			children = (
+				G00000000000000000000001 /* SwiftDataTestSupport.swift */,
+				G00000000000000000000002 /* SwiftDataMappingTests.swift */,
+				G00000000000000000000003 /* SwiftDataConferenceRepositoryTests.swift */,
+				G00000000000000000000004 /* SwiftDataTrackedConferenceRepositoryTests.swift */,
+				G00000000000000000000005 /* SwiftDataReminderRepositoryTests.swift */,
+				G00000000000000000000006 /* SwiftDataPersistenceRecreationTests.swift */,
+			);
+			path = SwiftData;
 			sourceTree = "<group>";
 		};
 		E00000000000000000000706 /* Integration */ = {
@@ -447,6 +552,19 @@
 				E00000000000000000000101 /* InMemoryConferenceRepository.swift in Sources */,
 				E00000000000000000000102 /* InMemoryTrackedConferenceRepository.swift in Sources */,
 				E00000000000000000000103 /* InMemoryReminderRepository.swift in Sources */,
+				F00000000000000000000101 /* ConferenceEntity.swift in Sources */,
+				F00000000000000000000102 /* ConferenceEditionEntity.swift in Sources */,
+				F00000000000000000000103 /* DeadlineEntity.swift in Sources */,
+				F00000000000000000000104 /* TrackedConferenceEntity.swift in Sources */,
+				F00000000000000000000105 /* ReminderEntity.swift in Sources */,
+				F00000000000000000000106 /* ConferenceCatalogMetadataEntity.swift in Sources */,
+				F00000000000000000000107 /* ConferenceEntityMapper.swift in Sources */,
+				F00000000000000000000108 /* ReminderEntityMapper.swift in Sources */,
+				F00000000000000000000109 /* TrackedConferenceEntityMapper.swift in Sources */,
+				F0000000000000000000010A /* SwiftDataContainerFactory.swift in Sources */,
+				F0000000000000000000010B /* SwiftDataConferenceRepository.swift in Sources */,
+				F0000000000000000000010C /* SwiftDataReminderRepository.swift in Sources */,
+				F0000000000000000000010D /* SwiftDataTrackedConferenceRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,6 +590,12 @@
 				E0000000000000000000010A /* InMemoryReminderRepositoryTests.swift in Sources */,
 				E0000000000000000000010B /* FixtureValidationTests.swift in Sources */,
 				E0000000000000000000010C /* FixtureDrivenDomainTests.swift in Sources */,
+				G00000000000000000000101 /* SwiftDataTestSupport.swift in Sources */,
+				G00000000000000000000102 /* SwiftDataMappingTests.swift in Sources */,
+				G00000000000000000000103 /* SwiftDataConferenceRepositoryTests.swift in Sources */,
+				G00000000000000000000104 /* SwiftDataTrackedConferenceRepositoryTests.swift in Sources */,
+				G00000000000000000000105 /* SwiftDataReminderRepositoryTests.swift in Sources */,
+				G00000000000000000000106 /* SwiftDataPersistenceRecreationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

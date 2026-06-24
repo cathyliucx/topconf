@@ -4,6 +4,10 @@ import XCTest
 final class DeadlineCalculatorTests: XCTestCase {
     private let calculator = DeadlineCalculator(clock: FixedClock.standard)
 
+    func testFixedClockStandardMatchesSOPReferenceDate() {
+        XCTAssertEqual(FixedClock.standard.now.timeIntervalSince1970, 1_782_172_800)
+    }
+
     func testRemainingTimeFormatting() {
         XCTAssertEqual(calculator.remainingText(until: DomainTestFactory.date(daysFromReference: 100)), "100 days")
         XCTAssertEqual(calculator.remainingText(until: DomainTestFactory.date(daysFromReference: 3)), "3 days")

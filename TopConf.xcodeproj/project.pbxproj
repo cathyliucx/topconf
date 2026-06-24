@@ -82,6 +82,28 @@
 		I00000000000000000000109 /* TrackedConferenceListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = I00000000000000000000009 /* TrackedConferenceListViewModelTests.swift */; };
 		I0000000000000000000010A /* DeadlinePresentationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = I0000000000000000000000A /* DeadlinePresentationTests.swift */; };
 		I0000000000000000000010B /* TrackedConferenceListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = I0000000000000000000000B /* TrackedConferenceListUITests.swift */; };
+		J00000000000000000000101 /* LauncherPanelState.swift in Sources */ = {isa = PBXBuildFile; fileRef = J00000000000000000000001 /* LauncherPanelState.swift */; };
+		J00000000000000000000102 /* GlobalHotkeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = J00000000000000000000002 /* GlobalHotkeyManager.swift */; };
+		J00000000000000000000103 /* LauncherPanelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = J00000000000000000000003 /* LauncherPanelController.swift */; };
+		J00000000000000000000104 /* TopConfAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = J00000000000000000000004 /* TopConfAppDelegate.swift */; };
+		J00000000000000000000105 /* GlobalHotkeyManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = J00000000000000000000005 /* GlobalHotkeyManagerTests.swift */; };
+		J00000000000000000000106 /* LauncherPanelLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = J00000000000000000000006 /* LauncherPanelLayoutTests.swift */; };
+		K00000000000000000000101 /* DeadlineNotificationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = K00000000000000000000001 /* DeadlineNotificationRequest.swift */; };
+		K00000000000000000000102 /* DeadlineNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = K00000000000000000000002 /* DeadlineNotificationService.swift */; };
+		K00000000000000000000103 /* NotificationIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = K00000000000000000000003 /* NotificationIdentifier.swift */; };
+		K00000000000000000000104 /* NotificationScheduling.swift in Sources */ = {isa = PBXBuildFile; fileRef = K00000000000000000000004 /* NotificationScheduling.swift */; };
+		K00000000000000000000105 /* UserNotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = K00000000000000000000005 /* UserNotificationScheduler.swift */; };
+		K00000000000000000000106 /* SilentNotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = K00000000000000000000006 /* SilentNotificationScheduler.swift */; };
+		L00000000000000000000101 /* ReminderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = L00000000000000000000001 /* ReminderViewModel.swift */; };
+		L00000000000000000000102 /* ReminderPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = L00000000000000000000002 /* ReminderPopoverView.swift */; };
+		M00000000000000000000101 /* NotificationIdentifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = M00000000000000000000001 /* NotificationIdentifierTests.swift */; };
+		M00000000000000000000102 /* DeadlineNotificationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = M00000000000000000000002 /* DeadlineNotificationServiceTests.swift */; };
+		M00000000000000000000103 /* ReminderViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = M00000000000000000000003 /* ReminderViewModelTests.swift */; };
+		N00000000000000000000101 /* DeveloperToolsAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = N00000000000000000000001 /* DeveloperToolsAvailability.swift */; };
+		N00000000000000000000102 /* DebugNotificationTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = N00000000000000000000002 /* DebugNotificationTestViewModel.swift */; };
+		N00000000000000000000103 /* DebugNotificationTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = N00000000000000000000003 /* DebugNotificationTestView.swift */; };
+		N00000000000000000000104 /* DebugNotificationTestWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = N00000000000000000000004 /* DebugNotificationTestWindowController.swift */; };
+		N00000000000000000000105 /* DebugNotificationTestViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = N00000000000000000000005 /* DebugNotificationTestViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,6 +202,28 @@
 		I00000000000000000000009 /* TrackedConferenceListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedConferenceListViewModelTests.swift; sourceTree = "<group>"; };
 		I0000000000000000000000A /* DeadlinePresentationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlinePresentationTests.swift; sourceTree = "<group>"; };
 		I0000000000000000000000B /* TrackedConferenceListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedConferenceListUITests.swift; sourceTree = "<group>"; };
+		J00000000000000000000001 /* LauncherPanelState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherPanelState.swift; sourceTree = "<group>"; };
+		J00000000000000000000002 /* GlobalHotkeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalHotkeyManager.swift; sourceTree = "<group>"; };
+		J00000000000000000000003 /* LauncherPanelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherPanelController.swift; sourceTree = "<group>"; };
+		J00000000000000000000004 /* TopConfAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopConfAppDelegate.swift; sourceTree = "<group>"; };
+		J00000000000000000000005 /* GlobalHotkeyManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalHotkeyManagerTests.swift; sourceTree = "<group>"; };
+		J00000000000000000000006 /* LauncherPanelLayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherPanelLayoutTests.swift; sourceTree = "<group>"; };
+		K00000000000000000000001 /* DeadlineNotificationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineNotificationRequest.swift; sourceTree = "<group>"; };
+		K00000000000000000000002 /* DeadlineNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineNotificationService.swift; sourceTree = "<group>"; };
+		K00000000000000000000003 /* NotificationIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationIdentifier.swift; sourceTree = "<group>"; };
+		K00000000000000000000004 /* NotificationScheduling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScheduling.swift; sourceTree = "<group>"; };
+		K00000000000000000000005 /* UserNotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationScheduler.swift; sourceTree = "<group>"; };
+		K00000000000000000000006 /* SilentNotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SilentNotificationScheduler.swift; sourceTree = "<group>"; };
+		L00000000000000000000001 /* ReminderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderViewModel.swift; sourceTree = "<group>"; };
+		L00000000000000000000002 /* ReminderPopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderPopoverView.swift; sourceTree = "<group>"; };
+		M00000000000000000000001 /* NotificationIdentifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationIdentifierTests.swift; sourceTree = "<group>"; };
+		M00000000000000000000002 /* DeadlineNotificationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineNotificationServiceTests.swift; sourceTree = "<group>"; };
+		M00000000000000000000003 /* ReminderViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderViewModelTests.swift; sourceTree = "<group>"; };
+		N00000000000000000000001 /* DeveloperToolsAvailability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperToolsAvailability.swift; sourceTree = "<group>"; };
+		N00000000000000000000002 /* DebugNotificationTestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugNotificationTestViewModel.swift; sourceTree = "<group>"; };
+		N00000000000000000000003 /* DebugNotificationTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugNotificationTestView.swift; sourceTree = "<group>"; };
+		N00000000000000000000004 /* DebugNotificationTestWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugNotificationTestWindowController.swift; sourceTree = "<group>"; };
+		N00000000000000000000005 /* DebugNotificationTestViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugNotificationTestViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,6 +271,7 @@
 				E00000000000000000000701 /* Data */,
 				H00000000000000000000704 /* Features */,
 				H00000000000000000000708 /* Shared */,
+				K00000000000000000000701 /* Notifications */,
 			);
 			path = TopConf;
 			sourceTree = "<group>";
@@ -242,6 +287,7 @@
 				E00000000000000000000706 /* Integration */,
 				H0000000000000000000070A /* Features */,
 				H0000000000000000000070B /* App */,
+				M00000000000000000000701 /* Notifications */,
 			);
 			path = TopConfTests;
 			sourceTree = "<group>";
@@ -365,8 +411,32 @@
 				H00000000000000000000001 /* AppEnvironment.swift */,
 				H00000000000000000000002 /* DependencyContainer.swift */,
 				H00000000000000000000003 /* AppRootView.swift */,
+				J00000000000000000000701 /* Launcher */,
+				N00000000000000000000701 /* Developer */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		N00000000000000000000701 /* Developer */ = {
+			isa = PBXGroup;
+			children = (
+				N00000000000000000000001 /* DeveloperToolsAvailability.swift */,
+				N00000000000000000000002 /* DebugNotificationTestViewModel.swift */,
+				N00000000000000000000003 /* DebugNotificationTestView.swift */,
+				N00000000000000000000004 /* DebugNotificationTestWindowController.swift */,
+			);
+			path = Developer;
+			sourceTree = "<group>";
+		};
+		J00000000000000000000701 /* Launcher */ = {
+			isa = PBXGroup;
+			children = (
+				J00000000000000000000001 /* LauncherPanelState.swift */,
+				J00000000000000000000002 /* GlobalHotkeyManager.swift */,
+				J00000000000000000000003 /* LauncherPanelController.swift */,
+				J00000000000000000000004 /* TopConfAppDelegate.swift */,
+			);
+			path = Launcher;
 			sourceTree = "<group>";
 		};
 		H00000000000000000000703 /* Seed */ = {
@@ -382,6 +452,7 @@
 			children = (
 				H00000000000000000000705 /* ConferenceManagement */,
 				I00000000000000000000701 /* TrackedConferenceList */,
+				L00000000000000000000701 /* Reminders */,
 				H00000000000000000000706 /* Onboarding */,
 			);
 			path = Features;
@@ -432,6 +503,7 @@
 				H0000000000000000000000D /* ConferenceManagementViewModelTests.swift */,
 				I00000000000000000000009 /* TrackedConferenceListViewModelTests.swift */,
 				I0000000000000000000000A /* DeadlinePresentationTests.swift */,
+				M00000000000000000000003 /* ReminderViewModelTests.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -440,6 +512,9 @@
 			isa = PBXGroup;
 			children = (
 				H0000000000000000000000E /* AppCompositionTests.swift */,
+				J00000000000000000000005 /* GlobalHotkeyManagerTests.swift */,
+				J00000000000000000000006 /* LauncherPanelLayoutTests.swift */,
+				N00000000000000000000005 /* DebugNotificationTestViewModelTests.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -463,6 +538,37 @@
 				I00000000000000000000001 /* Date+Formatting.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		K00000000000000000000701 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				K00000000000000000000001 /* DeadlineNotificationRequest.swift */,
+				K00000000000000000000002 /* DeadlineNotificationService.swift */,
+				K00000000000000000000003 /* NotificationIdentifier.swift */,
+				K00000000000000000000004 /* NotificationScheduling.swift */,
+				K00000000000000000000005 /* UserNotificationScheduler.swift */,
+				K00000000000000000000006 /* SilentNotificationScheduler.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		L00000000000000000000701 /* Reminders */ = {
+			isa = PBXGroup;
+			children = (
+				L00000000000000000000001 /* ReminderViewModel.swift */,
+				L00000000000000000000002 /* ReminderPopoverView.swift */,
+			);
+			path = Reminders;
+			sourceTree = "<group>";
+		};
+		M00000000000000000000701 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				M00000000000000000000001 /* NotificationIdentifierTests.swift */,
+				M00000000000000000000002 /* DeadlineNotificationServiceTests.swift */,
+			);
+			path = Notifications;
 			sourceTree = "<group>";
 		};
 		E00000000000000000000702 /* InMemory */ = {
@@ -743,6 +849,22 @@
 				H0000000000000000000010A /* OnboardingView.swift in Sources */,
 				H0000000000000000000010B /* EmptyStateView.swift in Sources */,
 				H0000000000000000000010C /* LoadingIndicator.swift in Sources */,
+				J00000000000000000000101 /* LauncherPanelState.swift in Sources */,
+				J00000000000000000000102 /* GlobalHotkeyManager.swift in Sources */,
+				J00000000000000000000103 /* LauncherPanelController.swift in Sources */,
+				J00000000000000000000104 /* TopConfAppDelegate.swift in Sources */,
+				N00000000000000000000101 /* DeveloperToolsAvailability.swift in Sources */,
+				N00000000000000000000102 /* DebugNotificationTestViewModel.swift in Sources */,
+				N00000000000000000000103 /* DebugNotificationTestView.swift in Sources */,
+				N00000000000000000000104 /* DebugNotificationTestWindowController.swift in Sources */,
+				K00000000000000000000101 /* DeadlineNotificationRequest.swift in Sources */,
+				K00000000000000000000102 /* DeadlineNotificationService.swift in Sources */,
+				K00000000000000000000103 /* NotificationIdentifier.swift in Sources */,
+				K00000000000000000000104 /* NotificationScheduling.swift in Sources */,
+				K00000000000000000000105 /* UserNotificationScheduler.swift in Sources */,
+				K00000000000000000000106 /* SilentNotificationScheduler.swift in Sources */,
+				L00000000000000000000101 /* ReminderViewModel.swift in Sources */,
+				L00000000000000000000102 /* ReminderPopoverView.swift in Sources */,
 				I00000000000000000000101 /* Date+Formatting.swift in Sources */,
 				I00000000000000000000102 /* DeadlineBadge.swift in Sources */,
 				I00000000000000000000103 /* DeadlinePresentation.swift in Sources */,
@@ -784,8 +906,14 @@
 				G00000000000000000000106 /* SwiftDataPersistenceRecreationTests.swift in Sources */,
 				H0000000000000000000010D /* ConferenceManagementViewModelTests.swift in Sources */,
 				H0000000000000000000010E /* AppCompositionTests.swift in Sources */,
+				J00000000000000000000105 /* GlobalHotkeyManagerTests.swift in Sources */,
+				J00000000000000000000106 /* LauncherPanelLayoutTests.swift in Sources */,
+				N00000000000000000000105 /* DebugNotificationTestViewModelTests.swift in Sources */,
 				I00000000000000000000109 /* TrackedConferenceListViewModelTests.swift in Sources */,
 				I0000000000000000000010A /* DeadlinePresentationTests.swift in Sources */,
+				M00000000000000000000101 /* NotificationIdentifierTests.swift in Sources */,
+				M00000000000000000000102 /* DeadlineNotificationServiceTests.swift in Sources */,
+				M00000000000000000000103 /* ReminderViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

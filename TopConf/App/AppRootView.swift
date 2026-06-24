@@ -4,10 +4,12 @@ struct AppRootView: View {
     @StateObject private var managementViewModel: ConferenceManagementViewModel
     @StateObject private var trackedListViewModel: TrackedConferenceListViewModel
     @State private var route: AppRoute = .loading
+    @ObservedObject private var panelState: LauncherPanelState
     private let container: DependencyContainer
 
-    init(container: DependencyContainer) {
+    init(container: DependencyContainer, panelState: LauncherPanelState = LauncherPanelState()) {
         self.container = container
+        self.panelState = panelState
         _managementViewModel = StateObject(wrappedValue: container.makeConferenceManagementViewModel())
         _trackedListViewModel = StateObject(wrappedValue: container.makeTrackedConferenceListViewModel())
     }
@@ -19,15 +21,24 @@ struct AppRootView: View {
                 LoadingIndicator(text: "Loading conferences")
                     .accessibilityIdentifier("topconf.loading")
             case .trackedList:
-                TrackedConferenceListView(viewModel: trackedListViewModel) {
+                TrackedConferenceListView(
+                    viewModel: trackedListViewModel,
+                    searchFocusRequest: panelState.searchFocusRequest
+                ) {
                     route = .management
                 }
             case .onboarding:
-                OnboardingView(viewModel: managementViewModel) {
+                OnboardingView(
+                    viewModel: managementViewModel,
+                    searchFocusRequest: panelState.searchFocusRequest
+                ) {
                     route = .trackedList
                 }
             case .management:
-                ConferenceManagementView(viewModel: managementViewModel) {
+                ConferenceManagementView(
+                    viewModel: managementViewModel,
+                    searchFocusRequest: panelState.searchFocusRequest
+                ) {
                     Task {
                         await trackedListViewModel.load()
                         route = routeAfterTrackedLoad()

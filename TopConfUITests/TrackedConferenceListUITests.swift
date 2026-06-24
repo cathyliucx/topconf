@@ -20,6 +20,18 @@ final class TrackedConferenceListUITests: XCTestCase {
         XCTAssertTrue(app.links["topconf.tracked.website.hci-chi"].exists || app.buttons["topconf.tracked.website.hci-chi"].exists)
     }
 
+    func testReminderPopoverCanBeOpenedForTrackedDeadline() {
+        let app = launch(seedScenario: "oneUpcoming")
+
+        XCTAssertTrue(element("topconf.tracked.table", in: app).waitForExistence(timeout: 5))
+        let remindButton = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "topconf.reminder.hci-chi-2027-paper")).firstMatch
+        XCTAssertTrue(remindButton.waitForExistence(timeout: 5))
+
+        remindButton.click()
+
+        XCTAssertTrue(element("topconf.reminder.popover.hci-chi-2027-paper", in: app).waitForExistence(timeout: 5))
+    }
+
     func testMultipleTrackedConferencesAreSortedAcrossCategories() {
         let app = launch(seedScenario: "multipleSorted")
 

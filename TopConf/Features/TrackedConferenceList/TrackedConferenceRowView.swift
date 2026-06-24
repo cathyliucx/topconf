@@ -2,6 +2,7 @@ import SwiftUI
 
 struct TrackedConferenceRowView: View {
     let row: TrackedConferenceRowPresentation
+    let makeReminderViewModel: (TrackedConferenceRowPresentation) -> ReminderViewModel?
 
     var body: some View {
         HStack(spacing: 14) {
@@ -34,7 +35,7 @@ struct TrackedConferenceRowView: View {
                 .accessibilityIdentifier("topconf.tracked.beijingTime.\(row.id)")
 
             actions
-                .frame(width: 70, alignment: .leading)
+                .frame(width: 138, alignment: .leading)
         }
         .padding(.vertical, 6)
         .accessibilityElement(children: .contain)
@@ -67,12 +68,39 @@ struct TrackedConferenceRowView: View {
 
     @ViewBuilder
     private var actions: some View {
-        if let url = row.websiteURL {
-            Link("Website", destination: url)
-                .accessibilityIdentifier("topconf.tracked.website.\(row.id)")
-        } else {
-            Text("-")
-                .foregroundStyle(.tertiary)
+        HStack(spacing: 8) {
+            if let url = row.websiteURL {
+                Link("Website", destination: url)
+                    .accessibilityIdentifier("topconf.tracked.website.\(row.id)")
+            }
+
+            if row.reminderContext != nil {
+                if let reminderViewModel = makeReminderViewModel(row) {
+                    ReminderActionButton(viewModel: reminderViewModel)
+                }
+            } else if row.websiteURL == nil {
+                Text("-")
+                    .foregroundStyle(.tertiary)
+            }
         }
+    }
+}
+
+private struct ReminderActionButton: View {
+    @StateObject private var viewModel: ReminderViewModel
+    @State private var isPopoverPresented = false
+
+    init(viewModel: ReminderViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
+
+    var body: some View {
+        Button("Remind") {
+            isPopoverPresented = true
+        }
+        .popover(isPresented: $isPopoverPresented) {
+            ReminderPopoverView(viewModel: viewModel)
+        }
+        .accessibilityIdentifier("topconf.reminder.\(viewModel.context.deadlineID)")
     }
 }

@@ -2,7 +2,9 @@ import SwiftUI
 
 struct TrackedConferenceListView: View {
     @ObservedObject var viewModel: TrackedConferenceListViewModel
+    var searchFocusRequest = 0
     let onManage: () -> Void
+    @FocusState private var isSearchFocused: Bool
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -12,6 +14,10 @@ struct TrackedConferenceListView: View {
         .padding(18)
         .task {
             await viewModel.load()
+        }
+        .onAppear(perform: focusSearchIfRequested)
+        .onChange(of: searchFocusRequest) { _, _ in
+            focusSearchIfRequested()
         }
         .overlay(alignment: .bottom) {
             if let error = viewModel.presentationError {
@@ -44,6 +50,7 @@ struct TrackedConferenceListView: View {
             HStack {
                 TextField("Search tracked conferences", text: $viewModel.searchQuery)
                     .textFieldStyle(.roundedBorder)
+                    .focused($isSearchFocused)
                     .accessibilityIdentifier("topconf.search.tracked")
                     .onChange(of: viewModel.searchQuery) { _, _ in
                         viewModel.refreshSearch()
@@ -58,6 +65,13 @@ struct TrackedConferenceListView: View {
                 }
             }
         }
+    }
+
+    private func focusSearchIfRequested() {
+        guard searchFocusRequest > 0 else {
+            return
+        }
+        isSearchFocused = true
     }
 
     @ViewBuilder
@@ -83,7 +97,10 @@ struct TrackedConferenceListView: View {
                     message: "Clear the search to return to all tracked conferences."
                 )
             } else {
-                TrackedConferenceTableView(rows: viewModel.visibleRows)
+                TrackedConferenceTableView(
+                    rows: viewModel.visibleRows,
+                    makeReminderViewModel: viewModel.makeReminderViewModel(for:)
+                )
             }
         case .failed:
             VStack(spacing: 12) {

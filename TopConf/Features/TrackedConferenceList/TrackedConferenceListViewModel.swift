@@ -24,6 +24,7 @@ final class TrackedConferenceListViewModel: ObservableObject {
     private let deadlineCalculator: DeadlineCalculator
     private let searchService: SearchService
     private let lastKnownConferences: [Conference]
+    private let reminderManager: (any DeadlineReminderManaging)?
     private var isLoading = false
 
     init(
@@ -33,7 +34,8 @@ final class TrackedConferenceListViewModel: ObservableObject {
         sortingService: ConferenceSortingService = ConferenceSortingService(),
         deadlineCalculator: DeadlineCalculator,
         searchService: SearchService = SearchService(),
-        lastKnownConferences: [Conference] = []
+        lastKnownConferences: [Conference] = [],
+        reminderManager: (any DeadlineReminderManaging)? = nil
     ) {
         self.conferenceRepository = conferenceRepository
         self.trackedRepository = trackedRepository
@@ -42,6 +44,7 @@ final class TrackedConferenceListViewModel: ObservableObject {
         self.deadlineCalculator = deadlineCalculator
         self.searchService = searchService
         self.lastKnownConferences = lastKnownConferences
+        self.reminderManager = reminderManager
     }
 
     var isEmpty: Bool {
@@ -76,6 +79,7 @@ final class TrackedConferenceListViewModel: ObservableObject {
             rows = sortingService.sort(resolved).map(makeRow)
             lastUpdatedText = Self.lastUpdatedText(for: updatedAt)
             applySearch()
+            await reminderManager?.synchronizeReminders(for: rows.compactMap(\.reminderContext))
             loadState = .loaded
             presentationError = nil
         } catch {
@@ -128,6 +132,36 @@ final class TrackedConferenceListViewModel: ObservableObject {
             editionYearText: resolved.edition.map { String($0.year) } ?? "-",
             deadline: deadline,
             websiteURL: conference?.websiteURL,
+            availability: resolved.availability,
+            reminderContext: Self.reminderContext(
+                for: resolved,
+                conference: conference,
+                deadline: deadline
+            )
+        )
+    }
+
+    func makeReminderViewModel(for row: TrackedConferenceRowPresentation) -> ReminderViewModel? {
+        guard let reminderContext = row.reminderContext, let reminderManager else {
+            return nil
+        }
+        return ReminderViewModel(context: reminderContext, reminderManager: reminderManager)
+    }
+
+    private static func reminderContext(
+        for resolved: ResolvedTrackedConference,
+        conference: Conference?,
+        deadline presentation: DeadlinePresentation
+    ) -> DeadlineReminderContext? {
+        guard let deadline = resolved.primaryDeadline else {
+            return nil
+        }
+        let title = conference.map { "\($0.abbreviation) \($0.fullName)" } ?? resolved.conferenceID
+        return DeadlineReminderContext(
+            deadlineID: deadline.id,
+            conferenceTitle: title,
+            deadlineTypeText: presentation.typeText,
+            deadlineDate: deadline.date,
             availability: resolved.availability
         )
     }

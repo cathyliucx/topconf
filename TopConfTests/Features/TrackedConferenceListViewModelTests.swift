@@ -98,7 +98,11 @@ final class TrackedConferenceListViewModelTests: XCTestCase {
                 customDeadline(id: "early", days: 2)
             ]
         )
-        let viewModel = makeViewModel(conferences: [conference], trackedIDs: ["ai-shuffled"])
+        let viewModel = makeViewModel(
+            conferences: [conference],
+            trackedIDs: ["ai-shuffled"],
+            clock: FixedClock.standard
+        )
 
         await viewModel.load()
 
@@ -123,7 +127,11 @@ final class TrackedConferenceListViewModelTests: XCTestCase {
             ],
             lastUpdatedAt: nil
         )
-        let viewModel = makeViewModel(conferences: [conference], trackedIDs: ["ai-years"])
+        let viewModel = makeViewModel(
+            conferences: [conference],
+            trackedIDs: ["ai-years"],
+            clock: FixedClock.standard
+        )
 
         await viewModel.load()
 
@@ -298,21 +306,23 @@ final class TrackedConferenceListViewModelTests: XCTestCase {
     private func makeViewModel(
         conferences: [Conference] = SeedConferenceCatalog.conferences(),
         trackedIDs: [String],
-        lastKnown: [Conference] = []
+        lastKnown: [Conference] = [],
+        clock: any Clock = FixedDateClock(now: SeedConferenceCatalog.seededAt)
     ) -> TrackedConferenceListViewModel {
         makeViewModel(
             conferenceRepository: InMemoryConferenceRepository(conferences: conferences, updatedAt: SeedConferenceCatalog.seededAt),
             trackedIDs: trackedIDs,
-            lastKnown: lastKnown
+            lastKnown: lastKnown,
+            clock: clock
         )
     }
 
     private func makeViewModel(
         conferenceRepository: any ConferenceRepository,
         trackedIDs: [String],
-        lastKnown: [Conference] = []
+        lastKnown: [Conference] = [],
+        clock: any Clock = FixedDateClock(now: SeedConferenceCatalog.seededAt)
     ) -> TrackedConferenceListViewModel {
-        let clock = FixedClock.standard
         let selection = DeadlineSelectionService(clock: clock)
         return TrackedConferenceListViewModel(
             conferenceRepository: conferenceRepository,

@@ -2,12 +2,13 @@ import SwiftUI
 
 struct ConferenceManagementView: View {
     @ObservedObject var viewModel: ConferenceManagementViewModel
+    var searchFocusRequest = 0
     var onDone: (() -> Void)?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             header
-            ConferenceFilterBar(viewModel: viewModel)
+            ConferenceFilterBar(viewModel: viewModel, searchFocusRequest: searchFocusRequest)
 
             HStack(alignment: .top, spacing: 18) {
                 VStack(alignment: .leading) {

@@ -2,11 +2,14 @@ import SwiftUI
 
 struct ConferenceFilterBar: View {
     @ObservedObject var viewModel: ConferenceManagementViewModel
+    var searchFocusRequest = 0
+    @FocusState private var isSearchFocused: Bool
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             TextField("Search conferences", text: $viewModel.searchQuery)
                 .textFieldStyle(.roundedBorder)
+                .focused($isSearchFocused)
                 .accessibilityIdentifier("topconf.search.discovery")
                 .onChange(of: viewModel.searchQuery) {
                     viewModel.refreshFilters()
@@ -47,6 +50,17 @@ struct ConferenceFilterBar: View {
                 content()
             }
         }
+        .onAppear(perform: focusSearchIfRequested)
+        .onChange(of: searchFocusRequest) { _, _ in
+            focusSearchIfRequested()
+        }
+    }
+
+    private func focusSearchIfRequested() {
+        guard searchFocusRequest > 0 else {
+            return
+        }
+        isSearchFocused = true
     }
 
 }

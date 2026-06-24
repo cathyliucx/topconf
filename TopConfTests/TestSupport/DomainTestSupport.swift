@@ -4,7 +4,7 @@ import Foundation
 struct FixedClock: Clock {
     let now: Date
 
-    static let standard = FixedClock(now: Date(timeIntervalSince1970: 1_750_636_800))
+    static let standard = FixedClock(now: Date(timeIntervalSince1970: 1_782_172_800))
 }
 
 enum DomainTestFactory {
@@ -79,4 +79,3 @@ enum DomainTestFactory {
         TrackedConference(conferenceID: conferenceID, addedAt: referenceDate)
     }
 }
-

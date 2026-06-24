@@ -4,6 +4,8 @@ import SwiftData
 struct DependencyContainer {
     let conferenceRepository: any ConferenceRepository
     let trackedRepository: any TrackedConferenceRepository
+    let reminderRepository: any ReminderRepository
+    let reminderManager: any DeadlineReminderManaging
     let clock: any Clock
     let configuration: AppLaunchConfiguration
 
@@ -16,9 +18,16 @@ struct DependencyContainer {
         let clock: any Clock = configuration.isUITesting
             ? FixedDateClock(now: SeedConferenceCatalog.seededAt)
             : SystemClock()
+        let reminderRepository = SwiftDataReminderRepository(container: container)
         return DependencyContainer(
             conferenceRepository: SwiftDataConferenceRepository(container: container),
             trackedRepository: SwiftDataTrackedConferenceRepository(container: container),
+            reminderRepository: reminderRepository,
+            reminderManager: DeadlineNotificationService(
+                reminderRepository: reminderRepository,
+                scheduler: configuration.isUITesting ? SilentNotificationScheduler() : UserNotificationScheduler(),
+                clock: clock
+            ),
             clock: clock,
             configuration: configuration
         )
@@ -43,7 +52,8 @@ struct DependencyContainer {
             trackedRepository: trackedRepository,
             resolver: TrackedConferenceResolver(deadlineSelectionService: deadlineSelectionService),
             sortingService: ConferenceSortingService(),
-            deadlineCalculator: DeadlineCalculator(clock: clock)
+            deadlineCalculator: DeadlineCalculator(clock: clock),
+            reminderManager: reminderManager
         )
     }
 

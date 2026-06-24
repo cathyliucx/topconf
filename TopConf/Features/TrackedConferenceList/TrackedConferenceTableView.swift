@@ -2,6 +2,7 @@ import SwiftUI
 
 struct TrackedConferenceTableView: View {
     let rows: [TrackedConferenceRowPresentation]
+    let makeReminderViewModel: (TrackedConferenceRowPresentation) -> ReminderViewModel?
 
     var body: some View {
         ScrollView {
@@ -9,7 +10,10 @@ struct TrackedConferenceTableView: View {
                 header
                 Divider()
                 ForEach(rows) { row in
-                    TrackedConferenceRowView(row: row)
+                    TrackedConferenceRowView(
+                        row: row,
+                        makeReminderViewModel: makeReminderViewModel
+                    )
                     Divider()
                 }
             }
@@ -33,7 +37,7 @@ struct TrackedConferenceTableView: View {
             Text("Beijing")
                 .frame(width: 150, alignment: .leading)
             Text("Actions")
-                .frame(width: 70, alignment: .leading)
+                .frame(width: 138, alignment: .leading)
         }
         .font(.caption)
         .foregroundStyle(.secondary)

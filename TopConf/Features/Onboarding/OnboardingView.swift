@@ -2,6 +2,7 @@ import SwiftUI
 
 struct OnboardingView: View {
     @ObservedObject var viewModel: ConferenceManagementViewModel
+    var searchFocusRequest = 0
     let onContinue: () -> Void
 
     var body: some View {
@@ -20,7 +21,7 @@ struct OnboardingView: View {
                     .accessibilityIdentifier("topconf.management.count")
             }
 
-            ConferenceManagementView(viewModel: viewModel)
+            ConferenceManagementView(viewModel: viewModel, searchFocusRequest: searchFocusRequest)
 
             HStack {
                 Spacer()

@@ -8,6 +8,18 @@ actor SwiftDataReminderRepository: ReminderRepository {
         self.container = container
     }
 
+    func loadAll() async throws -> [ReminderRule] {
+        let context = ModelContext(container)
+        let descriptor = FetchDescriptor<ReminderEntity>(
+            sortBy: [
+                SortDescriptor(\ReminderEntity.deadlineID),
+                SortDescriptor(\ReminderEntity.offsetSeconds),
+                SortDescriptor(\ReminderEntity.id)
+            ]
+        )
+        return try context.fetch(descriptor).map(ReminderEntityMapper.makeDomain(from:))
+    }
+
     func rules(for deadlineID: String) async throws -> [ReminderRule] {
         let context = ModelContext(container)
         let descriptor = FetchDescriptor<ReminderEntity>(

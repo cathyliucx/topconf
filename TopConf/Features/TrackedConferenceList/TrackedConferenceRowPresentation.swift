@@ -9,4 +9,5 @@ struct TrackedConferenceRowPresentation: Identifiable, Equatable {
     let deadline: DeadlinePresentation
     let websiteURL: URL?
     let availability: ConferenceAvailability
+    let reminderContext: DeadlineReminderContext?
 }

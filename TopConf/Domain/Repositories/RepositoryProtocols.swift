@@ -16,9 +16,9 @@ protocol TrackedConferenceRepository {
 }
 
 protocol ReminderRepository {
+    func loadAll() async throws -> [ReminderRule]
     func rules(for deadlineID: String) async throws -> [ReminderRule]
     func save(_ rule: ReminderRule) async throws
     func delete(ruleID: String) async throws
     func deleteAll(for deadlineID: String) async throws
 }
-

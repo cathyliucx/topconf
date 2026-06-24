@@ -28,6 +28,19 @@ final class SwiftDataConferenceRepositoryTests: XCTestCase {
         XCTAssertEqual(lastUpdatedAt, updatedAt)
     }
 
+    func testCatalogIsNotCappedAtTrackingLimit() async throws {
+        let repository = try makeRepository()
+        let seed = SeedConferenceCatalog.conferences()
+
+        try await repository.replaceAll(seed, updatedAt: SeedConferenceCatalog.seededAt)
+        let conferences = try await repository.loadAll()
+        let beyondLimitConference = try await repository.conference(id: "interdisciplinary-wsdm")
+
+        XCTAssertGreaterThan(seed.count, TrackingPolicy.maximumConferenceCount)
+        XCTAssertEqual(conferences.count, seed.count)
+        XCTAssertNotNil(beyondLimitConference)
+    }
+
     func testReplaceAllRemovesStaleCatalogRowsButPreservesTrackedAndReminders() async throws {
         let container = try SwiftDataTestSupport.makeInMemoryContainer()
         let conferenceRepository = SwiftDataConferenceRepository(container: container)

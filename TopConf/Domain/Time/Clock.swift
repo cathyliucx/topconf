@@ -8,3 +8,6 @@ struct SystemClock: Clock {
     var now: Date { Date() }
 }
 
+struct FixedDateClock: Clock {
+    let now: Date
+}

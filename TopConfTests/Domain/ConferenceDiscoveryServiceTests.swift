@@ -33,6 +33,19 @@ final class ConferenceDiscoveryServiceTests: XCTestCase {
         XCTAssertEqual(discover(conferences, query: "").map(\.id), conferences.map(\.id))
     }
 
+    func testDiscoveryAndSearchResultsAreNotCappedAtTrackingLimit() {
+        let conferences = SeedConferenceCatalog.conferences()
+
+        let allRanks = discover(conferences, ranks: [])
+        let searchResults = discover(conferences, ranks: [], query: "conference")
+        let ccfBResults = discover(conferences, ranks: [.b])
+
+        XCTAssertGreaterThan(conferences.count, TrackingPolicy.maximumConferenceCount)
+        XCTAssertEqual(allRanks.count, conferences.count)
+        XCTAssertGreaterThan(searchResults.count, TrackingPolicy.maximumConferenceCount)
+        XCTAssertGreaterThan(ccfBResults.count, TrackingPolicy.maximumConferenceCount)
+    }
+
     func testUnknownCategoryDoesNotCrashAndTrackingIdentityIsIndependentFromDiscoveryFilters() {
         let unknown = DomainTestFactory.conference(id: "unknown-conf", category: DomainTestFactory.unknown, rank: .unknown)
         let results = discover([unknown], categories: [DomainTestFactory.unknown], ranks: [.unknown])
@@ -68,4 +81,3 @@ final class ConferenceDiscoveryServiceTests: XCTestCase {
         ]
     }
 }
-

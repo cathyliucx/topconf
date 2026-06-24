@@ -28,7 +28,8 @@ TopConf is designed to support:
 * Native macOS menu bar application
 * Global `⌥ Space` launcher
 * Spotlight-style floating window
-* Tracking up to 10 conferences
+* Search and discovery across the supported conference catalog
+* Tracking up to 10 selected conferences
 * Deadline-first compact table layout
 * Sorting by nearest valid submission deadline
 * Conference search
@@ -61,6 +62,10 @@ CCF rank: CCF-A
 ```
 
 The discovery filter is only used to help users find conferences.
+
+The 10-conference limit applies only to the tracked set. It must not cap the
+catalog, search results, category/rank results, bundled seed data, or future
+structured synchronization.
 
 A conference that is already being tracked must not disappear automatically because:
 
@@ -666,7 +671,7 @@ Do not advance to a later SOP phase unless explicitly requested.
 * CCF-rank filters
 * search
 * add and remove tracking
-* 10-conference limit
+* 10-conference tracked-set limit without limiting the catalog or discovery results
 
 ### Phase 5 — Main Deadline Table
 
@@ -797,4 +802,3 @@ Conference accuracy depends on the quality and freshness of the upstream structu
 A license has not yet been selected.
 
 Do not add or assume a license without an explicit project decision.
-

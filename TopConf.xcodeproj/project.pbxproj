@@ -56,6 +56,32 @@
 		G00000000000000000000104 /* SwiftDataTrackedConferenceRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = G00000000000000000000004 /* SwiftDataTrackedConferenceRepositoryTests.swift */; };
 		G00000000000000000000105 /* SwiftDataReminderRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = G00000000000000000000005 /* SwiftDataReminderRepositoryTests.swift */; };
 		G00000000000000000000106 /* SwiftDataPersistenceRecreationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = G00000000000000000000006 /* SwiftDataPersistenceRecreationTests.swift */; };
+		H00000000000000000000101 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = H00000000000000000000001 /* AppEnvironment.swift */; };
+		H00000000000000000000102 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = H00000000000000000000002 /* DependencyContainer.swift */; };
+		H00000000000000000000103 /* AppRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = H00000000000000000000003 /* AppRootView.swift */; };
+		H00000000000000000000104 /* SeedConferenceCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = H00000000000000000000004 /* SeedConferenceCatalog.swift */; };
+		H00000000000000000000105 /* ConferenceManagementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = H00000000000000000000005 /* ConferenceManagementViewModel.swift */; };
+		H00000000000000000000106 /* ConferenceFilterBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = H00000000000000000000006 /* ConferenceFilterBar.swift */; };
+		H00000000000000000000107 /* ConferenceDiscoveryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = H00000000000000000000007 /* ConferenceDiscoveryListView.swift */; };
+		H00000000000000000000108 /* TrackedSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = H00000000000000000000008 /* TrackedSelectionView.swift */; };
+		H00000000000000000000109 /* ConferenceManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = H00000000000000000000009 /* ConferenceManagementView.swift */; };
+		H0000000000000000000010A /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = H0000000000000000000000A /* OnboardingView.swift */; };
+		H0000000000000000000010B /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = H0000000000000000000000B /* EmptyStateView.swift */; };
+		H0000000000000000000010C /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = H0000000000000000000000C /* LoadingIndicator.swift */; };
+		H0000000000000000000010D /* ConferenceManagementViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = H0000000000000000000000D /* ConferenceManagementViewModelTests.swift */; };
+		H0000000000000000000010E /* AppCompositionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = H0000000000000000000000E /* AppCompositionTests.swift */; };
+		H0000000000000000000010F /* ConferenceManagementUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = H0000000000000000000000F /* ConferenceManagementUITests.swift */; };
+		I00000000000000000000101 /* Date+Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = I00000000000000000000001 /* Date+Formatting.swift */; };
+		I00000000000000000000102 /* DeadlineBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = I00000000000000000000002 /* DeadlineBadge.swift */; };
+		I00000000000000000000103 /* DeadlinePresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = I00000000000000000000003 /* DeadlinePresentation.swift */; };
+		I00000000000000000000104 /* TrackedConferenceRowPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = I00000000000000000000004 /* TrackedConferenceRowPresentation.swift */; };
+		I00000000000000000000105 /* TrackedConferenceListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = I00000000000000000000005 /* TrackedConferenceListViewModel.swift */; };
+		I00000000000000000000106 /* TrackedConferenceRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = I00000000000000000000006 /* TrackedConferenceRowView.swift */; };
+		I00000000000000000000107 /* TrackedConferenceTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = I00000000000000000000007 /* TrackedConferenceTableView.swift */; };
+		I00000000000000000000108 /* TrackedConferenceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = I00000000000000000000008 /* TrackedConferenceListView.swift */; };
+		I00000000000000000000109 /* TrackedConferenceListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = I00000000000000000000009 /* TrackedConferenceListViewModelTests.swift */; };
+		I0000000000000000000010A /* DeadlinePresentationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = I0000000000000000000000A /* DeadlinePresentationTests.swift */; };
+		I0000000000000000000010B /* TrackedConferenceListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = I0000000000000000000000B /* TrackedConferenceListUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +154,32 @@
 		G00000000000000000000004 /* SwiftDataTrackedConferenceRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataTrackedConferenceRepositoryTests.swift; sourceTree = "<group>"; };
 		G00000000000000000000005 /* SwiftDataReminderRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataReminderRepositoryTests.swift; sourceTree = "<group>"; };
 		G00000000000000000000006 /* SwiftDataPersistenceRecreationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataPersistenceRecreationTests.swift; sourceTree = "<group>"; };
+		H00000000000000000000001 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
+		H00000000000000000000002 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
+		H00000000000000000000003 /* AppRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootView.swift; sourceTree = "<group>"; };
+		H00000000000000000000004 /* SeedConferenceCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedConferenceCatalog.swift; sourceTree = "<group>"; };
+		H00000000000000000000005 /* ConferenceManagementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceManagementViewModel.swift; sourceTree = "<group>"; };
+		H00000000000000000000006 /* ConferenceFilterBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceFilterBar.swift; sourceTree = "<group>"; };
+		H00000000000000000000007 /* ConferenceDiscoveryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceDiscoveryListView.swift; sourceTree = "<group>"; };
+		H00000000000000000000008 /* TrackedSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedSelectionView.swift; sourceTree = "<group>"; };
+		H00000000000000000000009 /* ConferenceManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceManagementView.swift; sourceTree = "<group>"; };
+		H0000000000000000000000A /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		H0000000000000000000000B /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		H0000000000000000000000C /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
+		H0000000000000000000000D /* ConferenceManagementViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceManagementViewModelTests.swift; sourceTree = "<group>"; };
+		H0000000000000000000000E /* AppCompositionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCompositionTests.swift; sourceTree = "<group>"; };
+		H0000000000000000000000F /* ConferenceManagementUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceManagementUITests.swift; sourceTree = "<group>"; };
+		I00000000000000000000001 /* Date+Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatting.swift"; sourceTree = "<group>"; };
+		I00000000000000000000002 /* DeadlineBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineBadge.swift; sourceTree = "<group>"; };
+		I00000000000000000000003 /* DeadlinePresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlinePresentation.swift; sourceTree = "<group>"; };
+		I00000000000000000000004 /* TrackedConferenceRowPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedConferenceRowPresentation.swift; sourceTree = "<group>"; };
+		I00000000000000000000005 /* TrackedConferenceListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedConferenceListViewModel.swift; sourceTree = "<group>"; };
+		I00000000000000000000006 /* TrackedConferenceRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedConferenceRowView.swift; sourceTree = "<group>"; };
+		I00000000000000000000007 /* TrackedConferenceTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedConferenceTableView.swift; sourceTree = "<group>"; };
+		I00000000000000000000008 /* TrackedConferenceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedConferenceListView.swift; sourceTree = "<group>"; };
+		I00000000000000000000009 /* TrackedConferenceListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedConferenceListViewModelTests.swift; sourceTree = "<group>"; };
+		I0000000000000000000000A /* DeadlinePresentationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlinePresentationTests.swift; sourceTree = "<group>"; };
+		I0000000000000000000000B /* TrackedConferenceListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedConferenceListUITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,8 +222,11 @@
 			children = (
 				100000000000000000000001 /* TopConfApp.swift */,
 				100000000000000000000002 /* ContentView.swift */,
+				H00000000000000000000701 /* App */,
 				D00000000000000000000701 /* Domain */,
 				E00000000000000000000701 /* Data */,
+				H00000000000000000000704 /* Features */,
+				H00000000000000000000708 /* Shared */,
 			);
 			path = TopConf;
 			sourceTree = "<group>";
@@ -185,6 +240,8 @@
 				E00000000000000000000703 /* Fixtures */,
 				E00000000000000000000704 /* Data */,
 				E00000000000000000000706 /* Integration */,
+				H0000000000000000000070A /* Features */,
+				H0000000000000000000070B /* App */,
 			);
 			path = TopConfTests;
 			sourceTree = "<group>";
@@ -193,6 +250,8 @@
 			isa = PBXGroup;
 			children = (
 				100000000000000000000004 /* TopConfUITests.swift */,
+				H0000000000000000000000F /* ConferenceManagementUITests.swift */,
+				I0000000000000000000000B /* TrackedConferenceListUITests.swift */,
 			);
 			path = TopConfUITests;
 			sourceTree = "<group>";
@@ -295,8 +354,115 @@
 			children = (
 				E00000000000000000000702 /* InMemory */,
 				F00000000000000000000701 /* Local */,
+				H00000000000000000000703 /* Seed */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		H00000000000000000000701 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				H00000000000000000000001 /* AppEnvironment.swift */,
+				H00000000000000000000002 /* DependencyContainer.swift */,
+				H00000000000000000000003 /* AppRootView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		H00000000000000000000703 /* Seed */ = {
+			isa = PBXGroup;
+			children = (
+				H00000000000000000000004 /* SeedConferenceCatalog.swift */,
+			);
+			path = Seed;
+			sourceTree = "<group>";
+		};
+		H00000000000000000000704 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				H00000000000000000000705 /* ConferenceManagement */,
+				I00000000000000000000701 /* TrackedConferenceList */,
+				H00000000000000000000706 /* Onboarding */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		H00000000000000000000705 /* ConferenceManagement */ = {
+			isa = PBXGroup;
+			children = (
+				H00000000000000000000005 /* ConferenceManagementViewModel.swift */,
+				H00000000000000000000006 /* ConferenceFilterBar.swift */,
+				H00000000000000000000007 /* ConferenceDiscoveryListView.swift */,
+				H00000000000000000000008 /* TrackedSelectionView.swift */,
+				H00000000000000000000009 /* ConferenceManagementView.swift */,
+			);
+			path = ConferenceManagement;
+			sourceTree = "<group>";
+		};
+		H00000000000000000000706 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				H0000000000000000000000A /* OnboardingView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		H00000000000000000000708 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				H00000000000000000000709 /* Components */,
+				I00000000000000000000702 /* Extensions */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		H00000000000000000000709 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				H0000000000000000000000B /* EmptyStateView.swift */,
+				H0000000000000000000000C /* LoadingIndicator.swift */,
+				I00000000000000000000002 /* DeadlineBadge.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		H0000000000000000000070A /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				H0000000000000000000000D /* ConferenceManagementViewModelTests.swift */,
+				I00000000000000000000009 /* TrackedConferenceListViewModelTests.swift */,
+				I0000000000000000000000A /* DeadlinePresentationTests.swift */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		H0000000000000000000070B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				H0000000000000000000000E /* AppCompositionTests.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		I00000000000000000000701 /* TrackedConferenceList */ = {
+			isa = PBXGroup;
+			children = (
+				I00000000000000000000008 /* TrackedConferenceListView.swift */,
+				I00000000000000000000007 /* TrackedConferenceTableView.swift */,
+				I00000000000000000000006 /* TrackedConferenceRowView.swift */,
+				I00000000000000000000005 /* TrackedConferenceListViewModel.swift */,
+				I00000000000000000000004 /* TrackedConferenceRowPresentation.swift */,
+				I00000000000000000000003 /* DeadlinePresentation.swift */,
+			);
+			path = TrackedConferenceList;
+			sourceTree = "<group>";
+		};
+		I00000000000000000000702 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				I00000000000000000000001 /* Date+Formatting.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		E00000000000000000000702 /* InMemory */ = {
@@ -565,6 +731,26 @@
 				F0000000000000000000010B /* SwiftDataConferenceRepository.swift in Sources */,
 				F0000000000000000000010C /* SwiftDataReminderRepository.swift in Sources */,
 				F0000000000000000000010D /* SwiftDataTrackedConferenceRepository.swift in Sources */,
+				H00000000000000000000101 /* AppEnvironment.swift in Sources */,
+				H00000000000000000000102 /* DependencyContainer.swift in Sources */,
+				H00000000000000000000103 /* AppRootView.swift in Sources */,
+				H00000000000000000000104 /* SeedConferenceCatalog.swift in Sources */,
+				H00000000000000000000105 /* ConferenceManagementViewModel.swift in Sources */,
+				H00000000000000000000106 /* ConferenceFilterBar.swift in Sources */,
+				H00000000000000000000107 /* ConferenceDiscoveryListView.swift in Sources */,
+				H00000000000000000000108 /* TrackedSelectionView.swift in Sources */,
+				H00000000000000000000109 /* ConferenceManagementView.swift in Sources */,
+				H0000000000000000000010A /* OnboardingView.swift in Sources */,
+				H0000000000000000000010B /* EmptyStateView.swift in Sources */,
+				H0000000000000000000010C /* LoadingIndicator.swift in Sources */,
+				I00000000000000000000101 /* Date+Formatting.swift in Sources */,
+				I00000000000000000000102 /* DeadlineBadge.swift in Sources */,
+				I00000000000000000000103 /* DeadlinePresentation.swift in Sources */,
+				I00000000000000000000104 /* TrackedConferenceRowPresentation.swift in Sources */,
+				I00000000000000000000105 /* TrackedConferenceListViewModel.swift in Sources */,
+				I00000000000000000000106 /* TrackedConferenceRowView.swift in Sources */,
+				I00000000000000000000107 /* TrackedConferenceTableView.swift in Sources */,
+				I00000000000000000000108 /* TrackedConferenceListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -596,6 +782,10 @@
 				G00000000000000000000104 /* SwiftDataTrackedConferenceRepositoryTests.swift in Sources */,
 				G00000000000000000000105 /* SwiftDataReminderRepositoryTests.swift in Sources */,
 				G00000000000000000000106 /* SwiftDataPersistenceRecreationTests.swift in Sources */,
+				H0000000000000000000010D /* ConferenceManagementViewModelTests.swift in Sources */,
+				H0000000000000000000010E /* AppCompositionTests.swift in Sources */,
+				I00000000000000000000109 /* TrackedConferenceListViewModelTests.swift in Sources */,
+				I0000000000000000000010A /* DeadlinePresentationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,6 +794,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				100000000000000000000104 /* TopConfUITests.swift in Sources */,
+				H0000000000000000000010F /* ConferenceManagementUITests.swift in Sources */,
+				I0000000000000000000010B /* TrackedConferenceListUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -40,6 +40,18 @@ final class InMemoryConferenceRepositoryTests: XCTestCase {
         XCTAssertEqual(lastUpdatedAt, updatedAt)
     }
 
+    func testCatalogIsNotCappedAtTrackingLimit() async throws {
+        let seed = SeedConferenceCatalog.conferences()
+        let repository = InMemoryConferenceRepository(conferences: seed, updatedAt: SeedConferenceCatalog.seededAt)
+
+        let conferences = try await repository.loadAll()
+        let beyondLimitConference = try await repository.conference(id: "interdisciplinary-wsdm")
+
+        XCTAssertGreaterThan(seed.count, TrackingPolicy.maximumConferenceCount)
+        XCTAssertEqual(conferences.count, seed.count)
+        XCTAssertNotNil(beyondLimitConference)
+    }
+
     func testReplacingWithEmptyArrayClearsCatalog() async throws {
         let repository = InMemoryConferenceRepository(conferences: ConferenceFixtures.catalog())
 

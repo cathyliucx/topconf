@@ -23,4 +23,6 @@ enum RemoteCatalogError: Error, Equatable {
     case malformedRoot
     case noUsableConferences
     case invalidResponse(Int)
+    case duplicateFilePath(String)
+    case incompleteBatch(String)
 }

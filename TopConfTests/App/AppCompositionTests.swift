@@ -163,6 +163,45 @@ final class AppCompositionTests: XCTestCase {
         XCTAssertEqual(lastUpdatedAt, DomainTestFactory.referenceDate)
     }
 
+    func testRejectedRemoteRefreshPreservesCatalogAndDoesNotResynchronizeReminders() async throws {
+        let existing = conference()
+        let conferenceRepository = InMemoryConferenceRepository(
+            conferences: [existing],
+            updatedAt: DomainTestFactory.referenceDate
+        )
+        let reminderRepository = InMemoryReminderRepository(rules: [
+            ReminderFixtures.rule(offsetSeconds: 24 * 60 * 60)
+        ])
+        let reminderManager = SpyReminderManager()
+        let container = DependencyContainer(
+            conferenceRepository: conferenceRepository,
+            trackedRepository: InMemoryTrackedConferenceRepository(trackedConferences: [
+                TrackedConference(conferenceID: "ai-neurips", addedAt: DomainTestFactory.referenceDate)
+            ]),
+            reminderRepository: reminderRepository,
+            reminderManager: reminderManager,
+            catalogSynchronizer: ConferenceCatalogSynchronizer(
+                remoteSource: ThrowingAppCompositionRemoteSource(error: .incompleteBatch("too small")),
+                conferenceRepository: conferenceRepository,
+                clock: FixedClock.standard
+            ),
+            clock: FixedClock.standard,
+            configuration: AppLaunchConfiguration(isUITesting: false, seedScenario: .empty, initialSearchQuery: nil)
+        )
+
+        let didRefresh = await container.refreshCatalogInBackground()
+        let catalog = try await conferenceRepository.loadAll()
+        let lastUpdatedAt = try await conferenceRepository.lastUpdatedAt()
+        let rules = try await reminderRepository.loadAll()
+        let synchronizedContexts = await reminderManager.synchronizedContexts()
+
+        XCTAssertFalse(didRefresh)
+        XCTAssertEqual(catalog, [existing])
+        XCTAssertEqual(lastUpdatedAt, DomainTestFactory.referenceDate)
+        XCTAssertEqual(rules.map(\.id), ["topconf.ai-neurips-2026-paper.86400"])
+        XCTAssertEqual(synchronizedContexts, [])
+    }
+
     func testRemoteDeadlineChangeResynchronizesRemindersFromAppLayer() async throws {
         let oldDeadline = DomainTestFactory.deadline(
             id: ReminderFixtures.neuripsPaperDeadlineID,
@@ -413,6 +452,14 @@ private struct MockAppCompositionRemoteSource: ConferenceRemoteSource {
 
     func fetchConferences() async throws -> [Conference] {
         conferences
+    }
+}
+
+private struct ThrowingAppCompositionRemoteSource: ConferenceRemoteSource {
+    let error: RemoteCatalogError
+
+    func fetchConferences() async throws -> [Conference] {
+        throw error
     }
 }
 

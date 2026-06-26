@@ -187,11 +187,11 @@ final class TrackedConferenceListViewModelTests: XCTestCase {
     }
 
     func testCategoryRankTrackingOrderAndRepositoryOrderDoNotAffectSorting() async {
-        let viewModel = makeViewModel(trackedIDs: ["graphics-siggraph", "interdisciplinary-kdd", "ai-neurips", "hci-chi"])
+        let viewModel = makeViewModel(trackedIDs: ["graphics-siggraph", "interdisciplinary-www", "ai-neurips", "hci-chi"])
 
         await viewModel.load()
 
-        XCTAssertEqual(viewModel.rows.map(\.id), ["interdisciplinary-kdd", "hci-chi", "ai-neurips", "graphics-siggraph"])
+        XCTAssertEqual(viewModel.rows.map(\.id), ["interdisciplinary-www", "hci-chi", "ai-neurips", "graphics-siggraph"])
     }
 
     func testAbbreviationFullNameYearCaseTrimmedAndEmptySearch() async {
@@ -248,7 +248,7 @@ final class TrackedConferenceListViewModelTests: XCTestCase {
         let viewModel = makeViewModel(trackedIDs: [
             "hci-chi",
             "interdisciplinary-sigir",
-            "interdisciplinary-kdd",
+            "interdisciplinary-www",
             "graphics-siggraph",
             "graphics-acm-mm"
         ])
@@ -257,7 +257,7 @@ final class TrackedConferenceListViewModelTests: XCTestCase {
 
         XCTAssertEqual(viewModel.rows.first { $0.id == "hci-chi" }?.deadline.remainingText, "3 days")
         XCTAssertEqual(viewModel.rows.first { $0.id == "interdisciplinary-sigir" }?.deadline.remainingText, "18 hours")
-        XCTAssertEqual(viewModel.rows.first { $0.id == "interdisciplinary-kdd" }?.deadline.remainingText, "45 min")
+        XCTAssertEqual(viewModel.rows.first { $0.id == "interdisciplinary-www" }?.deadline.remainingText, "45 min")
         XCTAssertEqual(viewModel.rows.first { $0.id == "graphics-siggraph" }?.deadline.remainingText, "TBD")
         XCTAssertEqual(viewModel.rows.first { $0.id == "graphics-acm-mm" }?.deadline.remainingText, "Closed")
     }

@@ -20,7 +20,7 @@ enum ConferenceFixtures {
             simpleConference(id: "ai-ijcai", abbreviation: "IJCAI", fullName: "International Joint Conference on Artificial Intelligence", category: ai, rank: .a, daysFromReference: 50),
             simpleConference(id: "graphics-acm-mm", abbreviation: "ACM MM", fullName: "ACM Multimedia", category: graphics, rank: .a, daysFromReference: 60),
             simpleConference(id: "hci-uist", abbreviation: "UIST", fullName: "ACM Symposium on User Interface Software and Technology", category: hci, rank: .a, daysFromReference: 70),
-            simpleConference(id: "interdisciplinary-kdd", abbreviation: "KDD", fullName: "ACM SIGKDD Conference on Knowledge Discovery and Data Mining", category: interdisciplinary, rank: .a, daysFromReference: 80)
+            simpleConference(id: "interdisciplinary-rtss", abbreviation: "RTSS", fullName: "The IEEE Real-Time Systems Symposium", category: interdisciplinary, rank: .a, daysFromReference: 80)
         ]
     }
 

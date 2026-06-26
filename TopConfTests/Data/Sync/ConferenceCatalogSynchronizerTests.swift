@@ -46,6 +46,68 @@ final class ConferenceCatalogSynchronizerTests: XCTestCase {
         XCTAssertEqual(lastUpdatedAt, DomainTestFactory.referenceDate)
     }
 
+    func testRejectedIncompleteBatchLeavesExistingCacheIntactAndReportsRejectedState() async throws {
+        let existing = ConferenceFixtures.closedConference()
+        let repository = InMemoryConferenceRepository(
+            conferences: [existing],
+            updatedAt: DomainTestFactory.referenceDate
+        )
+        let synchronizer = ConferenceCatalogSynchronizer(
+            remoteSource: MockConferenceRemoteSource(result: .failure(RemoteCatalogError.incompleteBatch("too small"))),
+            conferenceRepository: repository,
+            clock: FixedDateClock(now: DomainTestFactory.date(daysFromReference: 2))
+        )
+
+        let didRefresh = await synchronizer.refreshCatalog()
+        let catalog = try await repository.loadAll()
+        let lastUpdatedAt = try await repository.lastUpdatedAt()
+
+        XCTAssertFalse(didRefresh)
+        XCTAssertEqual(catalog, [existing])
+        XCTAssertEqual(lastUpdatedAt, DomainTestFactory.referenceDate)
+        XCTAssertEqual(synchronizer.refreshState, .rejected)
+    }
+
+    func testSuccessfulRefreshReplacesStaleClosedDataWithFutureData() async throws {
+        let staleClosed = ConferenceFixtures.closedConference()
+        let future = DomainTestFactory.conference(
+            id: staleClosed.id,
+            abbreviation: staleClosed.abbreviation,
+            fullName: staleClosed.fullName,
+            category: staleClosed.category,
+            rank: staleClosed.ccfRank,
+            editions: [
+                DomainTestFactory.edition(
+                    conferenceID: staleClosed.id,
+                    year: 2027,
+                    deadlines: [
+                        DomainTestFactory.deadline(
+                            id: "\(staleClosed.id)-2027-paper",
+                            editionID: "\(staleClosed.id)-2027",
+                            type: .paper,
+                            date: DomainTestFactory.date(daysFromReference: 30)
+                        )
+                    ]
+                )
+            ]
+        )
+        let repository = InMemoryConferenceRepository(conferences: [staleClosed], updatedAt: DomainTestFactory.referenceDate)
+        let synchronizer = ConferenceCatalogSynchronizer(
+            remoteSource: MockConferenceRemoteSource(result: .success([future])),
+            conferenceRepository: repository,
+            clock: FixedDateClock(now: DomainTestFactory.date(daysFromReference: 2))
+        )
+
+        let didRefresh = await synchronizer.refreshCatalog()
+        let refreshed = try await repository.loadAll()
+        let selection = DeadlineSelectionService(clock: FixedClock.standard).selectDeadline(for: refreshed.first)
+
+        XCTAssertTrue(didRefresh)
+        XCTAssertEqual(synchronizer.refreshState, .succeeded(lastSuccessfulRefreshAt: DomainTestFactory.date(daysFromReference: 2)))
+        XCTAssertEqual(selection.availability, .available)
+        XCTAssertEqual(selection.primaryDeadline?.id, "\(staleClosed.id)-2027-paper")
+    }
+
     func testRepeatedSynchronizationIsIdempotentForConferencesEditionsAndDeadlines() async throws {
         let repository = InMemoryConferenceRepository()
         let conference = DomainTestFactory.conference(

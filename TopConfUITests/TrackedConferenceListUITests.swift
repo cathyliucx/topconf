@@ -36,7 +36,7 @@ final class TrackedConferenceListUITests: XCTestCase {
         let app = launch(seedScenario: "multipleSorted")
 
         XCTAssertTrue(element("topconf.tracked.table", in: app).waitForExistence(timeout: 5))
-        assertRow("interdisciplinary-kdd", isAbove: "interdisciplinary-sigir", in: app)
+        assertRow("interdisciplinary-www", isAbove: "interdisciplinary-sigir", in: app)
         assertRow("interdisciplinary-sigir", isAbove: "hci-chi", in: app)
         assertRow("hci-chi", isAbove: "ai-aaai", in: app)
         assertRow("ai-aaai", isAbove: "ai-aamas", in: app)

@@ -1,22 +1,45 @@
 import Foundation
 
+enum CategoryMappingResult: Equatable {
+    case supported(ConferenceCategory)
+    case unsupported(rawValue: String, displayName: String)
+    case invalid(rawValue: String)
+}
+
 struct ConferenceCategoryMapper {
-    func category(for sourceID: String?) -> ConferenceCategory {
-        let normalized = (sourceID ?? "unknown").trimmingCharacters(in: .whitespacesAndNewlines)
-        let key = normalized.uppercased()
-        let displayName: String
-        switch key {
-        case "AI":
-            displayName = "Artificial Intelligence"
-        case "CG":
-            displayName = "Computer Graphics and Multimedia"
-        case "HI", "HCI":
-            displayName = "Human-Computer Interaction and Ubiquitous Computing"
-        case "MX":
-            displayName = "Interdisciplinary, Comprehensive, and Emerging Areas"
-        default:
-            displayName = normalized.isEmpty ? "Unknown" : normalized
+    func mappingResult(for sourceID: String?) -> CategoryMappingResult {
+        let normalized = (sourceID ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !normalized.isEmpty else {
+            return .invalid(rawValue: "")
         }
-        return ConferenceCategory(sourceID: normalized.isEmpty ? "unknown" : normalized, displayName: displayName)
+
+        switch normalized.uppercased() {
+        case "AI":
+            return .supported(SeedConferenceCatalog.ai)
+        case "CG":
+            return .supported(SeedConferenceCatalog.graphics)
+        case "HI", "HCI":
+            return .supported(SeedConferenceCatalog.hci)
+        case "MX":
+            return .supported(SeedConferenceCatalog.interdisciplinary)
+        case "DB":
+            return .unsupported(
+                rawValue: normalized,
+                displayName: "Database / Data Mining / Information Retrieval"
+            )
+        default:
+            return .unsupported(rawValue: normalized, displayName: normalized)
+        }
+    }
+
+    func category(for sourceID: String?) -> ConferenceCategory {
+        switch mappingResult(for: sourceID) {
+        case let .supported(category):
+            return category
+        case let .unsupported(rawValue, displayName):
+            return ConferenceCategory(sourceID: rawValue, displayName: displayName)
+        case let .invalid(rawValue):
+            return ConferenceCategory(sourceID: rawValue.isEmpty ? "unknown" : rawValue, displayName: "Unknown")
+        }
     }
 }

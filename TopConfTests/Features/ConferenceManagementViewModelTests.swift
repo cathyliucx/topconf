@@ -151,7 +151,7 @@ final class ConferenceManagementViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.trackingCountText, "10 / 10")
         XCTAssertFalse(viewModel.canAddAnotherConference)
 
-        await viewModel.addConference(id: "interdisciplinary-kdd")
+        await viewModel.addConference(id: "interdisciplinary-www")
         XCTAssertEqual(viewModel.presentationError?.id, "limitReached")
         XCTAssertEqual(viewModel.trackingCountText, "10 / 10")
 

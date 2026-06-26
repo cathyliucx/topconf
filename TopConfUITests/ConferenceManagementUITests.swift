@@ -33,7 +33,7 @@ final class ConferenceManagementUITests: XCTestCase {
     }
 
     func testTenTrackedLaunchShowsManagementAndTrackedColumn() {
-        let app = launch(seedScenario: "tenTracked", initialSearchQuery: "KDD")
+        let app = launch(seedScenario: "tenTracked", initialSearchQuery: "WWW")
 
         XCTAssertTrue(app.staticTexts["TopConf"].waitForExistence(timeout: 5))
         XCTAssertFalse(app.buttons["topconf.onboarding.continue"].exists)

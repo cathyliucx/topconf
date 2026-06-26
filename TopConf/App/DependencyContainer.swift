@@ -88,7 +88,7 @@ struct DependencyContainer {
                 "ai-aamas",
                 "graphics-acm-mm",
                 "hci-chi",
-                "interdisciplinary-kdd",
+                "interdisciplinary-www",
                 "interdisciplinary-sigir",
                 "ai-aaai"
             ])

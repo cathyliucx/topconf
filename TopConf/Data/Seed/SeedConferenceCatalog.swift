@@ -55,7 +55,6 @@ enum SeedConferenceCatalog {
             conference(id: "interdisciplinary-icwsm", abbreviation: "ICWSM", fullName: "International AAAI Conference on Web and Social Media", category: interdisciplinary, rank: .b, year: 2027),
             conference(id: "interdisciplinary-jcdl", abbreviation: "JCDL", fullName: "ACM/IEEE Joint Conference on Digital Libraries", category: interdisciplinary, rank: .c, year: 2027),
             conference(id: "interdisciplinary-www", abbreviation: "WWW", fullName: "The Web Conference", category: interdisciplinary, rank: .a, year: 2027),
-            conference(id: "interdisciplinary-kdd", abbreviation: "KDD", fullName: "ACM SIGKDD Conference on Knowledge Discovery and Data Mining", category: interdisciplinary, rank: .a, year: 2027),
             conference(id: "interdisciplinary-recsys", abbreviation: "RecSys", fullName: "ACM Conference on Recommender Systems", category: interdisciplinary, rank: .b, year: 2027),
             conference(id: "interdisciplinary-sigir", abbreviation: "SIGIR", fullName: "International ACM SIGIR Conference on Research and Development in Information Retrieval", category: interdisciplinary, rank: .a, year: 2027),
             conference(id: "interdisciplinary-wsdm", abbreviation: "WSDM", fullName: "ACM International Conference on Web Search and Data Mining", category: interdisciplinary, rank: .b, year: 2027)
@@ -117,7 +116,7 @@ enum SeedConferenceCatalog {
 
     private static func deadlines(for id: String, year: Int) -> [Deadline] {
         switch id {
-        case "interdisciplinary-kdd":
+        case "interdisciplinary-www":
             return [deadline(conferenceID: id, year: year, type: .paper, minutes: 45, raw: "Jun 23, 00:45 UTC", zone: "UTC")]
         case "interdisciplinary-sigir":
             return [deadline(conferenceID: id, year: year, type: .paper, hours: 18, raw: "Jun 23, 18:00 UTC", zone: "UTC")]

@@ -73,9 +73,19 @@ struct AppRootView: View {
             }
             await trackedListViewModel.load()
             route = routeAfterTrackedLoad()
+            await refreshCatalogInBackground()
         } catch {
             route = .failed(error.localizedDescription)
         }
+    }
+
+    private func refreshCatalogInBackground() async {
+        guard await container.refreshCatalogInBackground() else {
+            return
+        }
+        await managementViewModel.load()
+        await trackedListViewModel.load()
+        route = routeAfterTrackedLoad()
     }
 
     private func routeAfterTrackedLoad() -> AppRoute {

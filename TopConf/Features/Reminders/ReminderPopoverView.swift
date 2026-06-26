@@ -7,6 +7,7 @@ struct ReminderPopoverView: View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Reminders")
                 .font(.headline)
+                .accessibilityIdentifier("topconf.reminder.popover.\(viewModel.context.deadlineID)")
 
             VStack(alignment: .leading, spacing: 8) {
                 ForEach(viewModel.options) { option in

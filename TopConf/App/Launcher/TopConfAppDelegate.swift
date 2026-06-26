@@ -21,6 +21,10 @@ final class TopConfAppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ notification: Notification) {
         coordinator?.stop()
     }
+
+    func applicationDidBecomeActive(_ notification: Notification) {
+        coordinator?.applicationDidBecomeActive()
+    }
 }
 
 @MainActor
@@ -31,6 +35,7 @@ final class TopConfLauncherCoordinator: NSObject {
     private let hotkeyManager: GlobalHotkeyManager
     private var statusItem: NSStatusItem?
     private var hotkeyRegistrationError: Error?
+    private var hasShownInitialUITestPanel = false
 #if DEBUG
     private let debugNotificationTestWindowController = DebugNotificationTestWindowController()
 #endif
@@ -43,7 +48,9 @@ final class TopConfLauncherCoordinator: NSObject {
         self.configuration = configuration
         panelController = LauncherPanelController(
             rootView: Self.makeRootView(containerResult: containerResult, panelState: panelState),
-            panelState: panelState
+            panelState: panelState,
+            hidesOnDeactivate: !configuration.isUITesting,
+            usesFloatingPanel: !configuration.isUITesting
         )
         hotkeyManager = GlobalHotkeyManager(registrar: registrar) { [weak panelController] in
             Task { @MainActor in
@@ -62,12 +69,17 @@ final class TopConfLauncherCoordinator: NSObject {
             hotkeyRegistrationError = error
         }
         if configuration.isUITesting {
-            panelController.show()
+            NSApp.activate(ignoringOtherApps: true)
+            showInitialUITestPanelIfNeeded()
         }
     }
 
     func stop() {
         hotkeyManager.stop()
+    }
+
+    func applicationDidBecomeActive() {
+        showInitialUITestPanelIfNeeded()
     }
 
     @objc
@@ -97,6 +109,14 @@ final class TopConfLauncherCoordinator: NSObject {
         statusItem.button?.title = "TopConf"
         statusItem.menu = makeMenu()
         self.statusItem = statusItem
+    }
+
+    private func showInitialUITestPanelIfNeeded() {
+        guard configuration.isUITesting, !hasShownInitialUITestPanel else {
+            return
+        }
+        hasShownInitialUITestPanel = true
+        panelController.show()
     }
 
     private func makeMenu() -> NSMenu {

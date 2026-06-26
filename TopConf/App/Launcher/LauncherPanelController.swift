@@ -21,11 +21,20 @@ struct LauncherPanelLayout {
 final class LauncherPanelController {
     private let rootView: AnyView
     private let panelState: LauncherPanelState
-    private var panel: LauncherPanel?
+    private let hidesOnDeactivate: Bool
+    private let usesFloatingPanel: Bool
+    private var panel: NSWindow?
 
-    init(rootView: AnyView, panelState: LauncherPanelState) {
+    init(
+        rootView: AnyView,
+        panelState: LauncherPanelState,
+        hidesOnDeactivate: Bool = true,
+        usesFloatingPanel: Bool = true
+    ) {
         self.rootView = rootView
         self.panelState = panelState
+        self.hidesOnDeactivate = hidesOnDeactivate
+        self.usesFloatingPanel = usesFloatingPanel
     }
 
     var isVisible: Bool {
@@ -45,26 +54,38 @@ final class LauncherPanelController {
         self.panel = panel
         panelState.requestSearchFocus()
         panel.setFrame(LauncherPanelLayout.centeredFrame(screenFrame: activeScreenFrame()), display: true)
-        NSApp.activate(ignoringOtherApps: true)
         panel.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
+        panel.orderFrontRegardless()
     }
 
     func hide() {
         panel?.orderOut(nil)
     }
 
-    private func makePanel() -> LauncherPanel {
-        let panel = LauncherPanel(
-            contentRect: LauncherPanelLayout.centeredFrame(screenFrame: activeScreenFrame()),
-            styleMask: [.titled, .closable, .resizable, .fullSizeContentView],
-            backing: .buffered,
-            defer: false
-        )
-        panel.level = .floating
-        panel.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .transient]
-        panel.isFloatingPanel = true
-        panel.hidesOnDeactivate = true
+    private func makePanel() -> NSWindow {
+        let panel: NSWindow
+        if usesFloatingPanel {
+            panel = LauncherPanel(
+                contentRect: LauncherPanelLayout.centeredFrame(screenFrame: activeScreenFrame()),
+                styleMask: [.titled, .closable, .resizable, .fullSizeContentView],
+                backing: .buffered,
+                defer: false
+            )
+            (panel as? NSPanel)?.isFloatingPanel = true
+        } else {
+            panel = LauncherWindow(
+                contentRect: LauncherPanelLayout.centeredFrame(screenFrame: activeScreenFrame()),
+                styleMask: [.titled, .closable, .resizable],
+                backing: .buffered,
+                defer: false
+            )
+        }
+        panel.level = usesFloatingPanel ? .floating : .normal
+        panel.collectionBehavior = usesFloatingPanel ? [.canJoinAllSpaces, .fullScreenAuxiliary, .transient] : []
+        (panel as? NSPanel)?.hidesOnDeactivate = hidesOnDeactivate
         panel.isReleasedWhenClosed = false
+        panel.title = "TopConf"
         panel.titleVisibility = .hidden
         panel.titlebarAppearsTransparent = true
         panel.minSize = LauncherPanelLayout.minimumSize
@@ -87,6 +108,20 @@ final class LauncherPanelController {
 }
 
 private final class LauncherPanel: NSPanel {
+    override var canBecomeKey: Bool {
+        true
+    }
+
+    override var canBecomeMain: Bool {
+        true
+    }
+
+    override func cancelOperation(_ sender: Any?) {
+        orderOut(sender)
+    }
+}
+
+private final class LauncherWindow: NSWindow {
     override var canBecomeKey: Bool {
         true
     }

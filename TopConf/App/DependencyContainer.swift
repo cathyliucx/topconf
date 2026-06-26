@@ -6,6 +6,7 @@ struct DependencyContainer {
     let trackedRepository: any TrackedConferenceRepository
     let reminderRepository: any ReminderRepository
     let reminderManager: any DeadlineReminderManaging
+    let catalogSynchronizer: (any ConferenceCatalogSynchronizing)?
     let clock: any Clock
     let configuration: AppLaunchConfiguration
 
@@ -19,8 +20,16 @@ struct DependencyContainer {
             ? FixedDateClock(now: SeedConferenceCatalog.seededAt)
             : SystemClock()
         let reminderRepository = SwiftDataReminderRepository(container: container)
+        let conferenceRepository = SwiftDataConferenceRepository(container: container)
+        let synchronizer: (any ConferenceCatalogSynchronizing)? = configuration.isUITesting
+            ? nil
+            : ConferenceCatalogSynchronizer(
+                remoteSource: GitHubConferenceSource(clock: clock),
+                conferenceRepository: conferenceRepository,
+                clock: clock
+            )
         return DependencyContainer(
-            conferenceRepository: SwiftDataConferenceRepository(container: container),
+            conferenceRepository: conferenceRepository,
             trackedRepository: SwiftDataTrackedConferenceRepository(container: container),
             reminderRepository: reminderRepository,
             reminderManager: DeadlineNotificationService(
@@ -28,6 +37,7 @@ struct DependencyContainer {
                 scheduler: configuration.isUITesting ? SilentNotificationScheduler() : UserNotificationScheduler(),
                 clock: clock
             ),
+            catalogSynchronizer: synchronizer,
             clock: clock,
             configuration: configuration
         )
@@ -103,6 +113,46 @@ struct DependencyContainer {
         }
     }
 
+    func refreshCatalogInBackground() async -> Bool {
+        guard let catalogSynchronizer else {
+            return false
+        }
+        let didRefresh = await catalogSynchronizer.refreshCatalog()
+        if didRefresh {
+            await synchronizeRemindersForCurrentCatalog()
+        }
+        return didRefresh
+    }
+
+    func synchronizeRemindersForCurrentCatalog() async {
+        do {
+            let tracked = try await trackedRepository.loadAll()
+            let catalog = try await conferenceRepository.loadAll()
+            let deadlineSelectionService = DeadlineSelectionService(clock: clock)
+            let resolver = TrackedConferenceResolver(deadlineSelectionService: deadlineSelectionService)
+            let calculator = DeadlineCalculator(clock: clock)
+            let rowContexts = tracked.compactMap { trackedConference in
+                let resolved = resolver.resolve(
+                    trackedConference: trackedConference,
+                    currentConferences: catalog,
+                    lastKnownConferences: []
+                )
+                return Self.reminderContext(for: resolved, calculator: calculator)
+            }
+            let existingRules = try await reminderRepository.loadAll()
+            let existingContexts = Self.reminderContextsForExistingRules(
+                existingRules,
+                catalog: catalog,
+                calculator: calculator,
+                clock: clock
+            )
+            let contexts = Self.deduplicatedReminderContexts(rowContexts + existingContexts)
+            await reminderManager.synchronizeReminders(for: contexts)
+        } catch {
+            return
+        }
+    }
+
     private func seedTracked(count: Int) async throws {
         let conferences = try await conferenceRepository.loadAll()
         let existing = try await trackedRepository.loadAll()
@@ -126,5 +176,87 @@ struct DependencyContainer {
                 TrackedConference(conferenceID: conferenceID, addedAt: SeedConferenceCatalog.seededAt)
             )
         }
+    }
+
+    private static func reminderContext(
+        for resolved: ResolvedTrackedConference,
+        calculator: DeadlineCalculator
+    ) -> DeadlineReminderContext? {
+        guard let deadline = resolved.primaryDeadline else {
+            return nil
+        }
+        let presentation = DeadlinePresentation.make(
+            deadline: deadline,
+            availability: resolved.availability,
+            calculator: calculator
+        )
+        let title = resolved.conference.map { "\($0.abbreviation) \($0.fullName)" } ?? resolved.conferenceID
+        return DeadlineReminderContext(
+            deadlineID: deadline.id,
+            conferenceTitle: title,
+            deadlineTypeText: presentation.typeText,
+            deadlineDate: deadline.date,
+            availability: resolved.availability
+        )
+    }
+
+    private static func reminderContextsForExistingRules(
+        _ rules: [ReminderRule],
+        catalog: [Conference],
+        calculator: DeadlineCalculator,
+        clock: any Clock
+    ) -> [DeadlineReminderContext] {
+        rules.compactMap { rule in
+            for conference in catalog {
+                for edition in conference.editions {
+                    if let deadline = edition.deadlines.first(where: { $0.id == rule.deadlineID }) {
+                        return reminderContext(
+                            conference: conference,
+                            deadline: deadline,
+                            availability: availability(for: deadline, clock: clock),
+                            calculator: calculator
+                        )
+                    }
+                }
+            }
+            return nil
+        }
+    }
+
+    private static func reminderContext(
+        conference: Conference,
+        deadline: Deadline,
+        availability: ConferenceAvailability,
+        calculator: DeadlineCalculator
+    ) -> DeadlineReminderContext {
+        let presentation = DeadlinePresentation.make(
+            deadline: deadline,
+            availability: availability,
+            calculator: calculator
+        )
+        return DeadlineReminderContext(
+            deadlineID: deadline.id,
+            conferenceTitle: "\(conference.abbreviation) \(conference.fullName)",
+            deadlineTypeText: presentation.typeText,
+            deadlineDate: deadline.date,
+            availability: availability
+        )
+    }
+
+    private static func availability(for deadline: Deadline, clock: any Clock) -> ConferenceAvailability {
+        guard let date = deadline.date else {
+            return .deadlineToBeDetermined
+        }
+        return date > clock.now ? .available : .allDeadlinesClosed
+    }
+
+    private static func deduplicatedReminderContexts(
+        _ contexts: [DeadlineReminderContext]
+    ) -> [DeadlineReminderContext] {
+        var keyedContexts: [String: DeadlineReminderContext] = [:]
+        for context in contexts {
+            keyedContexts[context.deadlineID] = context
+        }
+        return keyedContexts.values.sorted { $0.deadlineID < $1.deadlineID }
     }
 }

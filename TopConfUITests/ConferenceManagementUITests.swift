@@ -39,6 +39,28 @@ final class ConferenceManagementUITests: XCTestCase {
         XCTAssertFalse(app.buttons["topconf.onboarding.continue"].exists)
     }
 
+    func testTrackingLimitBlocksEleventhAndRemovalRestoresAddCapability() {
+        let app = launch(seedScenario: "tenTracked", initialSearchQuery: "NeurIPS")
+
+        XCTAssertTrue(app.buttons["topconf.tracked.manage"].waitForExistence(timeout: 5))
+        app.buttons["topconf.tracked.manage"].click()
+        XCTAssertTrue(element("topconf.management.available", in: app).waitForExistence(timeout: 5))
+
+        let blockedAdd = app.buttons["topconf.add.ai-neurips"]
+        XCTAssertTrue(blockedAdd.waitForExistence(timeout: 5))
+        XCTAssertFalse(blockedAdd.isEnabled)
+        XCTAssertTrue(app.staticTexts["10 / 10"].firstMatch.waitForExistence(timeout: 5))
+
+        let removeTracked = app.buttons["topconf.tracked.remove.ai-aaai"]
+        XCTAssertTrue(removeTracked.waitForExistence(timeout: 5))
+        removeTracked.click()
+
+        XCTAssertTrue(waitForEnabled(blockedAdd))
+        XCTAssertTrue(app.staticTexts["9 / 10"].firstMatch.waitForExistence(timeout: 5))
+        blockedAdd.click()
+        XCTAssertTrue(app.staticTexts["10 / 10"].firstMatch.waitForExistence(timeout: 5))
+    }
+
     private func launch(seedScenario: String, initialSearchQuery: String? = nil) -> XCUIApplication {
         let app = XCUIApplication()
         app.launchArguments = [
@@ -70,5 +92,10 @@ final class ConferenceManagementUITests: XCTestCase {
             .matching(NSPredicate(format: "identifier BEGINSWITH %@", "topconf.tracked.abbreviation."))
         _ = rowMarkers.firstMatch.waitForExistence(timeout: 5)
         return rowMarkers.count
+    }
+
+    private func waitForEnabled(_ element: XCUIElement) -> Bool {
+        let predicate = NSPredicate(format: "isEnabled == true")
+        return XCTWaiter.wait(for: [expectation(for: predicate, evaluatedWith: element)], timeout: 5) == .completed
     }
 }

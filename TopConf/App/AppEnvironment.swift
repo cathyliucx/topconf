@@ -16,15 +16,30 @@ struct AppLaunchConfiguration: Equatable {
     let isUITesting: Bool
     let seedScenario: SeedScenario
     let initialSearchQuery: String?
+    let appearanceOverride: AppAppearanceOverride?
+
+    init(
+        isUITesting: Bool,
+        seedScenario: SeedScenario,
+        initialSearchQuery: String?,
+        appearanceOverride: AppAppearanceOverride? = nil
+    ) {
+        self.isUITesting = isUITesting
+        self.seedScenario = seedScenario
+        self.initialSearchQuery = initialSearchQuery
+        self.appearanceOverride = appearanceOverride
+    }
 
     static func current(
         arguments: [String] = ProcessInfo.processInfo.arguments,
         environment: [String: String] = ProcessInfo.processInfo.environment
     ) -> AppLaunchConfiguration {
-        AppLaunchConfiguration(
-            isUITesting: arguments.contains("-UITesting") || environment["TOPCONF_UI_TESTING"] == "1",
+        let isUITesting = arguments.contains("-UITesting") || environment["TOPCONF_UI_TESTING"] == "1"
+        return AppLaunchConfiguration(
+            isUITesting: isUITesting,
             seedScenario: seedScenario(from: arguments),
-            initialSearchQuery: value(after: "-InitialSearchQuery", in: arguments)
+            initialSearchQuery: value(after: "-InitialSearchQuery", in: arguments),
+            appearanceOverride: isUITesting ? appearanceOverride(from: arguments) : nil
         )
     }
 
@@ -42,4 +57,16 @@ struct AppLaunchConfiguration: Equatable {
         }
         return arguments[arguments.index(after: index)]
     }
+
+    private static func appearanceOverride(from arguments: [String]) -> AppAppearanceOverride? {
+        guard let rawValue = value(after: "-Appearance", in: arguments) else {
+            return nil
+        }
+        return AppAppearanceOverride(rawValue: rawValue)
+    }
+}
+
+enum AppAppearanceOverride: String, Equatable {
+    case light
+    case dark
 }

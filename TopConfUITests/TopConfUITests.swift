@@ -43,4 +43,33 @@ final class TopConfUITests: XCTestCase {
         )
         XCTAssertEqual(closed, .completed)
     }
+
+    func testLauncherSupportsLightAndDarkAppearances() throws {
+        for appearance in ["light", "dark"] {
+            let app = XCUIApplication()
+            app.launchArguments = [
+                "-UITesting",
+                "-ResetStore",
+                "-SeedScenario",
+                "oneUpcoming",
+                "-Appearance",
+                appearance
+            ]
+            app.launchEnvironment["TOPCONF_UI_TESTING"] = "1"
+            app.launchEnvironment["AppleLanguages"] = "(en)"
+            app.launchEnvironment["AppleLocale"] = "en_US"
+            app.launch()
+            app.activate()
+
+            XCTAssertTrue(element("topconf.launcher.panel", in: app).exists)
+            XCTAssertTrue(element("topconf.tracked.table", in: app).waitForExistence(timeout: 5))
+            XCTAssertTrue(app.staticTexts["topconf.tracked.abbreviation.hci-chi"].exists)
+
+            app.terminate()
+        }
+    }
+
+    private func element(_ identifier: String, in app: XCUIApplication) -> XCUIElement {
+        app.descendants(matching: .any).matching(identifier: identifier).firstMatch
+    }
 }

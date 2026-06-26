@@ -60,7 +60,19 @@ struct AppRootView: View {
         .task {
             await start()
         }
+        .preferredColorScheme(preferredColorScheme)
         .frame(minWidth: 900, minHeight: 560)
+    }
+
+    private var preferredColorScheme: ColorScheme? {
+        switch container.configuration.appearanceOverride {
+        case .light:
+            return .light
+        case .dark:
+            return .dark
+        case nil:
+            return nil
+        }
     }
 
     private func start() async {

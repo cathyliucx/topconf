@@ -458,6 +458,35 @@ xcodebuild -list
 
 ---
 
+## Release Verification
+
+Before declaring a release candidate, run:
+
+```bash
+xcodebuild test \
+  -project TopConf.xcodeproj \
+  -scheme TopConf \
+  -destination 'platform=macOS' \
+  -derivedDataPath .build/DerivedData
+
+xcodebuild build \
+  -project TopConf.xcodeproj \
+  -scheme TopConf \
+  -configuration Release \
+  -destination 'platform=macOS' \
+  -derivedDataPath .build/DerivedData
+```
+
+The Release app should be inspected at:
+
+```text
+.build/DerivedData/Build/Products/Release/TopConf.app
+```
+
+Final manual macOS checks include confirming the menu bar item appears, the Dock icon stays hidden, `⌥ Space` toggles the panel, `Esc` closes it, and real notification permission/delivery works as expected.
+
+---
+
 ## Test
 
 Run all unit tests:

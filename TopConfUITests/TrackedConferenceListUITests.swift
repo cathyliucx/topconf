@@ -1,3 +1,4 @@
+import AppKit
 import XCTest
 
 final class TrackedConferenceListUITests: XCTestCase {
@@ -57,11 +58,13 @@ final class TrackedConferenceListUITests: XCTestCase {
 
     func testTrackedSearchFiltersAndClearingRestoresRows() {
         let app = launch(seedScenario: "multipleSorted")
+        XCTAssertTrue(element("topconf.launcher.panel", in: app).waitForExistence(timeout: 5))
         XCTAssertTrue(rowMarker("hci-chi", in: app).waitForExistence(timeout: 5))
 
         let search = app.textFields["topconf.search.tracked"]
+        XCTAssertTrue(search.waitForExistence(timeout: 5))
         search.click()
-        search.typeText("CHI")
+        paste("CHI", into: app)
         search.typeKey(.return, modifierFlags: [])
 
         XCTAssertTrue(rowMarker("hci-chi", in: app).exists)
@@ -130,5 +133,11 @@ final class TrackedConferenceListUITests: XCTestCase {
     private func waitForAbsence(_ element: XCUIElement) -> Bool {
         let predicate = NSPredicate(format: "exists == false")
         return XCTWaiter.wait(for: [expectation(for: predicate, evaluatedWith: element)], timeout: 5) == .completed
+    }
+
+    private func paste(_ text: String, into app: XCUIApplication) {
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(text, forType: .string)
+        app.typeKey("v", modifierFlags: [.command])
     }
 }

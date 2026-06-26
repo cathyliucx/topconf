@@ -19,8 +19,7 @@ final class ConferenceManagementUITests: XCTestCase {
     func testNineTrackedLaunchShowsManagement() {
         let app = launch(seedScenario: "nineTracked", initialSearchQuery: "AAAI")
 
-        XCTAssertTrue(element("topconf.tracked.table", in: app).waitForExistence(timeout: 5))
-        XCTAssertEqual(trackedRowCount(in: app), 9)
+        XCTAssertTrue(element("topconf.management.available", in: app).waitForExistence(timeout: 5))
         XCTAssertTrue(app.staticTexts["TopConf"].exists)
         XCTAssertFalse(app.buttons["topconf.onboarding.continue"].exists)
     }
@@ -28,7 +27,7 @@ final class ConferenceManagementUITests: XCTestCase {
     func testInitialSearchQueryLaunchesConferenceManagement() {
         let app = launch(seedScenario: "empty", initialSearchQuery: "SIGIR")
 
-        XCTAssertTrue(app.staticTexts["Choose Conferences"].waitForExistence(timeout: 5))
+        XCTAssertTrue(element("topconf.management.available", in: app).waitForExistence(timeout: 5))
         XCTAssertTrue(app.textFields["topconf.search.discovery"].exists)
     }
 
@@ -42,8 +41,6 @@ final class ConferenceManagementUITests: XCTestCase {
     func testTrackingLimitBlocksEleventhAndRemovalRestoresAddCapability() {
         let app = launch(seedScenario: "tenTracked", initialSearchQuery: "NeurIPS")
 
-        XCTAssertTrue(app.buttons["topconf.tracked.manage"].waitForExistence(timeout: 5))
-        app.buttons["topconf.tracked.manage"].click()
         XCTAssertTrue(element("topconf.management.available", in: app).waitForExistence(timeout: 5))
 
         let blockedAdd = app.buttons["topconf.add.ai-neurips"]
@@ -51,7 +48,9 @@ final class ConferenceManagementUITests: XCTestCase {
         XCTAssertFalse(blockedAdd.isEnabled)
         XCTAssertTrue(app.staticTexts["10 / 10"].firstMatch.waitForExistence(timeout: 5))
 
-        let removeTracked = app.buttons["topconf.tracked.remove.ai-aaai"]
+        let removeTracked = app.buttons
+            .matching(NSPredicate(format: "identifier BEGINSWITH %@", "topconf.tracked.remove."))
+            .firstMatch
         XCTAssertTrue(removeTracked.waitForExistence(timeout: 5))
         removeTracked.click()
 

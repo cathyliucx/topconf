@@ -10,6 +10,23 @@ enum SeedScenario: String, Equatable {
     case multipleSorted
     case tbdAndClosed
     case sourceUnavailable
+
+    var onboardingCompleted: Bool {
+        switch self {
+        case .empty:
+            return false
+        case .none:
+            return false
+        case .nineTracked,
+             .tenTracked,
+             .zeroTracked,
+             .oneUpcoming,
+             .multipleSorted,
+             .tbdAndClosed,
+             .sourceUnavailable:
+            return true
+        }
+    }
 }
 
 struct AppLaunchConfiguration: Equatable {

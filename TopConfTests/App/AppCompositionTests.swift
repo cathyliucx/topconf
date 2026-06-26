@@ -14,6 +14,16 @@ final class AppCompositionTests: XCTestCase {
         XCTAssertEqual(configuration.initialSearchQuery, "SIGIR")
     }
 
+    func testUITestSeedScenariosDeclareOnboardingStateExplicitly() {
+        XCTAssertFalse(SeedScenario.empty.onboardingCompleted)
+        XCTAssertFalse(SeedScenario.none.onboardingCompleted)
+        XCTAssertTrue(SeedScenario.zeroTracked.onboardingCompleted)
+        XCTAssertTrue(SeedScenario.oneUpcoming.onboardingCompleted)
+        XCTAssertTrue(SeedScenario.multipleSorted.onboardingCompleted)
+        XCTAssertTrue(SeedScenario.nineTracked.onboardingCompleted)
+        XCTAssertTrue(SeedScenario.tenTracked.onboardingCompleted)
+    }
+
     func testProductionCompositionCanBeCreatedWithInMemorySwiftDataContainer() async throws {
         let container = try DependencyContainer.make(
             configuration: AppLaunchConfiguration(isUITesting: true, seedScenario: .empty, initialSearchQuery: nil),

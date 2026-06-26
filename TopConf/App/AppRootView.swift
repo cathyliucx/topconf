@@ -84,7 +84,7 @@ struct AppRootView: View {
                 managementViewModel.refreshFilters()
             }
             await trackedListViewModel.load()
-            route = routeAfterTrackedLoad()
+            route = container.configuration.initialSearchQuery == nil ? routeAfterTrackedLoad() : .management
             await refreshCatalogInBackground()
         } catch {
             route = .failed(error.localizedDescription)
@@ -101,7 +101,7 @@ struct AppRootView: View {
     }
 
     private func routeAfterTrackedLoad() -> AppRoute {
-        if trackedListViewModel.rows.isEmpty && container.configuration.seedScenario != .zeroTracked {
+        if trackedListViewModel.rows.isEmpty && !container.configuration.seedScenario.onboardingCompleted {
             return .onboarding
         }
         return .trackedList

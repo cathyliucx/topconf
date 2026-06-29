@@ -25,4 +25,5 @@ enum RemoteCatalogError: Error, Equatable {
     case invalidResponse(Int)
     case duplicateFilePath(String)
     case incompleteBatch(String)
+    case unsupportedTimeZone(String)
 }

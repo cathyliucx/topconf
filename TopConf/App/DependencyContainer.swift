@@ -80,33 +80,34 @@ struct DependencyContainer {
         case .none, .empty, .zeroTracked:
             return
         case .oneUpcoming:
-            try await seedTracked(conferenceIDs: ["hci-chi"])
+            try await seedTracked(conferenceIDs: ["ai-iclr"])
         case .multipleSorted:
             try await seedTracked(conferenceIDs: [
                 "ai-neurips",
                 "graphics-siggraph",
                 "ai-aamas",
-                "graphics-acm-mm",
-                "hci-chi",
+                "graphics-eurographics",
+                "hci-uist",
                 "interdisciplinary-www",
                 "interdisciplinary-sigir",
-                "ai-aaai"
+                "ai-aaai",
+                "ai-iclr"
             ])
         case .tbdAndClosed:
-            try await seedTracked(conferenceIDs: ["graphics-siggraph", "graphics-acm-mm"])
+            try await seedTracked(conferenceIDs: ["graphics-siggraph"])
         case .sourceUnavailable:
-            try await seedTracked(conferenceIDs: ["missing-source-conf", "hci-chi"])
+            try await seedTracked(conferenceIDs: ["missing-source-conf", "hci-uist"])
         case .nineTracked:
             try await seedTracked(conferenceIDs: [
                 "ai-iclr",
                 "ai-ijcai",
                 "ai-mlsys",
                 "ai-neurips",
-                "graphics-acm-mm",
                 "graphics-eurographics",
                 "graphics-siggraph",
-                "hci-chi",
                 "hci-cscw",
+                "hci-uist",
+                "interdisciplinary-cikm",
             ])
         case .tenTracked:
             try await seedTracked(count: TrackingPolicy.maximumConferenceCount)
@@ -119,9 +120,43 @@ struct DependencyContainer {
         }
         let didRefresh = await catalogSynchronizer.refreshCatalog()
         if didRefresh {
+            await removeTrackedConferencesMissingFromCurrentCatalog()
             await synchronizeRemindersForCurrentCatalog()
         }
         return didRefresh
+    }
+
+    func reconcileTrackedConferencesWithAcceptedCatalogIfPresent() async {
+        do {
+            guard let lastUpdatedAt = try await conferenceRepository.lastUpdatedAt(),
+                  lastUpdatedAt != SeedConferenceCatalog.seededAt else {
+                return
+            }
+            await removeTrackedConferencesMissingFromCurrentCatalog()
+            await synchronizeRemindersForCurrentCatalog()
+        } catch {
+            return
+        }
+    }
+
+    private func removeTrackedConferencesMissingFromCurrentCatalog() async {
+        do {
+            let catalogIDs = Set(try await conferenceRepository.loadAll().map(\.id))
+            guard !catalogIDs.isEmpty else {
+                return
+            }
+
+            let tracked = try await trackedRepository.loadAll()
+            let orphanedConferenceIDs = tracked
+                .map(\.conferenceID)
+                .filter { !catalogIDs.contains($0) }
+
+            for conferenceID in orphanedConferenceIDs {
+                try await trackedRepository.remove(conferenceID: conferenceID)
+            }
+        } catch {
+            return
+        }
     }
 
     func synchronizeRemindersForCurrentCatalog() async {

@@ -123,16 +123,125 @@ final class ConferenceYAMLParserTests: XCTestCase {
         XCTAssertEqual(changed.editions.map(\.year), [2027, 2028])
     }
 
-    func testTimeZoneParserCoversAoEUTCAndIANAIdentifiers() {
+    func testTimeZoneParserCoversAllTimezoneFormsUsedBySupportedUpstreamCategories() throws {
         let parser = DeadlineTimeZoneParser()
 
-        XCTAssertEqual(parser.timeZone(for: "AoE").secondsFromGMT(), -43_200)
-        XCTAssertEqual(parser.timeZone(for: "UTC").secondsFromGMT(), 0)
-        XCTAssertEqual(parser.timeZone(for: "UTC+0").secondsFromGMT(), 0)
-        XCTAssertEqual(parser.timeZone(for: "UTC-8").secondsFromGMT(), -28_800)
-        XCTAssertEqual(parser.timeZone(for: "Asia/Shanghai").identifier, "Asia/Shanghai")
-        XCTAssertEqual(parser.timeZone(for: "America/Los_Angeles").identifier, "America/Los_Angeles")
-        XCTAssertEqual(parser.timeZone(for: "Not/AZone").secondsFromGMT(), 0)
+        let fixedOffsetCases: [(String, Int)] = [
+            ("AoE", -43_200),
+            ("UTC-12", -43_200),
+            ("UTC", 0),
+            ("UTC+0", 0),
+            ("UTC+1", 3_600),
+            ("UTC+2", 7_200),
+            ("UTC+7", 25_200),
+            ("UTC+8", 28_800),
+            ("UTC+9", 32_400),
+            ("UTC-4", -14_400),
+            ("UTC-5", -18_000),
+            ("UTC-6", -21_600),
+            ("UTC-7", -25_200),
+            ("UTC-8", -28_800),
+            ("UTC-10", -36_000)
+        ]
+        for (identifier, expectedSeconds) in fixedOffsetCases {
+            XCTAssertEqual(try parser.timeZone(for: identifier).secondsFromGMT(), expectedSeconds, identifier)
+        }
+
+        XCTAssertEqual(try parser.timeZone(for: "Asia/Shanghai").identifier, "Asia/Shanghai")
+        XCTAssertEqual(try parser.timeZone(for: "America/Los_Angeles").identifier, "America/Los_Angeles")
+
+        let pacific = try parser.timeZone(for: "PT")
+        XCTAssertEqual(pacific.identifier, "America/Los_Angeles")
+        XCTAssertEqual(pacific.secondsFromGMT(for: try Self.date("2026-07-01T00:00:00Z")), -25_200)
+        XCTAssertEqual(pacific.secondsFromGMT(for: try Self.date("2026-01-01T00:00:00Z")), -28_800)
+    }
+
+    func testInvalidTimezoneIsObservableParseFailure() {
+        XCTAssertThrowsError(try DeadlineTimeZoneParser().timeZone(for: "Not/AZone")) { error in
+            XCTAssertEqual(error as? RemoteCatalogError, .unsupportedTimeZone("Not/AZone"))
+        }
+
+        XCTAssertThrowsError(try ConferenceYAMLParser().parse(Self.invalidTimezoneYAML, stableID: "ai-badconf")) { error in
+            XCTAssertEqual(error as? RemoteCatalogError, .unsupportedTimeZone("Not/AZone"))
+        }
+    }
+
+    func testRepresentativeUpstreamDeadlinesMatchCcfddlSemantics() throws {
+        let clock = FixedDateClock(now: try Self.date("2026-06-26T00:00:00Z"))
+        let selectionService = DeadlineSelectionService(clock: clock)
+        let calculator = DeadlineCalculator(clock: clock)
+        let cases: [(id: String, yaml: String, expectedDeadlineID: String, expectedBeijing: String, expectedStatus: DeadlineStatus)] = [
+            (
+                id: "ai-aaai",
+                yaml: Self.upstreamAAAIYAML,
+                expectedDeadlineID: "aaai27-abstract",
+                expectedBeijing: "Jul 21, 19:59 Beijing",
+                expectedStatus: .upcoming
+            ),
+            (
+                id: "ai-acl",
+                yaml: Self.upstreamACLYAML,
+                expectedDeadlineID: "acl26-paper",
+                expectedBeijing: "Jan 6, 19:59 Beijing",
+                expectedStatus: .closed
+            ),
+            (
+                id: "ai-cvpr",
+                yaml: Self.upstreamCVPRYAML,
+                expectedDeadlineID: "cvpr26-paper",
+                expectedBeijing: "Nov 14, 19:59 Beijing",
+                expectedStatus: .closed
+            ),
+            (
+                id: "ai-iccv",
+                yaml: Self.upstreamICCVYAML,
+                expectedDeadlineID: "iccv25-paper",
+                expectedBeijing: "Mar 8, 17:59 Beijing",
+                expectedStatus: .closed
+            ),
+            (
+                id: "ai-iclr",
+                yaml: Self.upstreamICLRYAML,
+                expectedDeadlineID: "iclr26-paper",
+                expectedBeijing: "Sep 25, 19:59 Beijing",
+                expectedStatus: .closed
+            ),
+            (
+                id: "ai-icml",
+                yaml: Self.upstreamICMLYAML,
+                expectedDeadlineID: "icml26-paper",
+                expectedBeijing: "Jan 29, 19:59 Beijing",
+                expectedStatus: .closed
+            ),
+            (
+                id: "ai-nips",
+                yaml: Self.upstreamNIPSYAML,
+                expectedDeadlineID: "nips26-paper",
+                expectedBeijing: "May 7, 19:59 Beijing",
+                expectedStatus: .closed
+            ),
+            (
+                id: "cg-dcc",
+                yaml: Self.upstreamDCCYAML,
+                expectedDeadlineID: "dcc27-paper",
+                expectedBeijing: "Oct 3, 14:59 Beijing",
+                expectedStatus: .upcoming
+            )
+        ]
+
+        for testCase in cases {
+            let conference = try ConferenceYAMLParser().parse(testCase.yaml, stableID: testCase.id)
+            let selection = selectionService.selectDeadline(for: conference)
+            let deadline = try XCTUnwrap(
+                selection.primaryDeadline ?? conference.editions.flatMap(\.deadlines).first { $0.id == testCase.expectedDeadlineID },
+                testCase.id
+            )
+            let date = try XCTUnwrap(deadline.date, testCase.id)
+
+            XCTAssertEqual(deadline.id, testCase.expectedDeadlineID, testCase.id)
+            XCTAssertEqual(TopConfDateFormatting.beijingTime(date), testCase.expectedBeijing, testCase.id)
+            XCTAssertEqual(calculator.status(for: date), testCase.expectedStatus, testCase.id)
+        }
     }
 
     private static let sampleYAML = """
@@ -164,6 +273,125 @@ final class ConferenceYAMLParserTests: XCTestCase {
         timeline:
           - deadline: TBD
         timezone: Asia/Shanghai
+    """
+
+    private static let invalidTimezoneYAML = """
+    title: BadConf
+    sub: AI
+    rank:
+      ccf: A
+    confs:
+      - year: 2027
+        id: bad27
+        timeline:
+          - deadline: '2026-07-27 23:59:59'
+        timezone: Not/AZone
+    """
+
+    private static let upstreamAAAIYAML = """
+    - title: AAAI
+      description: AAAI Conference on Artificial Intelligence
+      sub: AI
+      rank:
+        ccf: A
+      confs:
+        - year: 2027
+          id: aaai27
+          timeline:
+            - abstract_deadline: '2026-07-20 23:59:59'
+              deadline: '2026-07-27 23:59:59'
+          timezone: UTC-12
+    """
+
+    private static let upstreamACLYAML = """
+    - title: ACL
+      sub: AI
+      rank:
+        ccf: A
+      confs:
+        - year: 2026
+          id: acl26
+          timeline:
+            - deadline: '2026-01-05 23:59:59'
+          timezone: UTC-12
+    """
+
+    private static let upstreamCVPRYAML = """
+    - title: CVPR
+      sub: AI
+      rank:
+        ccf: A
+      confs:
+        - year: 2026
+          id: cvpr26
+          timeline:
+            - deadline: '2025-11-13 23:59:00'
+          timezone: UTC-12
+    """
+
+    private static let upstreamICCVYAML = """
+    - title: ICCV
+      sub: AI
+      rank:
+        ccf: A
+      confs:
+        - year: 2025
+          id: iccv25
+          timeline:
+            - deadline: '2025-03-08 09:59:59'
+          timezone: UTC+0
+    """
+
+    private static let upstreamICLRYAML = """
+    - title: ICLR
+      sub: AI
+      rank:
+        ccf: A
+      confs:
+        - year: 2026
+          id: iclr26
+          timeline:
+            - deadline: '2025-09-24 23:59:59'
+          timezone: AoE
+    """
+
+    private static let upstreamICMLYAML = """
+    - title: ICML
+      sub: AI
+      rank:
+        ccf: A
+      confs:
+        - year: 2026
+          id: icml26
+          timeline:
+            - deadline: '2026-01-29 11:59:59'
+          timezone: UTC+0
+    """
+
+    private static let upstreamNIPSYAML = """
+    - title: NIPS
+      sub: AI
+      rank:
+        ccf: A
+      confs:
+        - year: 2026
+          id: nips26
+          timeline:
+            - deadline: '2026-05-07 11:59:00'
+          timezone: UTC+0
+    """
+
+    private static let upstreamDCCYAML = """
+    - title: DCC
+      sub: CG
+      rank:
+        ccf: B
+      confs:
+        - year: 2027
+          id: dcc27
+          timeline:
+            - deadline: '2026-10-02 23:59:59'
+          timezone: PT
     """
 
     private static let unknownCategoryYAML = """
@@ -264,5 +492,11 @@ final class ConferenceYAMLParserTests: XCTestCase {
                   deadline: '2026-07-27 23:59:59'
               timezone: America/Los_Angeles
         """
+    }
+
+    private static func date(_ value: String) throws -> Date {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime]
+        return try XCTUnwrap(formatter.date(from: value))
     }
 }

@@ -139,28 +139,43 @@ final class TrackedConferenceListViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.rows.first?.deadline.remainingText, "4 days")
     }
 
-    func testTBDClosedAndSourceUnavailableStates() async {
+    func testTBDAndClosedStatesRemainVisibleButOrphansAreHidden() async {
         let viewModel = makeViewModel(trackedIDs: ["graphics-siggraph", "graphics-acm-mm", "missing-source-conf"])
 
         await viewModel.load()
 
-        XCTAssertEqual(viewModel.rows.map(\.id), ["graphics-siggraph", "graphics-acm-mm", "missing-source-conf"])
+        XCTAssertEqual(viewModel.rows.map(\.id), ["graphics-siggraph", "graphics-acm-mm"])
         XCTAssertEqual(viewModel.rows[0].deadline.statusText, "TBD")
         XCTAssertEqual(viewModel.rows[1].deadline.statusText, "Closed")
-        XCTAssertEqual(viewModel.rows[2].deadline.statusText, "Source unavailable")
     }
 
-    func testLastKnownFallbackResolvesMissingCurrentCatalogConference() async {
+    func testOrphanTrackedRowsAreAbsentFromTrackedListOutput() async {
+        let conferences = SeedConferenceCatalog.conferences().filter {
+            $0.id != "graphics-acm-mm" && $0.id != "hci-chi"
+        }
+        let viewModel = makeViewModel(
+            conferences: conferences,
+            trackedIDs: ["ai-aaai", "graphics-acm-mm", "hci-chi"]
+        )
+
+        await viewModel.load()
+
+        XCTAssertEqual(viewModel.rows.map(\.id), ["ai-aaai"])
+        XCTAssertEqual(viewModel.visibleRows.map(\.id), ["ai-aaai"])
+        XCTAssertEqual(viewModel.trackingCountText, "1 / 10")
+    }
+
+    func testLastKnownFallbackDoesNotRenderMissingCurrentCatalogConference() async {
         let cached = DomainTestFactory.conference(id: "cached-conf", abbreviation: "CACHE")
         let viewModel = makeViewModel(conferences: [], trackedIDs: ["cached-conf"], lastKnown: [cached])
 
         await viewModel.load()
 
-        XCTAssertEqual(viewModel.rows.first?.abbreviation, "CACHE")
-        XCTAssertEqual(viewModel.rows.first?.availability, .available)
+        XCTAssertTrue(viewModel.rows.isEmpty)
+        XCTAssertTrue(viewModel.visibleRows.isEmpty)
     }
 
-    func testSortingFutureTBDBeforeClosedBeforeUnavailable() async {
+    func testSortingFutureTBDBeforeClosedAndDropsUnavailableOrphans() async {
         let viewModel = makeViewModel(trackedIDs: [
             "missing-source-conf",
             "graphics-acm-mm",
@@ -173,8 +188,7 @@ final class TrackedConferenceListViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.rows.map(\.id), [
             "hci-chi",
             "graphics-siggraph",
-            "graphics-acm-mm",
-            "missing-source-conf"
+            "graphics-acm-mm"
         ])
     }
 
@@ -282,6 +296,26 @@ final class TrackedConferenceListViewModelTests: XCTestCase {
         await viewModel.load()
 
         XCTAssertNil(viewModel.rows.first?.websiteURL)
+    }
+
+    func testValidTrackedConferenceWithNoDeadlineStillRenders() async {
+        let noDeadline = DomainTestFactory.conference(
+            id: "hci-valid-no-deadline",
+            abbreviation: "VALID",
+            category: DomainTestFactory.hci,
+            editions: [
+                DomainTestFactory.edition(
+                    conferenceID: "hci-valid-no-deadline",
+                    deadlines: []
+                )
+            ]
+        )
+        let viewModel = makeViewModel(conferences: [noDeadline], trackedIDs: ["hci-valid-no-deadline"])
+
+        await viewModel.load()
+
+        XCTAssertEqual(viewModel.rows.map(\.id), ["hci-valid-no-deadline"])
+        XCTAssertEqual(viewModel.rows.first?.deadline.statusText, "Closed")
     }
 
     func testStableIdentityAfterRenameCategoryAndRankChange() async {

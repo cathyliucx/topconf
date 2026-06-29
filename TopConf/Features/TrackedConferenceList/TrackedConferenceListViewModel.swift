@@ -52,7 +52,8 @@ final class TrackedConferenceListViewModel: ObservableObject {
     }
 
     var trackingCountText: String {
-        "\(rows.count) / \(TrackingPolicy.maximumConferenceCount)"
+        let resolvableCount = rows.filter { $0.availability != .sourceUnavailable }.count
+        return "\(resolvableCount) / \(TrackingPolicy.maximumConferenceCount)"
     }
 
     func load() async {
@@ -69,11 +70,12 @@ final class TrackedConferenceListViewModel: ObservableObject {
             let tracked = try await trackedRepository.loadAll()
             let catalog = try await conferenceRepository.loadAll()
             let updatedAt = try await conferenceRepository.lastUpdatedAt()
-            let resolved = tracked.map { trackedConference in
+            let catalogIDs = Set(catalog.map(\.id))
+            let resolved = tracked.filter { catalogIDs.contains($0.conferenceID) }.map { trackedConference in
                 resolver.resolve(
                     trackedConference: trackedConference,
                     currentConferences: catalog,
-                    lastKnownConferences: lastKnownConferences
+                    lastKnownConferences: []
                 )
             }
             rows = sortingService.sort(resolved).map(makeRow)

@@ -78,6 +78,7 @@ struct AppRootView: View {
     private func start() async {
         do {
             try await container.seedIfNeeded()
+            await container.reconcileTrackedConferencesWithAcceptedCatalogIfPresent()
             await managementViewModel.load()
             if let initialSearchQuery = container.configuration.initialSearchQuery {
                 managementViewModel.searchQuery = initialSearchQuery

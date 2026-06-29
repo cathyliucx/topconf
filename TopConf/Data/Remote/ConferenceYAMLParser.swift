@@ -61,8 +61,11 @@ struct ConferenceYAMLParser {
             return ParsedRecord(conference: nil, mappingResult: mappingResult, title: abbreviation)
         }
         let conferenceID = stableID ?? "\(category.sourceID.lowercased())-\(Self.slug(abbreviation))"
-        let editions = ((root["confs"] as? [[String: Any]]) ?? []).compactMap { editionRoot in
-            parseEdition(editionRoot, conferenceID: conferenceID)
+        var editions: [ConferenceEdition] = []
+        for editionRoot in ((root["confs"] as? [[String: Any]]) ?? []) {
+            if let edition = try parseEdition(editionRoot, conferenceID: conferenceID) {
+                editions.append(edition)
+            }
         }
         guard !editions.isEmpty else {
             throw RemoteCatalogError.malformedRoot
@@ -85,13 +88,13 @@ struct ConferenceYAMLParser {
         return ParsedRecord(conference: conference, mappingResult: mappingResult, title: abbreviation)
     }
 
-    private func parseEdition(_ root: [String: Any], conferenceID: String) -> ConferenceEdition? {
+    private func parseEdition(_ root: [String: Any], conferenceID: String) throws -> ConferenceEdition? {
         guard let year = int(root["year"]) else {
             return nil
         }
         let editionID = nonEmptyString(root["id"]) ?? "\(conferenceID)-\(year)"
         let rawTimeZone = nonEmptyString(root["timezone"])
-        let timezone = timeZoneParser.timeZone(for: rawTimeZone)
+        let timezone = try timeZoneParser.timeZone(for: rawTimeZone)
         let timelines = (root["timeline"] as? [[String: Any]]) ?? []
         let deadlines = timelines.enumerated().flatMap { index, timeline in
             parseDeadlines(
@@ -248,18 +251,30 @@ struct ConferenceYAMLParser {
 }
 
 struct DeadlineTimeZoneParser {
-    func timeZone(for identifier: String?) -> TimeZone {
-        let rawValue = identifier?.trimmingCharacters(in: .whitespacesAndNewlines)
-        switch rawValue?.uppercased() {
+    func timeZone(for identifier: String?) throws -> TimeZone {
+        guard let rawValue = identifier?.trimmingCharacters(in: .whitespacesAndNewlines),
+              !rawValue.isEmpty else {
+            throw RemoteCatalogError.unsupportedTimeZone(identifier ?? "")
+        }
+
+        switch rawValue.uppercased() {
         case "AOE", "UTC-12":
-            return TimeZone(secondsFromGMT: -12 * 60 * 60) ?? TimeZone(identifier: "UTC") ?? .current
+            return try fixedTimeZone(secondsFromGMT: -12 * 60 * 60, identifier: rawValue)
         case "UTC", "GMT":
-            return TimeZone(secondsFromGMT: 0) ?? TimeZone(identifier: "UTC") ?? .current
+            return try fixedTimeZone(secondsFromGMT: 0, identifier: rawValue)
+        case "PT":
+            guard let timeZone = TimeZone(identifier: "America/Los_Angeles") else {
+                throw RemoteCatalogError.unsupportedTimeZone(rawValue)
+            }
+            return timeZone
         default:
             if let offset = utcOffsetSeconds(from: rawValue) {
-                return TimeZone(secondsFromGMT: offset) ?? TimeZone(identifier: "UTC") ?? .current
+                return try fixedTimeZone(secondsFromGMT: offset, identifier: rawValue)
             }
-            return rawValue.flatMap(TimeZone.init(identifier:)) ?? TimeZone(secondsFromGMT: 0) ?? TimeZone(identifier: "UTC") ?? .current
+            if let timeZone = TimeZone(identifier: rawValue) {
+                return timeZone
+            }
+            throw RemoteCatalogError.unsupportedTimeZone(rawValue)
         }
     }
 
@@ -296,5 +311,12 @@ struct DeadlineTimeZoneParser {
         let minutes = value >= 100 ? value % 100 : 0
         let seconds = hours * 60 * 60 + minutes * 60
         return sign == "-" ? -seconds : seconds
+    }
+
+    private func fixedTimeZone(secondsFromGMT: Int, identifier: String) throws -> TimeZone {
+        guard let timeZone = TimeZone(secondsFromGMT: secondsFromGMT) else {
+            throw RemoteCatalogError.unsupportedTimeZone(identifier)
+        }
+        return timeZone
     }
 }

@@ -36,6 +36,21 @@ final class AppCompositionTests: XCTestCase {
         XCTAssertGreaterThanOrEqual(conferences.count, 11)
     }
 
+    func testProductionCompositionUsesSystemClockAndDoesNotSeedTrackedConferencesByDefault() async throws {
+        let container = try DependencyContainer.make(
+            configuration: AppLaunchConfiguration(isUITesting: false, seedScenario: .none, initialSearchQuery: nil),
+            inMemory: true
+        )
+
+        try await container.seedIfNeeded()
+        let conferences = try await container.conferenceRepository.loadAll()
+        let trackedCount = try await container.trackedRepository.count()
+
+        XCTAssertTrue(container.clock is SystemClock)
+        XCTAssertGreaterThanOrEqual(conferences.count, 11)
+        XCTAssertEqual(trackedCount, 0)
+    }
+
     func testSeedDataIsInsertedOnlyWhenCatalogIsEmpty() async throws {
         let container = try DependencyContainer.make(
             configuration: AppLaunchConfiguration(isUITesting: true, seedScenario: .empty, initialSearchQuery: nil),
@@ -90,7 +105,7 @@ final class AppCompositionTests: XCTestCase {
         )
         try await oneUpcoming.seedIfNeeded()
         let oneUpcomingTracked = try await oneUpcoming.trackedRepository.loadAll().map(\.conferenceID)
-        XCTAssertEqual(oneUpcomingTracked, ["hci-chi"])
+        XCTAssertEqual(oneUpcomingTracked, ["ai-iclr"])
 
         let zeroTracked = try DependencyContainer.make(
             configuration: AppLaunchConfiguration(isUITesting: true, seedScenario: .zeroTracked, initialSearchQuery: nil),
@@ -99,6 +114,20 @@ final class AppCompositionTests: XCTestCase {
         try await zeroTracked.seedIfNeeded()
         let zeroTrackedCount = try await zeroTracked.trackedRepository.count()
         XCTAssertEqual(zeroTrackedCount, 0)
+    }
+
+    func testBundledCatalogLoadingDoesNotCreateTrackedRecordsForFreshInstall() async throws {
+        let container = try DependencyContainer.make(
+            configuration: AppLaunchConfiguration(isUITesting: false, seedScenario: .none, initialSearchQuery: nil),
+            inMemory: true
+        )
+
+        try await container.seedIfNeeded()
+        let catalogCount = try await container.conferenceRepository.loadAll().count
+        let tracked = try await container.trackedRepository.loadAll()
+
+        XCTAssertGreaterThan(catalogCount, TrackingPolicy.maximumConferenceCount)
+        XCTAssertTrue(tracked.isEmpty)
     }
 
     func testCompleteCatalogMayExceedTrackedListLimit() async throws {
@@ -115,11 +144,34 @@ final class AppCompositionTests: XCTestCase {
         XCTAssertEqual(tracked.count, TrackingPolicy.maximumConferenceCount)
     }
 
+    func testFirstLaunchOfflineFallbackDoesNotCreateTrackedRecordsForNormalProductionLaunch() async throws {
+        let conferenceRepository = InMemoryConferenceRepository()
+        let trackedRepository = InMemoryTrackedConferenceRepository()
+        let container = DependencyContainer(
+            conferenceRepository: conferenceRepository,
+            trackedRepository: trackedRepository,
+            reminderRepository: InMemoryReminderRepository(),
+            reminderManager: SpyReminderManager(),
+            catalogSynchronizer: StaticCatalogSynchronizer(didRefresh: false),
+            clock: SystemClock(),
+            configuration: AppLaunchConfiguration(isUITesting: false, seedScenario: .none, initialSearchQuery: nil)
+        )
+
+        try await container.seedIfNeeded()
+        let didRefresh = await container.refreshCatalogInBackground()
+        let catalog = try await conferenceRepository.loadAll()
+        let tracked = try await trackedRepository.loadAll()
+
+        XCTAssertFalse(didRefresh)
+        XCTAssertGreaterThan(catalog.count, TrackingPolicy.maximumConferenceCount)
+        XCTAssertTrue(tracked.isEmpty)
+    }
+
     func testFirstLaunchOfflineFallbackSeedsEmptyCatalogWhenRefreshFails() async throws {
         let conferenceRepository = InMemoryConferenceRepository()
         let trackedRepository = InMemoryTrackedConferenceRepository()
         let reminderRepository = InMemoryReminderRepository(rules: [
-            ReminderFixtures.rule(deadlineID: ReminderFixtures.chiPaperDeadlineID, offsetSeconds: 24 * 60 * 60)
+            ReminderFixtures.rule(deadlineID: "ai-iclr-2027-paper", offsetSeconds: 24 * 60 * 60)
         ])
         let reminderManager = SpyReminderManager()
         let container = DependencyContainer(
@@ -140,9 +192,9 @@ final class AppCompositionTests: XCTestCase {
 
         XCTAssertFalse(didRefresh)
         XCTAssertGreaterThanOrEqual(catalog.count, 11)
-        XCTAssertTrue(catalog.contains { $0.id == "hci-chi" })
-        XCTAssertEqual(tracked.map(\.conferenceID), ["hci-chi"])
-        XCTAssertEqual(reminderRules.map(\.id), ["topconf.hci-chi-2026-paper.86400"])
+        XCTAssertTrue(catalog.contains { $0.id == "ai-iclr" })
+        XCTAssertEqual(tracked.map(\.conferenceID), ["ai-iclr"])
+        XCTAssertEqual(reminderRules.map(\.id), ["topconf.ai-iclr-2027-paper.86400"])
         let synchronizedContexts = await reminderManager.synchronizedContexts()
         XCTAssertEqual(synchronizedContexts, [])
     }
@@ -363,16 +415,268 @@ final class AppCompositionTests: XCTestCase {
         XCTAssertEqual(snapshot.removedDeadlineIDs, [ReminderFixtures.neuripsPaperDeadlineID])
     }
 
+    func testAcceptedRefreshRemovesTrackedOrphansAndPreservesResolvableConferences() async throws {
+        let trackedRepository = InMemoryTrackedConferenceRepository(trackedConferences: [
+            DomainTestFactory.tracked("ai-neurips"),
+            DomainTestFactory.tracked("graphics-siggraph"),
+            DomainTestFactory.tracked("hci-uist"),
+            DomainTestFactory.tracked("graphics-acm-mm"),
+            DomainTestFactory.tracked("hci-chi")
+        ])
+        let container = makeRefreshingContainer(
+            initialCatalog: ConferenceFixtures.catalog(),
+            remoteCatalog: acceptedCatalogForOrphanCleanup(),
+            trackedRepository: trackedRepository,
+            reminderRepository: InMemoryReminderRepository(),
+            reminderManager: SpyReminderManager()
+        )
+
+        let didRefresh = await container.refreshCatalogInBackground()
+        let tracked = try await trackedRepository.loadAll().map(\.conferenceID)
+
+        XCTAssertTrue(didRefresh)
+        XCTAssertEqual(tracked, ["ai-neurips", "graphics-siggraph", "hci-uist"])
+    }
+
+    @MainActor
+    func testAcceptedRefreshRemovesOrphansFromTrackedListAndCount() async throws {
+        let trackedRepository = InMemoryTrackedConferenceRepository(trackedConferences: [
+            DomainTestFactory.tracked("ai-neurips"),
+            DomainTestFactory.tracked("graphics-acm-mm"),
+            DomainTestFactory.tracked("hci-chi")
+        ])
+        let conferenceRepository = InMemoryConferenceRepository(conferences: ConferenceFixtures.catalog())
+        let container = DependencyContainer(
+            conferenceRepository: conferenceRepository,
+            trackedRepository: trackedRepository,
+            reminderRepository: InMemoryReminderRepository(),
+            reminderManager: SpyReminderManager(),
+            catalogSynchronizer: ConferenceCatalogSynchronizer(
+                remoteSource: MockAppCompositionRemoteSource(conferences: acceptedCatalogForOrphanCleanup()),
+                conferenceRepository: conferenceRepository,
+                clock: FixedClock.standard
+            ),
+            clock: FixedClock.standard,
+            configuration: AppLaunchConfiguration(isUITesting: false, seedScenario: .empty, initialSearchQuery: nil)
+        )
+
+        let didRefresh = await container.refreshCatalogInBackground()
+        let viewModel = container.makeTrackedConferenceListViewModel()
+        await viewModel.load()
+
+        XCTAssertTrue(didRefresh)
+        XCTAssertEqual(viewModel.rows.map(\.id), ["ai-neurips"])
+        XCTAssertEqual(viewModel.trackingCountText, "1 / 10")
+    }
+
+    @MainActor
+    func testAcceptedRefreshImmediatelyReloadsTrackedListWithoutStaleExampleRows() async throws {
+        let aaai = DomainTestFactory.conference(id: "ai-aaai", abbreviation: "AAAI")
+        let trackedRepository = InMemoryTrackedConferenceRepository(trackedConferences: [
+            DomainTestFactory.tracked("ai-aaai"),
+            DomainTestFactory.tracked("graphics-acm-mm"),
+            DomainTestFactory.tracked("hci-chi")
+        ])
+        let conferenceRepository = InMemoryConferenceRepository(conferences: ConferenceFixtures.catalog())
+        let container = DependencyContainer(
+            conferenceRepository: conferenceRepository,
+            trackedRepository: trackedRepository,
+            reminderRepository: InMemoryReminderRepository(),
+            reminderManager: SpyReminderManager(),
+            catalogSynchronizer: ConferenceCatalogSynchronizer(
+                remoteSource: MockAppCompositionRemoteSource(conferences: [aaai]),
+                conferenceRepository: conferenceRepository,
+                clock: FixedClock.standard
+            ),
+            clock: FixedClock.standard,
+            configuration: AppLaunchConfiguration(isUITesting: false, seedScenario: .empty, initialSearchQuery: nil)
+        )
+        let viewModel = container.makeTrackedConferenceListViewModel()
+
+        await viewModel.load()
+        XCTAssertEqual(Set(viewModel.rows.map(\.id)), ["ai-aaai", "graphics-acm-mm", "hci-chi"])
+
+        let didRefresh = await container.refreshCatalogInBackground()
+        await viewModel.load()
+        let persistedTracked = try await trackedRepository.loadAll().map(\.conferenceID)
+
+        XCTAssertTrue(didRefresh)
+        XCTAssertEqual(viewModel.rows.map(\.id), ["ai-aaai"])
+        XCTAssertEqual(viewModel.trackingCountText, "1 / 10")
+        XCTAssertEqual(persistedTracked, ["ai-aaai"])
+    }
+
+    func testAcceptedRefreshCancelsReminderRulesForRemovedTrackedOrphans() async throws {
+        let staleGraphicsDeadlineID = "graphics-acm-mm-2027-paper"
+        let staleChiDeadlineID = "hci-chi-2027-paper"
+        let reminderRepository = InMemoryReminderRepository(rules: [
+            ReminderFixtures.rule(deadlineID: staleGraphicsDeadlineID, offsetSeconds: 24 * 60 * 60),
+            ReminderFixtures.rule(deadlineID: staleChiDeadlineID, offsetSeconds: 24 * 60 * 60),
+            ReminderFixtures.rule(offsetSeconds: 24 * 60 * 60)
+        ])
+        let scheduler = AppCompositionMockNotificationScheduler(seed: [
+            notificationRequest(deadlineID: staleGraphicsDeadlineID),
+            notificationRequest(deadlineID: staleChiDeadlineID),
+            notificationRequest(deadlineID: ReminderFixtures.neuripsPaperDeadlineID)
+        ])
+        let reminderManager = DeadlineNotificationService(
+            reminderRepository: reminderRepository,
+            scheduler: scheduler,
+            clock: FixedClock.standard
+        )
+        let trackedRepository = InMemoryTrackedConferenceRepository(trackedConferences: [
+            DomainTestFactory.tracked("ai-neurips"),
+            DomainTestFactory.tracked("graphics-acm-mm"),
+            DomainTestFactory.tracked("hci-chi")
+        ])
+        let container = makeRefreshingContainer(
+            initialCatalog: ConferenceFixtures.catalog(),
+            remoteCatalog: acceptedCatalogForOrphanCleanup(),
+            trackedRepository: trackedRepository,
+            reminderRepository: reminderRepository,
+            reminderManager: reminderManager
+        )
+
+        let didRefresh = await container.refreshCatalogInBackground()
+        let rules = try await reminderRepository.loadAll()
+        let snapshot = await scheduler.snapshot()
+
+        XCTAssertTrue(didRefresh)
+        XCTAssertEqual(rules.map(\.deadlineID), [ReminderFixtures.neuripsPaperDeadlineID])
+        XCTAssertTrue(snapshot.removedDeadlineIDs.contains(staleGraphicsDeadlineID))
+        XCTAssertTrue(snapshot.removedDeadlineIDs.contains(staleChiDeadlineID))
+        XCTAssertFalse(snapshot.scheduled.contains { $0.deadlineID == staleGraphicsDeadlineID })
+        XCTAssertFalse(snapshot.scheduled.contains { $0.deadlineID == staleChiDeadlineID })
+    }
+
+    func testRefreshFailureAndRejectedRefreshPreserveTrackedOrphans() async throws {
+        let failedRefreshTracked = try await preservedTrackedIDsAfterRefresh(
+            remoteSource: ThrowingAppCompositionRemoteSource(error: .invalidResponse(500))
+        )
+        let rejectedRefreshTracked = try await preservedTrackedIDsAfterRefresh(
+            remoteSource: ThrowingAppCompositionRemoteSource(error: .incompleteBatch("too small"))
+        )
+
+        XCTAssertEqual(failedRefreshTracked, ["ai-neurips", "graphics-acm-mm", "hci-chi"])
+        XCTAssertEqual(rejectedRefreshTracked, ["ai-neurips", "graphics-acm-mm", "hci-chi"])
+    }
+
+    func testCacheOrSeedFallbackDoesNotRemoveTrackedOrphans() async throws {
+        let trackedRepository = InMemoryTrackedConferenceRepository(trackedConferences: [
+            DomainTestFactory.tracked("ai-neurips"),
+            DomainTestFactory.tracked("graphics-acm-mm"),
+            DomainTestFactory.tracked("hci-chi")
+        ])
+        let container = DependencyContainer(
+            conferenceRepository: InMemoryConferenceRepository(conferences: [conference()]),
+            trackedRepository: trackedRepository,
+            reminderRepository: InMemoryReminderRepository(),
+            reminderManager: SpyReminderManager(),
+            catalogSynchronizer: StaticCatalogSynchronizer(didRefresh: false),
+            clock: FixedClock.standard,
+            configuration: AppLaunchConfiguration(isUITesting: false, seedScenario: .empty, initialSearchQuery: nil)
+        )
+
+        let didRefresh = await container.refreshCatalogInBackground()
+        let tracked = try await trackedRepository.loadAll().map(\.conferenceID)
+
+        XCTAssertFalse(didRefresh)
+        XCTAssertEqual(tracked, ["ai-neurips", "graphics-acm-mm", "hci-chi"])
+    }
+
+    func testAcceptedRefreshOrphanCleanupIsIdempotent() async throws {
+        let trackedRepository = InMemoryTrackedConferenceRepository(trackedConferences: [
+            DomainTestFactory.tracked("ai-neurips"),
+            DomainTestFactory.tracked("graphics-acm-mm"),
+            DomainTestFactory.tracked("hci-chi")
+        ])
+        let container = makeRefreshingContainer(
+            initialCatalog: ConferenceFixtures.catalog(),
+            remoteCatalog: acceptedCatalogForOrphanCleanup(),
+            trackedRepository: trackedRepository,
+            reminderRepository: InMemoryReminderRepository(),
+            reminderManager: SpyReminderManager()
+        )
+
+        let firstRefresh = await container.refreshCatalogInBackground()
+        let afterFirstRefresh = try await trackedRepository.loadAll().map(\.conferenceID)
+        let secondRefresh = await container.refreshCatalogInBackground()
+        let afterSecondRefresh = try await trackedRepository.loadAll().map(\.conferenceID)
+
+        XCTAssertTrue(firstRefresh)
+        XCTAssertTrue(secondRefresh)
+        XCTAssertEqual(afterFirstRefresh, ["ai-neurips"])
+        XCTAssertEqual(afterSecondRefresh, ["ai-neurips"])
+    }
+
+    @MainActor
+    func testStartupReconciliationRemovesOrphansWhenAcceptedCatalogAlreadyExists() async throws {
+        let aaai = DomainTestFactory.conference(id: "ai-aaai", abbreviation: "AAAI")
+        let trackedRepository = InMemoryTrackedConferenceRepository(trackedConferences: [
+            DomainTestFactory.tracked("ai-aaai"),
+            DomainTestFactory.tracked("graphics-acm-mm"),
+            DomainTestFactory.tracked("hci-chi")
+        ])
+        let conferenceRepository = InMemoryConferenceRepository(
+            conferences: [aaai],
+            updatedAt: DomainTestFactory.date(daysFromReference: 1)
+        )
+        let container = DependencyContainer(
+            conferenceRepository: conferenceRepository,
+            trackedRepository: trackedRepository,
+            reminderRepository: InMemoryReminderRepository(),
+            reminderManager: SpyReminderManager(),
+            catalogSynchronizer: StaticCatalogSynchronizer(didRefresh: false),
+            clock: FixedClock.standard,
+            configuration: AppLaunchConfiguration(isUITesting: false, seedScenario: .empty, initialSearchQuery: nil)
+        )
+        let viewModel = container.makeTrackedConferenceListViewModel()
+
+        await container.reconcileTrackedConferencesWithAcceptedCatalogIfPresent()
+        await viewModel.load()
+        let persistedTracked = try await trackedRepository.loadAll().map(\.conferenceID)
+
+        XCTAssertEqual(persistedTracked, ["ai-aaai"])
+        XCTAssertEqual(viewModel.rows.map(\.id), ["ai-aaai"])
+        XCTAssertEqual(viewModel.trackingCountText, "1 / 10")
+    }
+
+    func testStartupReconciliationDoesNotRemoveOrphansFromSeedOnlyCatalog() async throws {
+        let trackedRepository = InMemoryTrackedConferenceRepository(trackedConferences: [
+            DomainTestFactory.tracked("graphics-acm-mm"),
+            DomainTestFactory.tracked("hci-chi")
+        ])
+        let conferenceRepository = InMemoryConferenceRepository(
+            conferences: [conference()],
+            updatedAt: SeedConferenceCatalog.seededAt
+        )
+        let container = DependencyContainer(
+            conferenceRepository: conferenceRepository,
+            trackedRepository: trackedRepository,
+            reminderRepository: InMemoryReminderRepository(),
+            reminderManager: SpyReminderManager(),
+            catalogSynchronizer: StaticCatalogSynchronizer(didRefresh: false),
+            clock: FixedClock.standard,
+            configuration: AppLaunchConfiguration(isUITesting: false, seedScenario: .empty, initialSearchQuery: nil)
+        )
+
+        await container.reconcileTrackedConferencesWithAcceptedCatalogIfPresent()
+        let persistedTracked = try await trackedRepository.loadAll().map(\.conferenceID)
+
+        XCTAssertEqual(persistedTracked, ["graphics-acm-mm", "hci-chi"])
+    }
+
     private func makeRefreshingContainer(
         initialCatalog: [Conference],
         remoteCatalog: [Conference],
+        trackedRepository: InMemoryTrackedConferenceRepository? = nil,
         reminderRepository: InMemoryReminderRepository,
         reminderManager: any DeadlineReminderManaging
     ) -> DependencyContainer {
         let conferenceRepository = InMemoryConferenceRepository(conferences: initialCatalog)
         return DependencyContainer(
             conferenceRepository: conferenceRepository,
-            trackedRepository: InMemoryTrackedConferenceRepository(trackedConferences: [
+            trackedRepository: trackedRepository ?? InMemoryTrackedConferenceRepository(trackedConferences: [
                 TrackedConference(conferenceID: "ai-neurips", addedAt: DomainTestFactory.referenceDate)
             ]),
             reminderRepository: reminderRepository,
@@ -385,6 +689,69 @@ final class AppCompositionTests: XCTestCase {
             clock: FixedClock.standard,
             configuration: AppLaunchConfiguration(isUITesting: false, seedScenario: .empty, initialSearchQuery: nil)
         )
+    }
+
+    private func preservedTrackedIDsAfterRefresh(remoteSource: any ConferenceRemoteSource) async throws -> [String] {
+        let trackedRepository = InMemoryTrackedConferenceRepository(trackedConferences: [
+            DomainTestFactory.tracked("ai-neurips"),
+            DomainTestFactory.tracked("graphics-acm-mm"),
+            DomainTestFactory.tracked("hci-chi")
+        ])
+        let conferenceRepository = InMemoryConferenceRepository(conferences: [conference()])
+        let container = DependencyContainer(
+            conferenceRepository: conferenceRepository,
+            trackedRepository: trackedRepository,
+            reminderRepository: InMemoryReminderRepository(),
+            reminderManager: SpyReminderManager(),
+            catalogSynchronizer: ConferenceCatalogSynchronizer(
+                remoteSource: remoteSource,
+                conferenceRepository: conferenceRepository,
+                clock: FixedClock.standard
+            ),
+            clock: FixedClock.standard,
+            configuration: AppLaunchConfiguration(isUITesting: false, seedScenario: .empty, initialSearchQuery: nil)
+        )
+
+        let didRefresh = await container.refreshCatalogInBackground()
+
+        XCTAssertFalse(didRefresh)
+        return try await trackedRepository.loadAll().map(\.conferenceID)
+    }
+
+    private func acceptedCatalogForOrphanCleanup() -> [Conference] {
+        [
+            conference(),
+            DomainTestFactory.conference(
+                id: "graphics-siggraph",
+                abbreviation: "SIGGRAPH",
+                category: DomainTestFactory.graphics,
+                editions: [
+                    DomainTestFactory.edition(
+                        conferenceID: "graphics-siggraph",
+                        year: 2027,
+                        deadlines: [
+                            DomainTestFactory.deadline(
+                                id: "graphics-siggraph-2027-paper",
+                                editionID: "graphics-siggraph-2027",
+                                date: nil,
+                                rawDateValue: "TBD"
+                            )
+                        ]
+                    )
+                ]
+            ),
+            DomainTestFactory.conference(
+                id: "hci-uist",
+                abbreviation: "UIST",
+                category: DomainTestFactory.hci,
+                editions: [
+                    DomainTestFactory.edition(
+                        conferenceID: "hci-uist",
+                        deadlines: []
+                    )
+                ]
+            )
+        ]
     }
 
     private func conference(deadline: Deadline = DomainTestFactory.deadline(
@@ -416,9 +783,19 @@ final class AppCompositionTests: XCTestCase {
     }
 
     private func notificationRequest(deliveryDate: Date) -> DeadlineNotificationRequest {
-        DeadlineNotificationRequest(
-            identifier: "topconf.ai-neurips-2026-paper.86400",
+        notificationRequest(
             deadlineID: ReminderFixtures.neuripsPaperDeadlineID,
+            deliveryDate: deliveryDate
+        )
+    }
+
+    private func notificationRequest(
+        deadlineID: String,
+        deliveryDate: Date = DomainTestFactory.date(daysFromReference: 29)
+    ) -> DeadlineNotificationRequest {
+        DeadlineNotificationRequest(
+            identifier: "topconf.\(deadlineID).86400",
+            deadlineID: deadlineID,
             title: "NeurIPS Paper Deadline is in 1 day",
             body: "Deadline",
             deliveryDate: deliveryDate

@@ -143,15 +143,16 @@ final class ConferenceManagementViewModel: ObservableObject {
     }
 
     func addConference(id conferenceID: String) async {
+        let trackedRecordsForCurrentCatalog = resolvableTrackedRecords()
         let mutation = trackingService.add(
             conferenceID: conferenceID,
-            to: trackedRecords,
+            to: trackedRecordsForCurrentCatalog,
             availableConferences: catalogConferences
         )
 
         guard mutation.result == .added,
               let added = mutation.trackedConferences.first(where: { tracked in
-                  !trackedRecords.contains(where: { $0.conferenceID == tracked.conferenceID })
+                  !trackedRecordsForCurrentCatalog.contains(where: { $0.conferenceID == tracked.conferenceID })
               }) else {
             handleTrackingResult(mutation.result)
             return
@@ -185,7 +186,8 @@ final class ConferenceManagementViewModel: ObservableObject {
     }
 
     private func rebuildPresentation() {
-        let trackedIDs = Set(trackedRecords.map(\.conferenceID))
+        let trackedRecordsForCurrentCatalog = resolvableTrackedRecords()
+        let trackedIDs = Set(trackedRecordsForCurrentCatalog.map(\.conferenceID))
         trackingCount = trackedIDs.count
         categoryOptions = makeCategoryOptions(from: catalogConferences)
         allConferences = catalogConferences
@@ -206,7 +208,7 @@ final class ConferenceManagementViewModel: ObservableObject {
             makeRow(for: conference, trackedIDs: trackedIDs)
         }
 
-        trackedConferences = trackedRecords
+        trackedConferences = trackedRecordsForCurrentCatalog
             .compactMap { tracked in
                 catalogConferences.first(where: { $0.id == tracked.conferenceID })
             }
@@ -280,5 +282,10 @@ final class ConferenceManagementViewModel: ObservableObject {
         default:
             return "topconf.filter.category.\(categoryID)"
         }
+    }
+
+    private func resolvableTrackedRecords() -> [TrackedConference] {
+        let catalogIDs = Set(catalogConferences.map(\.id))
+        return trackedRecords.filter { catalogIDs.contains($0.conferenceID) }
     }
 }

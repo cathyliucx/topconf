@@ -160,6 +160,65 @@ final class ConferenceManagementViewModelTests: XCTestCase {
         XCTAssertTrue(viewModel.canAddAnotherConference)
     }
 
+    func testOrphanTrackedRowsDoNotAppearOrConsumeTrackingSlots() async {
+        let tracked = [
+            "ai-aaai",
+            "ai-iclr",
+            "ai-ijcai",
+            "ai-mlsys",
+            "ai-neurips",
+            "graphics-eurographics",
+            "graphics-siggraph",
+            "hci-uist",
+            "interdisciplinary-cikm",
+            "graphics-acm-mm",
+            "hci-chi"
+        ].map {
+            TrackedConference(conferenceID: $0, addedAt: SeedConferenceCatalog.seededAt)
+        }
+        let conferences = SeedConferenceCatalog.conferences().filter {
+            $0.id != "graphics-acm-mm" && $0.id != "hci-chi"
+        }
+        let viewModel = makeViewModel(conferences: conferences, tracked: tracked)
+
+        await viewModel.load()
+
+        XCTAssertEqual(viewModel.trackingCountText, "9 / 10")
+        XCTAssertEqual(viewModel.trackedConferences.count, 9)
+        XCTAssertFalse(viewModel.trackedConferences.contains { $0.id == "graphics-acm-mm" })
+        XCTAssertFalse(viewModel.trackedConferences.contains { $0.id == "hci-chi" })
+        XCTAssertTrue(viewModel.canAddAnotherConference)
+    }
+
+    func testOrphanTrackedRowsDoNotBlockAddingTenthConference() async {
+        let tracked = [
+            "ai-aaai",
+            "ai-iclr",
+            "ai-ijcai",
+            "ai-mlsys",
+            "ai-neurips",
+            "graphics-eurographics",
+            "graphics-siggraph",
+            "hci-uist",
+            "interdisciplinary-cikm",
+            "graphics-acm-mm",
+            "hci-chi"
+        ].map {
+            TrackedConference(conferenceID: $0, addedAt: SeedConferenceCatalog.seededAt)
+        }
+        let conferences = SeedConferenceCatalog.conferences().filter {
+            $0.id != "graphics-acm-mm" && $0.id != "hci-chi"
+        }
+        let viewModel = makeViewModel(conferences: conferences, tracked: tracked)
+
+        await viewModel.load()
+        await viewModel.addConference(id: "interdisciplinary-www")
+
+        XCTAssertEqual(viewModel.trackingCountText, "10 / 10")
+        XCTAssertTrue(viewModel.trackedConferences.contains { $0.id == "interdisciplinary-www" })
+        XCTAssertFalse(viewModel.canAddAnotherConference)
+    }
+
     func testDuplicateMissingAndRemoveMissingAreDeterministic() async {
         let viewModel = makeViewModel(tracked: [
             TrackedConference(conferenceID: "ai-neurips", addedAt: SeedConferenceCatalog.seededAt)

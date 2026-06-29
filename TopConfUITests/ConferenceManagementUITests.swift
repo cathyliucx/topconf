@@ -6,6 +6,7 @@ final class ConferenceManagementUITests: XCTestCase {
 
         XCTAssertTrue(app.buttons["topconf.onboarding.continue"].waitForExistence(timeout: 5))
         XCTAssertFalse(app.buttons["topconf.onboarding.continue"].isEnabled)
+        XCTAssertTrue(app.staticTexts["0 / 10"].firstMatch.waitForExistence(timeout: 5))
         XCTAssertTrue(app.buttons["topconf.filter.category.ai"].exists)
         XCTAssertTrue(app.buttons["topconf.filter.category.graphics"].exists)
         XCTAssertTrue(app.buttons["topconf.filter.category.hci"].exists)

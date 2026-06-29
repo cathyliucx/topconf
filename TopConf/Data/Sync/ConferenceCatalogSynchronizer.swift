@@ -48,7 +48,7 @@ final class ConferenceCatalogSynchronizer: ConferenceCatalogSynchronizing {
             return true
         } catch let error as RemoteCatalogError {
             switch error {
-            case .noUsableConferences, .incompleteBatch, .duplicateFilePath, .malformedRoot:
+            case .noUsableConferences, .incompleteBatch, .duplicateFilePath, .malformedRoot, .unsupportedTimeZone:
                 refreshState = .rejected
             case .invalidResponse:
                 refreshState = .failed

@@ -14,23 +14,23 @@ final class TrackedConferenceListUITests: XCTestCase {
         let app = launch(seedScenario: "oneUpcoming")
 
         XCTAssertTrue(element("topconf.tracked.table", in: app).waitForExistence(timeout: 5))
-        XCTAssertTrue(rowMarker("hci-chi", in: app).exists)
-        XCTAssertTrue(app.staticTexts["topconf.tracked.remaining.hci-chi"].exists)
-        XCTAssertTrue(app.staticTexts["topconf.tracked.originalDeadline.hci-chi"].exists)
-        XCTAssertTrue(app.staticTexts["topconf.tracked.beijingTime.hci-chi"].exists)
-        XCTAssertTrue(app.links["topconf.tracked.website.hci-chi"].exists || app.buttons["topconf.tracked.website.hci-chi"].exists)
+        XCTAssertTrue(rowMarker("ai-iclr", in: app).exists)
+        XCTAssertTrue(app.staticTexts["topconf.tracked.remaining.ai-iclr"].exists)
+        XCTAssertTrue(app.staticTexts["topconf.tracked.originalDeadline.ai-iclr"].exists)
+        XCTAssertTrue(app.staticTexts["topconf.tracked.beijingTime.ai-iclr"].exists)
+        XCTAssertTrue(app.links["topconf.tracked.website.ai-iclr"].exists || app.buttons["topconf.tracked.website.ai-iclr"].exists)
     }
 
     func testReminderPopoverCanBeOpenedForTrackedDeadline() {
         let app = launch(seedScenario: "oneUpcoming")
 
         XCTAssertTrue(element("topconf.tracked.table", in: app).waitForExistence(timeout: 5))
-        let remindButton = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "topconf.reminder.hci-chi-2027-paper")).firstMatch
+        let remindButton = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "topconf.reminder.ai-iclr-2027-paper")).firstMatch
         XCTAssertTrue(remindButton.waitForExistence(timeout: 5))
 
         remindButton.click()
 
-        XCTAssertTrue(element("topconf.reminder.popover.hci-chi-2027-paper", in: app).waitForExistence(timeout: 5))
+        XCTAssertTrue(element("topconf.reminder.popover.ai-iclr-2027-paper", in: app).waitForExistence(timeout: 5))
     }
 
     func testMultipleTrackedConferencesAreSortedAcrossCategories() {
@@ -38,36 +38,37 @@ final class TrackedConferenceListUITests: XCTestCase {
 
         XCTAssertTrue(element("topconf.tracked.table", in: app).waitForExistence(timeout: 5))
         assertRow("interdisciplinary-www", isAbove: "interdisciplinary-sigir", in: app)
-        assertRow("interdisciplinary-sigir", isAbove: "hci-chi", in: app)
-        assertRow("hci-chi", isAbove: "ai-aaai", in: app)
+        assertRow("interdisciplinary-sigir", isAbove: "ai-aaai", in: app)
         assertRow("ai-aaai", isAbove: "ai-aamas", in: app)
-        assertRow("ai-neurips", isAbove: "graphics-siggraph", in: app)
-        assertRow("graphics-siggraph", isAbove: "graphics-acm-mm", in: app)
+        assertRow("ai-aamas", isAbove: "ai-iclr", in: app)
+        assertRow("ai-iclr", isAbove: "ai-neurips", in: app)
+        assertRow("ai-neurips", isAbove: "graphics-eurographics", in: app)
+        assertRow("graphics-eurographics", isAbove: "hci-uist", in: app)
+        assertRow("hci-uist", isAbove: "graphics-siggraph", in: app)
     }
 
-    func testTBDClosedAndSourceUnavailableAreShown() {
+    func testTBDRemainsVisibleAndSourceUnavailableOrphansAreHidden() {
         let tbdAndClosed = launch(seedScenario: "tbdAndClosed")
         XCTAssertTrue(rowMarker("graphics-siggraph", in: tbdAndClosed).waitForExistence(timeout: 5))
         XCTAssertTrue(tbdAndClosed.staticTexts["topconf.tracked.status.graphics-siggraph"].exists)
-        XCTAssertTrue(tbdAndClosed.staticTexts["topconf.tracked.status.graphics-acm-mm"].exists)
 
         let unavailable = launch(seedScenario: "sourceUnavailable")
-        XCTAssertTrue(rowMarker("missing-source-conf", in: unavailable).waitForExistence(timeout: 5))
-        XCTAssertTrue(unavailable.staticTexts["topconf.tracked.status.missing-source-conf"].exists)
+        XCTAssertTrue(rowMarker("hci-uist", in: unavailable).waitForExistence(timeout: 5))
+        XCTAssertTrue(waitForAbsence(rowMarker("missing-source-conf", in: unavailable)))
     }
 
     func testTrackedSearchFiltersAndClearingRestoresRows() {
         let app = launch(seedScenario: "multipleSorted")
         XCTAssertTrue(element("topconf.launcher.panel", in: app).waitForExistence(timeout: 5))
-        XCTAssertTrue(rowMarker("hci-chi", in: app).waitForExistence(timeout: 5))
+        XCTAssertTrue(rowMarker("ai-iclr", in: app).waitForExistence(timeout: 5))
 
         let search = app.textFields["topconf.search.tracked"]
         XCTAssertTrue(search.waitForExistence(timeout: 5))
         search.click()
-        paste("CHI", into: app)
+        paste("ICLR", into: app)
         search.typeKey(.return, modifierFlags: [])
 
-        XCTAssertTrue(rowMarker("hci-chi", in: app).exists)
+        XCTAssertTrue(rowMarker("ai-iclr", in: app).exists)
         XCTAssertTrue(waitForAbsence(rowMarker("ai-neurips", in: app)))
 
         app.buttons["topconf.search.tracked.clear"].click()

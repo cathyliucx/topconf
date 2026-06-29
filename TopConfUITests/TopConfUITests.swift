@@ -63,7 +63,7 @@ final class TopConfUITests: XCTestCase {
 
             XCTAssertTrue(element("topconf.launcher.panel", in: app).exists)
             XCTAssertTrue(element("topconf.tracked.table", in: app).waitForExistence(timeout: 5))
-            XCTAssertTrue(app.staticTexts["topconf.tracked.abbreviation.hci-chi"].exists)
+            XCTAssertTrue(app.staticTexts["topconf.tracked.abbreviation.ai-iclr"].exists)
 
             app.terminate()
         }

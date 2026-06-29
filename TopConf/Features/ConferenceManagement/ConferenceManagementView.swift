@@ -92,7 +92,7 @@ struct ConferenceRowSummary: View {
         case .c:
             return "CCF-C"
         case .unranked:
-            return "Unranked"
+            return "Unknown"
         case .unknown:
             return "Unknown"
         }

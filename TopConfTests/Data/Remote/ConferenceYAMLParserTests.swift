@@ -91,6 +91,14 @@ final class ConferenceYAMLParserTests: XCTestCase {
         XCTAssertEqual(conference.editions[0].deadlines[0].rawDateValue, "TBD")
     }
 
+    func testRankParsingStillHandlesUnsupportedAndMissingValuesWithoutUnrankedFilterUI() throws {
+        let missingRank = try ConferenceYAMLParser().parse(Self.missingRankYAML, stableID: "ai-missing-rank")
+        let unsupportedRank = try ConferenceYAMLParser().parse(Self.unsupportedRankYAML, stableID: "ai-unsupported-rank")
+
+        XCTAssertEqual(missingRank.ccfRank, .unknown)
+        XCTAssertEqual(unsupportedRank.ccfRank, .unknown)
+    }
+
     func testUnknownCategoryIsReportedWithoutProducingSupportedConference() throws {
         XCTAssertThrowsError(try ConferenceYAMLParser().parse(Self.unknownCategoryYAML, stableID: "new-newconf")) { error in
             XCTAssertEqual(error as? RemoteCatalogError, .malformedRoot)
@@ -270,6 +278,32 @@ final class ConferenceYAMLParserTests: XCTestCase {
       - year: 2028
         id: new28
         link: not a url
+        timeline:
+          - deadline: TBD
+        timezone: Asia/Shanghai
+    """
+
+    private static let missingRankYAML = """
+    title: MissingRank
+    sub: AI
+    link: https://example.com/missing-rank
+    confs:
+      - year: 2028
+        id: missingrank28
+        timeline:
+          - deadline: TBD
+        timezone: Asia/Shanghai
+    """
+
+    private static let unsupportedRankYAML = """
+    title: UnsupportedRank
+    sub: AI
+    rank:
+      ccf: S
+    link: https://example.com/unsupported-rank
+    confs:
+      - year: 2028
+        id: unsupportedrank28
         timeline:
           - deadline: TBD
         timezone: Asia/Shanghai

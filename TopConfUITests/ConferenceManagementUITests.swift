@@ -12,9 +12,36 @@ final class ConferenceManagementUITests: XCTestCase {
         XCTAssertTrue(app.buttons["topconf.filter.category.hci"].exists)
         XCTAssertTrue(app.buttons["topconf.filter.category.interdisciplinary"].exists)
         XCTAssertTrue(app.buttons["topconf.filter.rank.a"].exists)
+        XCTAssertTrue(app.buttons["topconf.filter.rank.b"].exists)
+        XCTAssertTrue(app.buttons["topconf.filter.rank.c"].exists)
+        XCTAssertFalse(app.buttons["topconf.filter.rank.unranked"].exists)
 
         let search = app.textFields["topconf.search.discovery"]
         XCTAssertTrue(search.exists)
+    }
+
+    func testConferenceManagementShowsSupportedRankFiltersWithoutUnranked() {
+        let app = launch(seedScenario: "empty", initialSearchQuery: "conference")
+
+        XCTAssertTrue(element("topconf.management.available", in: app).waitForExistence(timeout: 5))
+        XCTAssertTrue(app.buttons["topconf.filter.rank.a"].exists)
+        XCTAssertTrue(app.buttons["topconf.filter.rank.b"].exists)
+        XCTAssertTrue(app.buttons["topconf.filter.rank.c"].exists)
+        XCTAssertFalse(app.buttons["topconf.filter.rank.unranked"].exists)
+    }
+
+    func testSupportedRankFiltersRemainFunctional() {
+        let app = launch(seedScenario: "empty", initialSearchQuery: "Conference")
+
+        XCTAssertTrue(element("topconf.management.available", in: app).waitForExistence(timeout: 5))
+        XCTAssertTrue(app.buttons["topconf.filter.rank.a"].exists)
+        XCTAssertTrue(app.staticTexts["AAAI"].waitForExistence(timeout: 5))
+
+        app.buttons["topconf.filter.rank.a"].click()
+        app.buttons["topconf.filter.rank.b"].click()
+
+        XCTAssertTrue(app.staticTexts["CIKM"].waitForExistence(timeout: 5))
+        XCTAssertFalse(app.staticTexts["AAAI"].exists)
     }
 
     func testNineTrackedLaunchShowsManagement() {

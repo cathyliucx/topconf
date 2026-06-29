@@ -53,8 +53,7 @@ final class ConferenceManagementViewModel: ObservableObject {
     let rankOptions: [RankFilterOption] = [
         RankFilterOption(id: .a, title: "CCF-A", accessibilityIdentifier: "topconf.filter.rank.a"),
         RankFilterOption(id: .b, title: "CCF-B", accessibilityIdentifier: "topconf.filter.rank.b"),
-        RankFilterOption(id: .c, title: "CCF-C", accessibilityIdentifier: "topconf.filter.rank.c"),
-        RankFilterOption(id: .unranked, title: "Unranked", accessibilityIdentifier: "topconf.filter.rank.unranked")
+        RankFilterOption(id: .c, title: "CCF-C", accessibilityIdentifier: "topconf.filter.rank.c")
     ]
 
     private let conferenceRepository: any ConferenceRepository

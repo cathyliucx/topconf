@@ -13,6 +13,15 @@ final class ConferenceManagementViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.selectedRanks, [.a])
     }
 
+    func testRankFilterOptionsExposeOnlySupportedRankedFilters() {
+        let viewModel = makeViewModel()
+
+        XCTAssertEqual(viewModel.rankOptions.map(\.id), [.a, .b, .c])
+        XCTAssertEqual(viewModel.rankOptions.map(\.title), ["CCF-A", "CCF-B", "CCF-C"])
+        XCTAssertFalse(viewModel.rankOptions.contains { $0.id == .unranked })
+        XCTAssertFalse(viewModel.rankOptions.contains { $0.accessibilityIdentifier.contains("unranked") })
+    }
+
     func testSuccessfulLoadDefaultFiltersAndDeterministicOrdering() async {
         let viewModel = makeViewModel()
 

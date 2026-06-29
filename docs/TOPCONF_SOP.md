@@ -11,7 +11,6 @@ Before making architectural changes, implementing features, or modifying multipl
 * `AGENTS.md`
 * `README.md`
 * `docs/TOPCONF_SOP.md`
-* `docs/CODEX_FIRST_ENTRY_SOP.md`
 
 The project must be implemented incrementally. The agent must not attempt to build the entire product in one unbounded task.
 
@@ -54,7 +53,7 @@ The first release must support:
 * Native macOS menu bar application
 * Global `⌥ Space` shortcut
 * Spotlight-style floating panel
-* Tracking up to 10 conferences
+* Tracking up to 10 selected conferences
 * Conference discovery across selected CCF categories
 * CCF-A as the default discovery rank
 * Conference search and management
@@ -140,7 +139,7 @@ On first launch:
 2. If a network connection is available, refresh remote conference data in the background.
 3. Show CCF-A conferences from the four supported categories by default.
 4. Allow the user to search and select conferences.
-5. Allow the user to select at most 10 conferences.
+5. Allow the user to search the full loaded catalog and select at most 10 conferences to track.
 6. Persist stable conference IDs.
 7. Open the main deadline table.
 
@@ -199,7 +198,7 @@ If the user has not tracked any conferences:
 ```text
 No conferences are being tracked.
 
-Choose up to 10 conferences from Artificial Intelligence,
+Choose up to 10 tracked conferences from Artificial Intelligence,
 Computer Graphics and Multimedia, Human-Computer Interaction
 and Ubiquitous Computing, or Interdisciplinary, Comprehensive,
 and Emerging Areas.
@@ -226,6 +225,8 @@ Rules:
 * The 11th conference must be rejected.
 * Adding the same conference twice must be rejected.
 * After removing a conference, the user may add another one.
+* The limit applies only to tracked conferences.
+* The limit must not cap the catalog, discovery results, search results, category filters, rank filters, seed data, or future synchronization.
 * The tracking limit must be enforced by a domain service.
 * The repository must not be the only place enforcing this rule.
 
@@ -532,7 +533,7 @@ Responsibilities:
 * determine whether a conference can be added;
 * verify that the conference exists;
 * prevent duplicates;
-* enforce the 10-conference limit;
+* enforce the 10-conference tracked-set limit;
 * determine removal results.
 
 Return explicit outcomes:
@@ -1382,6 +1383,8 @@ Support:
 * display `x / 10`;
 * disable additional add buttons when 10 conferences are tracked;
 * restore add capability after removal.
+* keep catalog and discovery/search results visible when 10 conferences are tracked.
+* keep remove actions available when 10 conferences are tracked.
 
 Manual drag-and-drop ordering is not required in the first release.
 
@@ -2037,13 +2040,15 @@ Complete:
 * search;
 * add;
 * remove;
-* 10-conference limit;
+* 10-conference tracked-set limit;
+* catalog and discovery results that are not capped at 10;
 * ViewModel tests.
 
 Acceptance:
 
 ```text
-The user can select up to 10 conferences
+The user can search and filter catalog results beyond 10 conferences
+The user can select up to 10 tracked conferences
 The 11th conference is rejected
 ```
 
@@ -2420,7 +2425,6 @@ Read these files completely before modifying anything:
 - AGENTS.md
 - README.md
 - docs/TOPCONF_SOP.md
-- docs/CODEX_FIRST_ENTRY_SOP.md
 
 First inspect the repository and establish the build and test baseline.
 
@@ -2458,6 +2462,7 @@ Do not implement:
 Requirements:
 
 - Users can track at most 10 conferences.
+- The 10-conference limit applies only to tracked conferences, not the catalog or discovery/search results.
 - The 10th conference must be accepted.
 - The 11th conference must be rejected.
 - Users track conferences, not editions.
@@ -2489,4 +2494,3 @@ Do not claim completion unless all required tests pass.
 TopConf must follow this principle:
 
 > Users track conferences, not years. The primary interface tracks deadlines, not conference encyclopedia content. Beijing Time is the default display timezone, but the original timezone must always be preserved. Build testable domain rules first, then integrate platform features and remote data.
-

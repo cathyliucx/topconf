@@ -4,7 +4,7 @@
 
 TopConf is a native macOS menu bar application for tracking academic conference deadlines.
 
-The user can select and track up to 10 conferences. Pressing `⌥ Space` opens a Spotlight-style floating window that displays the tracked conferences, sorted by their nearest valid submission deadline.
+The user can discover and search the full supported conference catalog, then select and track up to 10 conferences. Pressing `⌥ Space` opens a Spotlight-style floating window that displays the tracked conferences, sorted by their nearest valid submission deadline.
 
 Conference discovery focuses on these CCF categories:
 
@@ -18,7 +18,6 @@ The default discovery filter is CCF-A, but rank and category filters must not be
 Before making architectural or feature-level changes, read:
 
 * `docs/TOPCONF_SOP.md`
-* `docs/CODEX_FIRST_ENTRY_SOP.md`
 
 If the repository implementation conflicts with these documents, report the conflict before making broad changes.
 
@@ -99,6 +98,8 @@ External capabilities must be represented through protocols and injected from th
 * A user may track at most 10 conferences.
 * The 10th conference must be accepted.
 * The 11th conference must be rejected.
+* The limit applies only to the tracked-conference set.
+* Do not apply the tracking limit to the conference catalog, discovery results, search results, category filters, rank filters, seed data, or future synchronization.
 * The limit must be defined in one policy location.
 * Do not scatter the literal value `10` across views, view models, repositories, or services.
 * The tracking limit must be enforced by a domain service, not by the persistence repository alone.
@@ -304,7 +305,7 @@ Repositories are not responsible for all business policy.
 In particular:
 
 * `TrackedConferenceRepository` persists tracked records;
-* `ConferenceTrackingService` enforces the 10-conference limit;
+* `ConferenceTrackingService` enforces the 10-conference tracked-set limit;
 * replacing conference catalog data must not clear tracked records;
 * duplicate tracked records must not be persisted;
 * repository tests should use an in-memory SwiftData container when testing SwiftData implementations.
@@ -365,11 +366,10 @@ Read:
 
 1. `AGENTS.md`
 2. `docs/TOPCONF_SOP.md`
-3. `docs/CODEX_FIRST_ENTRY_SOP.md`
-4. `README.md`
-5. Xcode project and scheme configuration
-6. Relevant source files
-7. Relevant test files
+3. `README.md`
+4. Xcode project and scheme configuration
+5. Relevant source files
+6. Relevant test files
 
 Inspect Git state:
 
@@ -693,4 +693,3 @@ A task is complete only when:
 The governing principle is:
 
 > Read the rules before the code, establish the baseline before editing, implement one coherent scope at a time, verify with real tests, and review every diff before declaring completion.
-

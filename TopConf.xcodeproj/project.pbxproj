@@ -11,6 +11,110 @@
 		100000000000000000000102 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000002 /* ContentView.swift */; };
 		100000000000000000000103 /* TopConfTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000003 /* TopConfTests.swift */; };
 		100000000000000000000104 /* TopConfUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000004 /* TopConfUITests.swift */; };
+		D00000000000000000000101 /* DomainModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00000000000000000000001 /* DomainModels.swift */; };
+		D00000000000000000000102 /* DomainPolicies.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00000000000000000000002 /* DomainPolicies.swift */; };
+		D00000000000000000000103 /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00000000000000000000003 /* Clock.swift */; };
+		D00000000000000000000104 /* RepositoryProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00000000000000000000004 /* RepositoryProtocols.swift */; };
+		D00000000000000000000105 /* DomainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00000000000000000000005 /* DomainError.swift */; };
+		D00000000000000000000106 /* DomainServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00000000000000000000006 /* DomainServices.swift */; };
+		D00000000000000000000107 /* DomainTestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00000000000000000000007 /* DomainTestSupport.swift */; };
+		D00000000000000000000108 /* ConferenceTrackingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00000000000000000000008 /* ConferenceTrackingServiceTests.swift */; };
+		D00000000000000000000109 /* ConferenceDiscoveryServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00000000000000000000009 /* ConferenceDiscoveryServiceTests.swift */; };
+		D0000000000000000000010A /* DeadlineSelectionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0000000000000000000000A /* DeadlineSelectionServiceTests.swift */; };
+		D0000000000000000000010B /* TrackedConferenceResolverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0000000000000000000000B /* TrackedConferenceResolverTests.swift */; };
+		D0000000000000000000010C /* ConferenceSortingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0000000000000000000000C /* ConferenceSortingServiceTests.swift */; };
+		D0000000000000000000010D /* DeadlineCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0000000000000000000000D /* DeadlineCalculatorTests.swift */; };
+		D0000000000000000000010E /* SearchServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0000000000000000000000E /* SearchServiceTests.swift */; };
+		E00000000000000000000101 /* InMemoryConferenceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00000000000000000000001 /* InMemoryConferenceRepository.swift */; };
+		E00000000000000000000102 /* InMemoryTrackedConferenceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00000000000000000000002 /* InMemoryTrackedConferenceRepository.swift */; };
+		E00000000000000000000103 /* InMemoryReminderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00000000000000000000003 /* InMemoryReminderRepository.swift */; };
+		E00000000000000000000104 /* ConferenceFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00000000000000000000004 /* ConferenceFixtures.swift */; };
+		E00000000000000000000105 /* DeadlineFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00000000000000000000005 /* DeadlineFixtures.swift */; };
+		E00000000000000000000106 /* TrackedConferenceFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00000000000000000000006 /* TrackedConferenceFixtures.swift */; };
+		E00000000000000000000107 /* ReminderFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00000000000000000000007 /* ReminderFixtures.swift */; };
+		E00000000000000000000108 /* InMemoryConferenceRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00000000000000000000008 /* InMemoryConferenceRepositoryTests.swift */; };
+		E00000000000000000000109 /* InMemoryTrackedConferenceRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00000000000000000000009 /* InMemoryTrackedConferenceRepositoryTests.swift */; };
+		E0000000000000000000010A /* InMemoryReminderRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0000000000000000000000A /* InMemoryReminderRepositoryTests.swift */; };
+		E0000000000000000000010B /* FixtureValidationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0000000000000000000000B /* FixtureValidationTests.swift */; };
+		E0000000000000000000010C /* FixtureDrivenDomainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0000000000000000000000C /* FixtureDrivenDomainTests.swift */; };
+		F00000000000000000000101 /* ConferenceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000001 /* ConferenceEntity.swift */; };
+		F00000000000000000000102 /* ConferenceEditionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000002 /* ConferenceEditionEntity.swift */; };
+		F00000000000000000000103 /* DeadlineEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000003 /* DeadlineEntity.swift */; };
+		F00000000000000000000104 /* TrackedConferenceEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000004 /* TrackedConferenceEntity.swift */; };
+		F00000000000000000000105 /* ReminderEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000005 /* ReminderEntity.swift */; };
+		F00000000000000000000106 /* ConferenceCatalogMetadataEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000006 /* ConferenceCatalogMetadataEntity.swift */; };
+		F00000000000000000000107 /* ConferenceEntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000007 /* ConferenceEntityMapper.swift */; };
+		F00000000000000000000108 /* ReminderEntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000008 /* ReminderEntityMapper.swift */; };
+		F00000000000000000000109 /* TrackedConferenceEntityMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00000000000000000000009 /* TrackedConferenceEntityMapper.swift */; };
+		F0000000000000000000010A /* SwiftDataContainerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0000000000000000000000A /* SwiftDataContainerFactory.swift */; };
+		F0000000000000000000010B /* SwiftDataConferenceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0000000000000000000000B /* SwiftDataConferenceRepository.swift */; };
+		F0000000000000000000010C /* SwiftDataReminderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0000000000000000000000C /* SwiftDataReminderRepository.swift */; };
+		F0000000000000000000010D /* SwiftDataTrackedConferenceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0000000000000000000000D /* SwiftDataTrackedConferenceRepository.swift */; };
+		G00000000000000000000101 /* SwiftDataTestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = G00000000000000000000001 /* SwiftDataTestSupport.swift */; };
+		G00000000000000000000102 /* SwiftDataMappingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = G00000000000000000000002 /* SwiftDataMappingTests.swift */; };
+		G00000000000000000000103 /* SwiftDataConferenceRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = G00000000000000000000003 /* SwiftDataConferenceRepositoryTests.swift */; };
+		G00000000000000000000104 /* SwiftDataTrackedConferenceRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = G00000000000000000000004 /* SwiftDataTrackedConferenceRepositoryTests.swift */; };
+		G00000000000000000000105 /* SwiftDataReminderRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = G00000000000000000000005 /* SwiftDataReminderRepositoryTests.swift */; };
+		G00000000000000000000106 /* SwiftDataPersistenceRecreationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = G00000000000000000000006 /* SwiftDataPersistenceRecreationTests.swift */; };
+		H00000000000000000000101 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = H00000000000000000000001 /* AppEnvironment.swift */; };
+		H00000000000000000000102 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = H00000000000000000000002 /* DependencyContainer.swift */; };
+		H00000000000000000000103 /* AppRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = H00000000000000000000003 /* AppRootView.swift */; };
+		H00000000000000000000104 /* SeedConferenceCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = H00000000000000000000004 /* SeedConferenceCatalog.swift */; };
+		H00000000000000000000105 /* ConferenceManagementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = H00000000000000000000005 /* ConferenceManagementViewModel.swift */; };
+		H00000000000000000000106 /* ConferenceFilterBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = H00000000000000000000006 /* ConferenceFilterBar.swift */; };
+		H00000000000000000000107 /* ConferenceDiscoveryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = H00000000000000000000007 /* ConferenceDiscoveryListView.swift */; };
+		H00000000000000000000108 /* TrackedSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = H00000000000000000000008 /* TrackedSelectionView.swift */; };
+		H00000000000000000000109 /* ConferenceManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = H00000000000000000000009 /* ConferenceManagementView.swift */; };
+		H0000000000000000000010A /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = H0000000000000000000000A /* OnboardingView.swift */; };
+		H0000000000000000000010B /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = H0000000000000000000000B /* EmptyStateView.swift */; };
+		H0000000000000000000010C /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = H0000000000000000000000C /* LoadingIndicator.swift */; };
+		H0000000000000000000010D /* ConferenceManagementViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = H0000000000000000000000D /* ConferenceManagementViewModelTests.swift */; };
+		H0000000000000000000010E /* AppCompositionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = H0000000000000000000000E /* AppCompositionTests.swift */; };
+		H0000000000000000000010F /* ConferenceManagementUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = H0000000000000000000000F /* ConferenceManagementUITests.swift */; };
+		I00000000000000000000101 /* Date+Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = I00000000000000000000001 /* Date+Formatting.swift */; };
+		I00000000000000000000102 /* DeadlineBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = I00000000000000000000002 /* DeadlineBadge.swift */; };
+		I00000000000000000000103 /* DeadlinePresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = I00000000000000000000003 /* DeadlinePresentation.swift */; };
+		I00000000000000000000104 /* TrackedConferenceRowPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = I00000000000000000000004 /* TrackedConferenceRowPresentation.swift */; };
+		I00000000000000000000105 /* TrackedConferenceListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = I00000000000000000000005 /* TrackedConferenceListViewModel.swift */; };
+		I00000000000000000000106 /* TrackedConferenceRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = I00000000000000000000006 /* TrackedConferenceRowView.swift */; };
+		I00000000000000000000107 /* TrackedConferenceTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = I00000000000000000000007 /* TrackedConferenceTableView.swift */; };
+		I00000000000000000000108 /* TrackedConferenceListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = I00000000000000000000008 /* TrackedConferenceListView.swift */; };
+		I00000000000000000000109 /* TrackedConferenceListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = I00000000000000000000009 /* TrackedConferenceListViewModelTests.swift */; };
+		I0000000000000000000010A /* DeadlinePresentationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = I0000000000000000000000A /* DeadlinePresentationTests.swift */; };
+		I0000000000000000000010B /* TrackedConferenceListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = I0000000000000000000000B /* TrackedConferenceListUITests.swift */; };
+		J00000000000000000000101 /* LauncherPanelState.swift in Sources */ = {isa = PBXBuildFile; fileRef = J00000000000000000000001 /* LauncherPanelState.swift */; };
+		J00000000000000000000102 /* GlobalHotkeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = J00000000000000000000002 /* GlobalHotkeyManager.swift */; };
+		J00000000000000000000103 /* LauncherPanelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = J00000000000000000000003 /* LauncherPanelController.swift */; };
+		J00000000000000000000104 /* TopConfAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = J00000000000000000000004 /* TopConfAppDelegate.swift */; };
+		J00000000000000000000107 /* MenuBarStatusItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = J00000000000000000000007 /* MenuBarStatusItem.swift */; };
+		J00000000000000000000105 /* GlobalHotkeyManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = J00000000000000000000005 /* GlobalHotkeyManagerTests.swift */; };
+		J00000000000000000000106 /* LauncherPanelLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = J00000000000000000000006 /* LauncherPanelLayoutTests.swift */; };
+		K00000000000000000000101 /* DeadlineNotificationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = K00000000000000000000001 /* DeadlineNotificationRequest.swift */; };
+		K00000000000000000000102 /* DeadlineNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = K00000000000000000000002 /* DeadlineNotificationService.swift */; };
+		K00000000000000000000103 /* NotificationIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = K00000000000000000000003 /* NotificationIdentifier.swift */; };
+		K00000000000000000000104 /* NotificationScheduling.swift in Sources */ = {isa = PBXBuildFile; fileRef = K00000000000000000000004 /* NotificationScheduling.swift */; };
+		K00000000000000000000105 /* UserNotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = K00000000000000000000005 /* UserNotificationScheduler.swift */; };
+		K00000000000000000000106 /* SilentNotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = K00000000000000000000006 /* SilentNotificationScheduler.swift */; };
+		L00000000000000000000101 /* ReminderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = L00000000000000000000001 /* ReminderViewModel.swift */; };
+		L00000000000000000000102 /* ReminderPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = L00000000000000000000002 /* ReminderPopoverView.swift */; };
+		M00000000000000000000101 /* NotificationIdentifierTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = M00000000000000000000001 /* NotificationIdentifierTests.swift */; };
+		M00000000000000000000102 /* DeadlineNotificationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = M00000000000000000000002 /* DeadlineNotificationServiceTests.swift */; };
+		M00000000000000000000103 /* ReminderViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = M00000000000000000000003 /* ReminderViewModelTests.swift */; };
+		N00000000000000000000101 /* DeveloperToolsAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = N00000000000000000000001 /* DeveloperToolsAvailability.swift */; };
+		N00000000000000000000102 /* DebugNotificationTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = N00000000000000000000002 /* DebugNotificationTestViewModel.swift */; };
+		N00000000000000000000103 /* DebugNotificationTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = N00000000000000000000003 /* DebugNotificationTestView.swift */; };
+		N00000000000000000000104 /* DebugNotificationTestWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = N00000000000000000000004 /* DebugNotificationTestWindowController.swift */; };
+		N00000000000000000000105 /* DebugNotificationTestViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = N00000000000000000000005 /* DebugNotificationTestViewModelTests.swift */; };
+		Q00000000000000000000101 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = Q00000000000000000000001 /* Assets.xcassets */; };
+		P00000000000000000000101 /* ConferenceCategoryMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = P00000000000000000000001 /* ConferenceCategoryMapper.swift */; };
+		P00000000000000000000102 /* ConferenceRemoteSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = P00000000000000000000002 /* ConferenceRemoteSource.swift */; };
+		P00000000000000000000103 /* ConferenceYAMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = P00000000000000000000003 /* ConferenceYAMLParser.swift */; };
+		P00000000000000000000104 /* GitHubConferenceSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = P00000000000000000000004 /* GitHubConferenceSource.swift */; };
+		P00000000000000000000105 /* ConferenceCatalogSynchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = P00000000000000000000005 /* ConferenceCatalogSynchronizer.swift */; };
+		P00000000000000000000106 /* ConferenceYAMLParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = P00000000000000000000006 /* ConferenceYAMLParserTests.swift */; };
+		P00000000000000000000107 /* GitHubConferenceSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = P00000000000000000000007 /* GitHubConferenceSourceTests.swift */; };
+		P00000000000000000000108 /* ConferenceCatalogSynchronizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = P00000000000000000000008 /* ConferenceCatalogSynchronizerTests.swift */; };
+		P00000000000000000000109 /* Yams in Frameworks */ = {isa = PBXBuildFile; productRef = P00000000000000000000201 /* Yams */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +142,109 @@
 		100000000000000000000501 /* TopConf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TopConf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		100000000000000000000502 /* TopConfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TopConfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		100000000000000000000503 /* TopConfUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TopConfUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D00000000000000000000001 /* DomainModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainModels.swift; sourceTree = "<group>"; };
+		D00000000000000000000002 /* DomainPolicies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainPolicies.swift; sourceTree = "<group>"; };
+		D00000000000000000000003 /* Clock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
+		D00000000000000000000004 /* RepositoryProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryProtocols.swift; sourceTree = "<group>"; };
+		D00000000000000000000005 /* DomainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainError.swift; sourceTree = "<group>"; };
+		D00000000000000000000006 /* DomainServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainServices.swift; sourceTree = "<group>"; };
+		D00000000000000000000007 /* DomainTestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainTestSupport.swift; sourceTree = "<group>"; };
+		D00000000000000000000008 /* ConferenceTrackingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceTrackingServiceTests.swift; sourceTree = "<group>"; };
+		D00000000000000000000009 /* ConferenceDiscoveryServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceDiscoveryServiceTests.swift; sourceTree = "<group>"; };
+		D0000000000000000000000A /* DeadlineSelectionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineSelectionServiceTests.swift; sourceTree = "<group>"; };
+		D0000000000000000000000B /* TrackedConferenceResolverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedConferenceResolverTests.swift; sourceTree = "<group>"; };
+		D0000000000000000000000C /* ConferenceSortingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceSortingServiceTests.swift; sourceTree = "<group>"; };
+		D0000000000000000000000D /* DeadlineCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineCalculatorTests.swift; sourceTree = "<group>"; };
+		D0000000000000000000000E /* SearchServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchServiceTests.swift; sourceTree = "<group>"; };
+		E00000000000000000000001 /* InMemoryConferenceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryConferenceRepository.swift; sourceTree = "<group>"; };
+		E00000000000000000000002 /* InMemoryTrackedConferenceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryTrackedConferenceRepository.swift; sourceTree = "<group>"; };
+		E00000000000000000000003 /* InMemoryReminderRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryReminderRepository.swift; sourceTree = "<group>"; };
+		E00000000000000000000004 /* ConferenceFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceFixtures.swift; sourceTree = "<group>"; };
+		E00000000000000000000005 /* DeadlineFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineFixtures.swift; sourceTree = "<group>"; };
+		E00000000000000000000006 /* TrackedConferenceFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedConferenceFixtures.swift; sourceTree = "<group>"; };
+		E00000000000000000000007 /* ReminderFixtures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderFixtures.swift; sourceTree = "<group>"; };
+		E00000000000000000000008 /* InMemoryConferenceRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryConferenceRepositoryTests.swift; sourceTree = "<group>"; };
+		E00000000000000000000009 /* InMemoryTrackedConferenceRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryTrackedConferenceRepositoryTests.swift; sourceTree = "<group>"; };
+		E0000000000000000000000A /* InMemoryReminderRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryReminderRepositoryTests.swift; sourceTree = "<group>"; };
+		E0000000000000000000000B /* FixtureValidationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixtureValidationTests.swift; sourceTree = "<group>"; };
+		E0000000000000000000000C /* FixtureDrivenDomainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixtureDrivenDomainTests.swift; sourceTree = "<group>"; };
+		F00000000000000000000001 /* ConferenceEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceEntity.swift; sourceTree = "<group>"; };
+		F00000000000000000000002 /* ConferenceEditionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceEditionEntity.swift; sourceTree = "<group>"; };
+		F00000000000000000000003 /* DeadlineEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineEntity.swift; sourceTree = "<group>"; };
+		F00000000000000000000004 /* TrackedConferenceEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedConferenceEntity.swift; sourceTree = "<group>"; };
+		F00000000000000000000005 /* ReminderEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderEntity.swift; sourceTree = "<group>"; };
+		F00000000000000000000006 /* ConferenceCatalogMetadataEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceCatalogMetadataEntity.swift; sourceTree = "<group>"; };
+		F00000000000000000000007 /* ConferenceEntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceEntityMapper.swift; sourceTree = "<group>"; };
+		F00000000000000000000008 /* ReminderEntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderEntityMapper.swift; sourceTree = "<group>"; };
+		F00000000000000000000009 /* TrackedConferenceEntityMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedConferenceEntityMapper.swift; sourceTree = "<group>"; };
+		F0000000000000000000000A /* SwiftDataContainerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataContainerFactory.swift; sourceTree = "<group>"; };
+		F0000000000000000000000B /* SwiftDataConferenceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataConferenceRepository.swift; sourceTree = "<group>"; };
+		F0000000000000000000000C /* SwiftDataReminderRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataReminderRepository.swift; sourceTree = "<group>"; };
+		F0000000000000000000000D /* SwiftDataTrackedConferenceRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataTrackedConferenceRepository.swift; sourceTree = "<group>"; };
+		G00000000000000000000001 /* SwiftDataTestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataTestSupport.swift; sourceTree = "<group>"; };
+		G00000000000000000000002 /* SwiftDataMappingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataMappingTests.swift; sourceTree = "<group>"; };
+		G00000000000000000000003 /* SwiftDataConferenceRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataConferenceRepositoryTests.swift; sourceTree = "<group>"; };
+		G00000000000000000000004 /* SwiftDataTrackedConferenceRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataTrackedConferenceRepositoryTests.swift; sourceTree = "<group>"; };
+		G00000000000000000000005 /* SwiftDataReminderRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataReminderRepositoryTests.swift; sourceTree = "<group>"; };
+		G00000000000000000000006 /* SwiftDataPersistenceRecreationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataPersistenceRecreationTests.swift; sourceTree = "<group>"; };
+		H00000000000000000000001 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
+		H00000000000000000000002 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
+		H00000000000000000000003 /* AppRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootView.swift; sourceTree = "<group>"; };
+		H00000000000000000000004 /* SeedConferenceCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedConferenceCatalog.swift; sourceTree = "<group>"; };
+		H00000000000000000000005 /* ConferenceManagementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceManagementViewModel.swift; sourceTree = "<group>"; };
+		H00000000000000000000006 /* ConferenceFilterBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceFilterBar.swift; sourceTree = "<group>"; };
+		H00000000000000000000007 /* ConferenceDiscoveryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceDiscoveryListView.swift; sourceTree = "<group>"; };
+		H00000000000000000000008 /* TrackedSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedSelectionView.swift; sourceTree = "<group>"; };
+		H00000000000000000000009 /* ConferenceManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceManagementView.swift; sourceTree = "<group>"; };
+		H0000000000000000000000A /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		H0000000000000000000000B /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		H0000000000000000000000C /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
+		H0000000000000000000000D /* ConferenceManagementViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceManagementViewModelTests.swift; sourceTree = "<group>"; };
+		H0000000000000000000000E /* AppCompositionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCompositionTests.swift; sourceTree = "<group>"; };
+		H0000000000000000000000F /* ConferenceManagementUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceManagementUITests.swift; sourceTree = "<group>"; };
+		I00000000000000000000001 /* Date+Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatting.swift"; sourceTree = "<group>"; };
+		I00000000000000000000002 /* DeadlineBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineBadge.swift; sourceTree = "<group>"; };
+		I00000000000000000000003 /* DeadlinePresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlinePresentation.swift; sourceTree = "<group>"; };
+		I00000000000000000000004 /* TrackedConferenceRowPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedConferenceRowPresentation.swift; sourceTree = "<group>"; };
+		I00000000000000000000005 /* TrackedConferenceListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedConferenceListViewModel.swift; sourceTree = "<group>"; };
+		I00000000000000000000006 /* TrackedConferenceRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedConferenceRowView.swift; sourceTree = "<group>"; };
+		I00000000000000000000007 /* TrackedConferenceTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedConferenceTableView.swift; sourceTree = "<group>"; };
+		I00000000000000000000008 /* TrackedConferenceListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedConferenceListView.swift; sourceTree = "<group>"; };
+		I00000000000000000000009 /* TrackedConferenceListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedConferenceListViewModelTests.swift; sourceTree = "<group>"; };
+		I0000000000000000000000A /* DeadlinePresentationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlinePresentationTests.swift; sourceTree = "<group>"; };
+		I0000000000000000000000B /* TrackedConferenceListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackedConferenceListUITests.swift; sourceTree = "<group>"; };
+		J00000000000000000000001 /* LauncherPanelState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherPanelState.swift; sourceTree = "<group>"; };
+		J00000000000000000000002 /* GlobalHotkeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalHotkeyManager.swift; sourceTree = "<group>"; };
+		J00000000000000000000003 /* LauncherPanelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherPanelController.swift; sourceTree = "<group>"; };
+		J00000000000000000000004 /* TopConfAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopConfAppDelegate.swift; sourceTree = "<group>"; };
+		J00000000000000000000007 /* MenuBarStatusItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarStatusItem.swift; sourceTree = "<group>"; };
+		J00000000000000000000005 /* GlobalHotkeyManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalHotkeyManagerTests.swift; sourceTree = "<group>"; };
+		J00000000000000000000006 /* LauncherPanelLayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherPanelLayoutTests.swift; sourceTree = "<group>"; };
+		K00000000000000000000001 /* DeadlineNotificationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineNotificationRequest.swift; sourceTree = "<group>"; };
+		K00000000000000000000002 /* DeadlineNotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineNotificationService.swift; sourceTree = "<group>"; };
+		K00000000000000000000003 /* NotificationIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationIdentifier.swift; sourceTree = "<group>"; };
+		K00000000000000000000004 /* NotificationScheduling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScheduling.swift; sourceTree = "<group>"; };
+		K00000000000000000000005 /* UserNotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationScheduler.swift; sourceTree = "<group>"; };
+		K00000000000000000000006 /* SilentNotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SilentNotificationScheduler.swift; sourceTree = "<group>"; };
+		L00000000000000000000001 /* ReminderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderViewModel.swift; sourceTree = "<group>"; };
+		L00000000000000000000002 /* ReminderPopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderPopoverView.swift; sourceTree = "<group>"; };
+		M00000000000000000000001 /* NotificationIdentifierTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationIdentifierTests.swift; sourceTree = "<group>"; };
+		M00000000000000000000002 /* DeadlineNotificationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineNotificationServiceTests.swift; sourceTree = "<group>"; };
+		M00000000000000000000003 /* ReminderViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderViewModelTests.swift; sourceTree = "<group>"; };
+		N00000000000000000000001 /* DeveloperToolsAvailability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperToolsAvailability.swift; sourceTree = "<group>"; };
+		N00000000000000000000002 /* DebugNotificationTestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugNotificationTestViewModel.swift; sourceTree = "<group>"; };
+		N00000000000000000000003 /* DebugNotificationTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugNotificationTestView.swift; sourceTree = "<group>"; };
+		N00000000000000000000004 /* DebugNotificationTestWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugNotificationTestWindowController.swift; sourceTree = "<group>"; };
+		N00000000000000000000005 /* DebugNotificationTestViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugNotificationTestViewModelTests.swift; sourceTree = "<group>"; };
+		Q00000000000000000000001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		P00000000000000000000001 /* ConferenceCategoryMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceCategoryMapper.swift; sourceTree = "<group>"; };
+		P00000000000000000000002 /* ConferenceRemoteSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceRemoteSource.swift; sourceTree = "<group>"; };
+		P00000000000000000000003 /* ConferenceYAMLParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceYAMLParser.swift; sourceTree = "<group>"; };
+		P00000000000000000000004 /* GitHubConferenceSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubConferenceSource.swift; sourceTree = "<group>"; };
+		P00000000000000000000005 /* ConferenceCatalogSynchronizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceCatalogSynchronizer.swift; sourceTree = "<group>"; };
+		P00000000000000000000006 /* ConferenceYAMLParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceYAMLParserTests.swift; sourceTree = "<group>"; };
+		P00000000000000000000007 /* GitHubConferenceSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubConferenceSourceTests.swift; sourceTree = "<group>"; };
+		P00000000000000000000008 /* ConferenceCatalogSynchronizerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceCatalogSynchronizerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +252,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				P00000000000000000000109 /* Yams in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +288,13 @@
 			children = (
 				100000000000000000000001 /* TopConfApp.swift */,
 				100000000000000000000002 /* ContentView.swift */,
+				Q00000000000000000000001 /* Assets.xcassets */,
+				H00000000000000000000701 /* App */,
+				D00000000000000000000701 /* Domain */,
+				E00000000000000000000701 /* Data */,
+				H00000000000000000000704 /* Features */,
+				H00000000000000000000708 /* Shared */,
+				K00000000000000000000701 /* Notifications */,
 			);
 			path = TopConf;
 			sourceTree = "<group>";
@@ -88,6 +303,14 @@
 			isa = PBXGroup;
 			children = (
 				100000000000000000000003 /* TopConfTests.swift */,
+				D00000000000000000000708 /* Domain */,
+				D00000000000000000000709 /* TestSupport */,
+				E00000000000000000000703 /* Fixtures */,
+				E00000000000000000000704 /* Data */,
+				E00000000000000000000706 /* Integration */,
+				H0000000000000000000070A /* Features */,
+				H0000000000000000000070B /* App */,
+				M00000000000000000000701 /* Notifications */,
 			);
 			path = TopConfTests;
 			sourceTree = "<group>";
@@ -96,6 +319,8 @@
 			isa = PBXGroup;
 			children = (
 				100000000000000000000004 /* TopConfUITests.swift */,
+				H0000000000000000000000F /* ConferenceManagementUITests.swift */,
+				I0000000000000000000000B /* TrackedConferenceListUITests.swift */,
 			);
 			path = TopConfUITests;
 			sourceTree = "<group>";
@@ -108,6 +333,420 @@
 				100000000000000000000503 /* TopConfUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		D00000000000000000000701 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				D00000000000000000000702 /* Models */,
+				D00000000000000000000703 /* Policies */,
+				D00000000000000000000704 /* Services */,
+				D00000000000000000000705 /* Repositories */,
+				D00000000000000000000706 /* Time */,
+				D00000000000000000000707 /* Errors */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		D00000000000000000000702 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D00000000000000000000001 /* DomainModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D00000000000000000000703 /* Policies */ = {
+			isa = PBXGroup;
+			children = (
+				D00000000000000000000002 /* DomainPolicies.swift */,
+			);
+			path = Policies;
+			sourceTree = "<group>";
+		};
+		D00000000000000000000704 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				D00000000000000000000006 /* DomainServices.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		D00000000000000000000705 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				D00000000000000000000004 /* RepositoryProtocols.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		D00000000000000000000706 /* Time */ = {
+			isa = PBXGroup;
+			children = (
+				D00000000000000000000003 /* Clock.swift */,
+			);
+			path = Time;
+			sourceTree = "<group>";
+		};
+		D00000000000000000000707 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				D00000000000000000000005 /* DomainError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		D00000000000000000000708 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				D00000000000000000000008 /* ConferenceTrackingServiceTests.swift */,
+				D00000000000000000000009 /* ConferenceDiscoveryServiceTests.swift */,
+				D0000000000000000000000A /* DeadlineSelectionServiceTests.swift */,
+				D0000000000000000000000B /* TrackedConferenceResolverTests.swift */,
+				D0000000000000000000000C /* ConferenceSortingServiceTests.swift */,
+				D0000000000000000000000D /* DeadlineCalculatorTests.swift */,
+				D0000000000000000000000E /* SearchServiceTests.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		D00000000000000000000709 /* TestSupport */ = {
+			isa = PBXGroup;
+			children = (
+				D00000000000000000000007 /* DomainTestSupport.swift */,
+			);
+			path = TestSupport;
+			sourceTree = "<group>";
+		};
+		E00000000000000000000701 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E00000000000000000000702 /* InMemory */,
+				F00000000000000000000701 /* Local */,
+				P00000000000000000000701 /* Remote */,
+				P00000000000000000000702 /* Sync */,
+				H00000000000000000000703 /* Seed */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		P00000000000000000000701 /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				P00000000000000000000001 /* ConferenceCategoryMapper.swift */,
+				P00000000000000000000002 /* ConferenceRemoteSource.swift */,
+				P00000000000000000000003 /* ConferenceYAMLParser.swift */,
+				P00000000000000000000004 /* GitHubConferenceSource.swift */,
+			);
+			path = Remote;
+			sourceTree = "<group>";
+		};
+		P00000000000000000000702 /* Sync */ = {
+			isa = PBXGroup;
+			children = (
+				P00000000000000000000005 /* ConferenceCatalogSynchronizer.swift */,
+			);
+			path = Sync;
+			sourceTree = "<group>";
+		};
+		H00000000000000000000701 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				H00000000000000000000001 /* AppEnvironment.swift */,
+				H00000000000000000000002 /* DependencyContainer.swift */,
+				H00000000000000000000003 /* AppRootView.swift */,
+				J00000000000000000000701 /* Launcher */,
+				N00000000000000000000701 /* Developer */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		N00000000000000000000701 /* Developer */ = {
+			isa = PBXGroup;
+			children = (
+				N00000000000000000000001 /* DeveloperToolsAvailability.swift */,
+				N00000000000000000000002 /* DebugNotificationTestViewModel.swift */,
+				N00000000000000000000003 /* DebugNotificationTestView.swift */,
+				N00000000000000000000004 /* DebugNotificationTestWindowController.swift */,
+			);
+			path = Developer;
+			sourceTree = "<group>";
+		};
+		J00000000000000000000701 /* Launcher */ = {
+			isa = PBXGroup;
+			children = (
+				J00000000000000000000001 /* LauncherPanelState.swift */,
+				J00000000000000000000002 /* GlobalHotkeyManager.swift */,
+				J00000000000000000000003 /* LauncherPanelController.swift */,
+				J00000000000000000000004 /* TopConfAppDelegate.swift */,
+				J00000000000000000000007 /* MenuBarStatusItem.swift */,
+			);
+			path = Launcher;
+			sourceTree = "<group>";
+		};
+		H00000000000000000000703 /* Seed */ = {
+			isa = PBXGroup;
+			children = (
+				H00000000000000000000004 /* SeedConferenceCatalog.swift */,
+			);
+			path = Seed;
+			sourceTree = "<group>";
+		};
+		H00000000000000000000704 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				H00000000000000000000705 /* ConferenceManagement */,
+				I00000000000000000000701 /* TrackedConferenceList */,
+				L00000000000000000000701 /* Reminders */,
+				H00000000000000000000706 /* Onboarding */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		H00000000000000000000705 /* ConferenceManagement */ = {
+			isa = PBXGroup;
+			children = (
+				H00000000000000000000005 /* ConferenceManagementViewModel.swift */,
+				H00000000000000000000006 /* ConferenceFilterBar.swift */,
+				H00000000000000000000007 /* ConferenceDiscoveryListView.swift */,
+				H00000000000000000000008 /* TrackedSelectionView.swift */,
+				H00000000000000000000009 /* ConferenceManagementView.swift */,
+			);
+			path = ConferenceManagement;
+			sourceTree = "<group>";
+		};
+		H00000000000000000000706 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				H0000000000000000000000A /* OnboardingView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		H00000000000000000000708 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				H00000000000000000000709 /* Components */,
+				I00000000000000000000702 /* Extensions */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		H00000000000000000000709 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				H0000000000000000000000B /* EmptyStateView.swift */,
+				H0000000000000000000000C /* LoadingIndicator.swift */,
+				I00000000000000000000002 /* DeadlineBadge.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		H0000000000000000000070A /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				H0000000000000000000000D /* ConferenceManagementViewModelTests.swift */,
+				I00000000000000000000009 /* TrackedConferenceListViewModelTests.swift */,
+				I0000000000000000000000A /* DeadlinePresentationTests.swift */,
+				M00000000000000000000003 /* ReminderViewModelTests.swift */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		H0000000000000000000070B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				H0000000000000000000000E /* AppCompositionTests.swift */,
+				J00000000000000000000005 /* GlobalHotkeyManagerTests.swift */,
+				J00000000000000000000006 /* LauncherPanelLayoutTests.swift */,
+				N00000000000000000000005 /* DebugNotificationTestViewModelTests.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		I00000000000000000000701 /* TrackedConferenceList */ = {
+			isa = PBXGroup;
+			children = (
+				I00000000000000000000008 /* TrackedConferenceListView.swift */,
+				I00000000000000000000007 /* TrackedConferenceTableView.swift */,
+				I00000000000000000000006 /* TrackedConferenceRowView.swift */,
+				I00000000000000000000005 /* TrackedConferenceListViewModel.swift */,
+				I00000000000000000000004 /* TrackedConferenceRowPresentation.swift */,
+				I00000000000000000000003 /* DeadlinePresentation.swift */,
+			);
+			path = TrackedConferenceList;
+			sourceTree = "<group>";
+		};
+		I00000000000000000000702 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				I00000000000000000000001 /* Date+Formatting.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		K00000000000000000000701 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				K00000000000000000000001 /* DeadlineNotificationRequest.swift */,
+				K00000000000000000000002 /* DeadlineNotificationService.swift */,
+				K00000000000000000000003 /* NotificationIdentifier.swift */,
+				K00000000000000000000004 /* NotificationScheduling.swift */,
+				K00000000000000000000005 /* UserNotificationScheduler.swift */,
+				K00000000000000000000006 /* SilentNotificationScheduler.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		L00000000000000000000701 /* Reminders */ = {
+			isa = PBXGroup;
+			children = (
+				L00000000000000000000001 /* ReminderViewModel.swift */,
+				L00000000000000000000002 /* ReminderPopoverView.swift */,
+			);
+			path = Reminders;
+			sourceTree = "<group>";
+		};
+		M00000000000000000000701 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				M00000000000000000000001 /* NotificationIdentifierTests.swift */,
+				M00000000000000000000002 /* DeadlineNotificationServiceTests.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		E00000000000000000000702 /* InMemory */ = {
+			isa = PBXGroup;
+			children = (
+				E00000000000000000000001 /* InMemoryConferenceRepository.swift */,
+				E00000000000000000000002 /* InMemoryTrackedConferenceRepository.swift */,
+				E00000000000000000000003 /* InMemoryReminderRepository.swift */,
+			);
+			path = InMemory;
+			sourceTree = "<group>";
+		};
+		F00000000000000000000701 /* Local */ = {
+			isa = PBXGroup;
+			children = (
+				F00000000000000000000702 /* Entities */,
+				F00000000000000000000703 /* Mapping */,
+				F00000000000000000000704 /* Persistence */,
+				F00000000000000000000705 /* Repositories */,
+			);
+			path = Local;
+			sourceTree = "<group>";
+		};
+		F00000000000000000000702 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				F00000000000000000000001 /* ConferenceEntity.swift */,
+				F00000000000000000000002 /* ConferenceEditionEntity.swift */,
+				F00000000000000000000003 /* DeadlineEntity.swift */,
+				F00000000000000000000004 /* TrackedConferenceEntity.swift */,
+				F00000000000000000000005 /* ReminderEntity.swift */,
+				F00000000000000000000006 /* ConferenceCatalogMetadataEntity.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		F00000000000000000000703 /* Mapping */ = {
+			isa = PBXGroup;
+			children = (
+				F00000000000000000000007 /* ConferenceEntityMapper.swift */,
+				F00000000000000000000008 /* ReminderEntityMapper.swift */,
+				F00000000000000000000009 /* TrackedConferenceEntityMapper.swift */,
+			);
+			path = Mapping;
+			sourceTree = "<group>";
+		};
+		F00000000000000000000704 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				F0000000000000000000000A /* SwiftDataContainerFactory.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		F00000000000000000000705 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				F0000000000000000000000B /* SwiftDataConferenceRepository.swift */,
+				F0000000000000000000000C /* SwiftDataReminderRepository.swift */,
+				F0000000000000000000000D /* SwiftDataTrackedConferenceRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		E00000000000000000000703 /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				E00000000000000000000004 /* ConferenceFixtures.swift */,
+				E00000000000000000000005 /* DeadlineFixtures.swift */,
+				E00000000000000000000006 /* TrackedConferenceFixtures.swift */,
+				E00000000000000000000007 /* ReminderFixtures.swift */,
+				E0000000000000000000000B /* FixtureValidationTests.swift */,
+			);
+			path = Fixtures;
+			sourceTree = "<group>";
+		};
+		E00000000000000000000704 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E00000000000000000000705 /* InMemory */,
+				G00000000000000000000701 /* SwiftData */,
+				P00000000000000000000703 /* Remote */,
+				P00000000000000000000704 /* Sync */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		E00000000000000000000705 /* InMemory */ = {
+			isa = PBXGroup;
+			children = (
+				E00000000000000000000008 /* InMemoryConferenceRepositoryTests.swift */,
+				E00000000000000000000009 /* InMemoryTrackedConferenceRepositoryTests.swift */,
+				E0000000000000000000000A /* InMemoryReminderRepositoryTests.swift */,
+			);
+			path = InMemory;
+			sourceTree = "<group>";
+		};
+		G00000000000000000000701 /* SwiftData */ = {
+			isa = PBXGroup;
+			children = (
+				G00000000000000000000001 /* SwiftDataTestSupport.swift */,
+				G00000000000000000000002 /* SwiftDataMappingTests.swift */,
+				G00000000000000000000003 /* SwiftDataConferenceRepositoryTests.swift */,
+				G00000000000000000000004 /* SwiftDataTrackedConferenceRepositoryTests.swift */,
+				G00000000000000000000005 /* SwiftDataReminderRepositoryTests.swift */,
+				G00000000000000000000006 /* SwiftDataPersistenceRecreationTests.swift */,
+			);
+			path = SwiftData;
+			sourceTree = "<group>";
+		};
+		P00000000000000000000703 /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				P00000000000000000000006 /* ConferenceYAMLParserTests.swift */,
+				P00000000000000000000007 /* GitHubConferenceSourceTests.swift */,
+			);
+			path = Remote;
+			sourceTree = "<group>";
+		};
+		P00000000000000000000704 /* Sync */ = {
+			isa = PBXGroup;
+			children = (
+				P00000000000000000000008 /* ConferenceCatalogSynchronizerTests.swift */,
+			);
+			path = Sync;
+			sourceTree = "<group>";
+		};
+		E00000000000000000000706 /* Integration */ = {
+			isa = PBXGroup;
+			children = (
+				E0000000000000000000000C /* FixtureDrivenDomainTests.swift */,
+			);
+			path = Integration;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,6 +765,9 @@
 			dependencies = (
 			);
 			name = TopConf;
+			packageProductDependencies = (
+				P00000000000000000000201 /* Yams */,
+			);
 			productName = TopConf;
 			productReference = 100000000000000000000501 /* TopConf.app */;
 			productType = "com.apple.product-type.application";
@@ -200,6 +842,9 @@
 			mainGroup = 100000000000000000000701;
 			productRefGroup = 100000000000000000000705 /* Products */;
 			projectDirPath = "";
+			packageReferences = (
+				P00000000000000000000301 /* XCRemoteSwiftPackageReference "Yams" */,
+			);
 			projectRoot = "";
 			targets = (
 				100000000000000000000401 /* TopConf */,
@@ -214,6 +859,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				Q00000000000000000000101 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,6 +886,70 @@
 			files = (
 				100000000000000000000101 /* TopConfApp.swift in Sources */,
 				100000000000000000000102 /* ContentView.swift in Sources */,
+				D00000000000000000000101 /* DomainModels.swift in Sources */,
+				D00000000000000000000102 /* DomainPolicies.swift in Sources */,
+				D00000000000000000000103 /* Clock.swift in Sources */,
+				D00000000000000000000104 /* RepositoryProtocols.swift in Sources */,
+				D00000000000000000000105 /* DomainError.swift in Sources */,
+				D00000000000000000000106 /* DomainServices.swift in Sources */,
+				E00000000000000000000101 /* InMemoryConferenceRepository.swift in Sources */,
+				E00000000000000000000102 /* InMemoryTrackedConferenceRepository.swift in Sources */,
+				E00000000000000000000103 /* InMemoryReminderRepository.swift in Sources */,
+				F00000000000000000000101 /* ConferenceEntity.swift in Sources */,
+				F00000000000000000000102 /* ConferenceEditionEntity.swift in Sources */,
+				F00000000000000000000103 /* DeadlineEntity.swift in Sources */,
+				F00000000000000000000104 /* TrackedConferenceEntity.swift in Sources */,
+				F00000000000000000000105 /* ReminderEntity.swift in Sources */,
+				F00000000000000000000106 /* ConferenceCatalogMetadataEntity.swift in Sources */,
+				F00000000000000000000107 /* ConferenceEntityMapper.swift in Sources */,
+				F00000000000000000000108 /* ReminderEntityMapper.swift in Sources */,
+				F00000000000000000000109 /* TrackedConferenceEntityMapper.swift in Sources */,
+				F0000000000000000000010A /* SwiftDataContainerFactory.swift in Sources */,
+				F0000000000000000000010B /* SwiftDataConferenceRepository.swift in Sources */,
+				F0000000000000000000010C /* SwiftDataReminderRepository.swift in Sources */,
+				F0000000000000000000010D /* SwiftDataTrackedConferenceRepository.swift in Sources */,
+				H00000000000000000000101 /* AppEnvironment.swift in Sources */,
+				H00000000000000000000102 /* DependencyContainer.swift in Sources */,
+				H00000000000000000000103 /* AppRootView.swift in Sources */,
+				H00000000000000000000104 /* SeedConferenceCatalog.swift in Sources */,
+				H00000000000000000000105 /* ConferenceManagementViewModel.swift in Sources */,
+				H00000000000000000000106 /* ConferenceFilterBar.swift in Sources */,
+				H00000000000000000000107 /* ConferenceDiscoveryListView.swift in Sources */,
+				H00000000000000000000108 /* TrackedSelectionView.swift in Sources */,
+				H00000000000000000000109 /* ConferenceManagementView.swift in Sources */,
+				H0000000000000000000010A /* OnboardingView.swift in Sources */,
+				H0000000000000000000010B /* EmptyStateView.swift in Sources */,
+				H0000000000000000000010C /* LoadingIndicator.swift in Sources */,
+				J00000000000000000000101 /* LauncherPanelState.swift in Sources */,
+				J00000000000000000000102 /* GlobalHotkeyManager.swift in Sources */,
+				J00000000000000000000103 /* LauncherPanelController.swift in Sources */,
+				J00000000000000000000104 /* TopConfAppDelegate.swift in Sources */,
+				J00000000000000000000107 /* MenuBarStatusItem.swift in Sources */,
+				N00000000000000000000101 /* DeveloperToolsAvailability.swift in Sources */,
+				N00000000000000000000102 /* DebugNotificationTestViewModel.swift in Sources */,
+				N00000000000000000000103 /* DebugNotificationTestView.swift in Sources */,
+				N00000000000000000000104 /* DebugNotificationTestWindowController.swift in Sources */,
+				P00000000000000000000101 /* ConferenceCategoryMapper.swift in Sources */,
+				P00000000000000000000102 /* ConferenceRemoteSource.swift in Sources */,
+				P00000000000000000000103 /* ConferenceYAMLParser.swift in Sources */,
+				P00000000000000000000104 /* GitHubConferenceSource.swift in Sources */,
+				P00000000000000000000105 /* ConferenceCatalogSynchronizer.swift in Sources */,
+				K00000000000000000000101 /* DeadlineNotificationRequest.swift in Sources */,
+				K00000000000000000000102 /* DeadlineNotificationService.swift in Sources */,
+				K00000000000000000000103 /* NotificationIdentifier.swift in Sources */,
+				K00000000000000000000104 /* NotificationScheduling.swift in Sources */,
+				K00000000000000000000105 /* UserNotificationScheduler.swift in Sources */,
+				K00000000000000000000106 /* SilentNotificationScheduler.swift in Sources */,
+				L00000000000000000000101 /* ReminderViewModel.swift in Sources */,
+				L00000000000000000000102 /* ReminderPopoverView.swift in Sources */,
+				I00000000000000000000101 /* Date+Formatting.swift in Sources */,
+				I00000000000000000000102 /* DeadlineBadge.swift in Sources */,
+				I00000000000000000000103 /* DeadlinePresentation.swift in Sources */,
+				I00000000000000000000104 /* TrackedConferenceRowPresentation.swift in Sources */,
+				I00000000000000000000105 /* TrackedConferenceListViewModel.swift in Sources */,
+				I00000000000000000000106 /* TrackedConferenceRowView.swift in Sources */,
+				I00000000000000000000107 /* TrackedConferenceTableView.swift in Sources */,
+				I00000000000000000000108 /* TrackedConferenceListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +958,42 @@
 			buildActionMask = 2147483647;
 			files = (
 				100000000000000000000103 /* TopConfTests.swift in Sources */,
+				D00000000000000000000107 /* DomainTestSupport.swift in Sources */,
+				D00000000000000000000108 /* ConferenceTrackingServiceTests.swift in Sources */,
+				D00000000000000000000109 /* ConferenceDiscoveryServiceTests.swift in Sources */,
+				D0000000000000000000010A /* DeadlineSelectionServiceTests.swift in Sources */,
+				D0000000000000000000010B /* TrackedConferenceResolverTests.swift in Sources */,
+				D0000000000000000000010C /* ConferenceSortingServiceTests.swift in Sources */,
+				D0000000000000000000010D /* DeadlineCalculatorTests.swift in Sources */,
+				D0000000000000000000010E /* SearchServiceTests.swift in Sources */,
+				E00000000000000000000104 /* ConferenceFixtures.swift in Sources */,
+				E00000000000000000000105 /* DeadlineFixtures.swift in Sources */,
+				E00000000000000000000106 /* TrackedConferenceFixtures.swift in Sources */,
+				E00000000000000000000107 /* ReminderFixtures.swift in Sources */,
+				E00000000000000000000108 /* InMemoryConferenceRepositoryTests.swift in Sources */,
+				E00000000000000000000109 /* InMemoryTrackedConferenceRepositoryTests.swift in Sources */,
+				E0000000000000000000010A /* InMemoryReminderRepositoryTests.swift in Sources */,
+				E0000000000000000000010B /* FixtureValidationTests.swift in Sources */,
+				E0000000000000000000010C /* FixtureDrivenDomainTests.swift in Sources */,
+				G00000000000000000000101 /* SwiftDataTestSupport.swift in Sources */,
+				G00000000000000000000102 /* SwiftDataMappingTests.swift in Sources */,
+				G00000000000000000000103 /* SwiftDataConferenceRepositoryTests.swift in Sources */,
+				G00000000000000000000104 /* SwiftDataTrackedConferenceRepositoryTests.swift in Sources */,
+				G00000000000000000000105 /* SwiftDataReminderRepositoryTests.swift in Sources */,
+				G00000000000000000000106 /* SwiftDataPersistenceRecreationTests.swift in Sources */,
+				H0000000000000000000010D /* ConferenceManagementViewModelTests.swift in Sources */,
+				H0000000000000000000010E /* AppCompositionTests.swift in Sources */,
+				J00000000000000000000105 /* GlobalHotkeyManagerTests.swift in Sources */,
+				J00000000000000000000106 /* LauncherPanelLayoutTests.swift in Sources */,
+				N00000000000000000000105 /* DebugNotificationTestViewModelTests.swift in Sources */,
+				P00000000000000000000106 /* ConferenceYAMLParserTests.swift in Sources */,
+				P00000000000000000000107 /* GitHubConferenceSourceTests.swift in Sources */,
+				P00000000000000000000108 /* ConferenceCatalogSynchronizerTests.swift in Sources */,
+				I00000000000000000000109 /* TrackedConferenceListViewModelTests.swift in Sources */,
+				I0000000000000000000010A /* DeadlinePresentationTests.swift in Sources */,
+				M00000000000000000000101 /* NotificationIdentifierTests.swift in Sources */,
+				M00000000000000000000102 /* DeadlineNotificationServiceTests.swift in Sources */,
+				M00000000000000000000103 /* ReminderViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +1002,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				100000000000000000000104 /* TopConfUITests.swift in Sources */,
+				H0000000000000000000010F /* ConferenceManagementUITests.swift in Sources */,
+				I0000000000000000000010B /* TrackedConferenceListUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +1021,25 @@
 			targetProxy = 100000000000000000000202 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		P00000000000000000000301 /* XCRemoteSwiftPackageReference "Yams" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jpsim/Yams.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.2.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		P00000000000000000000201 /* Yams */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = P00000000000000000000301 /* XCRemoteSwiftPackageReference "Yams" */;
+			productName = Yams;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCBuildConfiguration section */
 		100000000000000000000C01 /* Debug */ = {
@@ -404,13 +1171,14 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = TopConf;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.TopConf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -429,13 +1197,14 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = TopConf;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.TopConf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -456,7 +1225,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.TopConfTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -478,7 +1247,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.TopConfTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -499,7 +1268,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.TopConfUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -520,7 +1289,7 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.TopConfUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -571,4 +1340,3 @@
 	};
 	rootObject = 100000000000000000000301 /* Project object */;
 }
-

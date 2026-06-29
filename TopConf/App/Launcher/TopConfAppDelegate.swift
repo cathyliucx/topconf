@@ -33,7 +33,7 @@ final class TopConfLauncherCoordinator: NSObject {
     private let panelState = LauncherPanelState()
     private let panelController: LauncherPanelController
     private let hotkeyManager: GlobalHotkeyManager
-    private var statusItem: NSStatusItem?
+    private(set) var statusItem: NSStatusItem?
     private var hotkeyRegistrationError: Error?
     private var hasShownInitialUITestPanel = false
 #if DEBUG
@@ -105,8 +105,8 @@ final class TopConfLauncherCoordinator: NSObject {
 #endif
 
     private func installStatusItem() {
-        let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
-        statusItem.button?.title = "TopConf"
+        let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+        MenuBarStatusItem.configure(statusItem)
         statusItem.menu = makeMenu()
         self.statusItem = statusItem
     }

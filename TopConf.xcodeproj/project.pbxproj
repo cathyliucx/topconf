@@ -86,6 +86,7 @@
 		J00000000000000000000102 /* GlobalHotkeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = J00000000000000000000002 /* GlobalHotkeyManager.swift */; };
 		J00000000000000000000103 /* LauncherPanelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = J00000000000000000000003 /* LauncherPanelController.swift */; };
 		J00000000000000000000104 /* TopConfAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = J00000000000000000000004 /* TopConfAppDelegate.swift */; };
+		J00000000000000000000107 /* MenuBarStatusItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = J00000000000000000000007 /* MenuBarStatusItem.swift */; };
 		J00000000000000000000105 /* GlobalHotkeyManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = J00000000000000000000005 /* GlobalHotkeyManagerTests.swift */; };
 		J00000000000000000000106 /* LauncherPanelLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = J00000000000000000000006 /* LauncherPanelLayoutTests.swift */; };
 		K00000000000000000000101 /* DeadlineNotificationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = K00000000000000000000001 /* DeadlineNotificationRequest.swift */; };
@@ -216,6 +217,7 @@
 		J00000000000000000000002 /* GlobalHotkeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalHotkeyManager.swift; sourceTree = "<group>"; };
 		J00000000000000000000003 /* LauncherPanelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherPanelController.swift; sourceTree = "<group>"; };
 		J00000000000000000000004 /* TopConfAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopConfAppDelegate.swift; sourceTree = "<group>"; };
+		J00000000000000000000007 /* MenuBarStatusItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarStatusItem.swift; sourceTree = "<group>"; };
 		J00000000000000000000005 /* GlobalHotkeyManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalHotkeyManagerTests.swift; sourceTree = "<group>"; };
 		J00000000000000000000006 /* LauncherPanelLayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherPanelLayoutTests.swift; sourceTree = "<group>"; };
 		K00000000000000000000001 /* DeadlineNotificationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineNotificationRequest.swift; sourceTree = "<group>"; };
@@ -477,6 +479,7 @@
 				J00000000000000000000002 /* GlobalHotkeyManager.swift */,
 				J00000000000000000000003 /* LauncherPanelController.swift */,
 				J00000000000000000000004 /* TopConfAppDelegate.swift */,
+				J00000000000000000000007 /* MenuBarStatusItem.swift */,
 			);
 			path = Launcher;
 			sourceTree = "<group>";
@@ -921,6 +924,7 @@
 				J00000000000000000000102 /* GlobalHotkeyManager.swift in Sources */,
 				J00000000000000000000103 /* LauncherPanelController.swift in Sources */,
 				J00000000000000000000104 /* TopConfAppDelegate.swift in Sources */,
+				J00000000000000000000107 /* MenuBarStatusItem.swift in Sources */,
 				N00000000000000000000101 /* DeveloperToolsAvailability.swift in Sources */,
 				N00000000000000000000102 /* DebugNotificationTestViewModel.swift in Sources */,
 				N00000000000000000000103 /* DebugNotificationTestView.swift in Sources */,
